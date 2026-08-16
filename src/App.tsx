@@ -2,7 +2,6 @@ import { lazy, Suspense } from 'react';
 import { GenerativeBackground } from '@/components/GenerativeBackground';
 import { SkylineBackground } from '@/components/SkylineBackground';
 import { CursorGlow } from '@/components/CursorGlow';
-import { ScrollTiltPlane } from '@/components/ScrollTiltPlane';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { useScrollProgress } from '@/hooks/useScrollProgress';
@@ -33,23 +32,27 @@ function App() {
 
       <Nav />
 
-      <ScrollTiltPlane>
-        <main>
-          <Home />
-          <OurStory />
-          <Team />
-          <CompetitionTimeline />
-          <Sustainability />
-          <PaddockTV />
-          <AbsoluteRoya />
-          <Suspense fallback={<div className="min-h-screen px-6 py-32 md:px-10" />}>
-            <BuildYourLivery />
-          </Suspense>
-          <Events />
-          <Press />
-        </main>
-        <Footer />
-      </ScrollTiltPlane>
+      <main>
+        <Home />
+        <OurStory />
+        <Team />
+        <CompetitionTimeline />
+        <Sustainability />
+        <PaddockTV />
+        <AbsoluteRoya />
+        <Suspense
+          fallback={
+            <div className="flex min-h-screen items-center justify-center px-6 py-32 md:px-10">
+              <p className="label-mono text-paper/40">Loading…</p>
+            </div>
+          }
+        >
+          <BuildYourLivery />
+        </Suspense>
+        <Events />
+        <Press />
+      </main>
+      <Footer />
     </>
   );
 }
