@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ElementType } from 'react';
+import { createElement, useEffect, useRef, useState, type ElementType, type ReactNode } from 'react';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 
 interface RevealTextProps {
@@ -39,40 +39,41 @@ export function RevealText({
   }, []);
 
   if (reducedMotion) {
-    return (
-      <Tag
-        ref={ref as never}
-        className={`${className} transition-opacity duration-500 ${visible ? 'opacity-100' : 'opacity-0'}`}
-      >
-        {text}
-      </Tag>
+    return createElement(
+      Tag,
+      {
+        ref,
+        className: `${className} transition-opacity duration-500 ${visible ? 'opacity-100' : 'opacity-0'}`,
+      },
+      text,
     );
   }
 
   const units = splitBy === 'word' ? text.split(' ') : text.split('');
 
-  return (
-    <Tag ref={ref as never} className={className}>
-      {units.map((unit, i) => (
+  // The trailing space of a word is rendered as a separate sibling text
+  // node, outside the overflow-hidden/transform wrapper — a space living
+  // inside an inline-block's own text content gets collapsed as trailing
+  // whitespace by the browser, which silently ate word gaps.
+  const nodes: ReactNode[] = [];
+  units.forEach((unit, i) => {
+    nodes.push(
+      <span key={`w${i}`} className="inline-block overflow-hidden" style={{ verticalAlign: 'top' }}>
         <span
-          key={i}
-          className="inline-block overflow-hidden"
-          style={{ verticalAlign: 'top' }}
+          className="inline-block transition-[transform,opacity] ease-[var(--ease-roya)]"
+          style={{
+            transitionDuration: '700ms',
+            transitionDelay: `${i * stagger}s`,
+            transform: visible ? 'translateY(0%)' : 'translateY(110%)',
+            opacity: visible ? 1 : 0,
+          }}
         >
-          <span
-            className="inline-block transition-[transform,opacity] ease-[var(--ease-roya)]"
-            style={{
-              transitionDuration: '700ms',
-              transitionDelay: `${i * stagger}s`,
-              transform: visible ? 'translateY(0%)' : 'translateY(110%)',
-              opacity: visible ? 1 : 0,
-            }}
-          >
-            {unit}
-            {splitBy === 'word' && i < units.length - 1 ? ' ' : ''}
-          </span>
+          {unit}
         </span>
-      ))}
-    </Tag>
-  );
+      </span>,
+    );
+    if (splitBy === 'word' && i < units.length - 1) nodes.push(' ');
+  });
+
+  return createElement(Tag, { ref, className }, nodes);
 }
