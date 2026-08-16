@@ -1,0 +1,115 @@
+/*
+  Garet is Roya Racing's specified heading/UI font, but no licensed font
+  files were made available for this build (flagged back to the team).
+  Urbanist is used as an interim substitute — a geometric sans with a
+  similar confident, technical character — restricted to the same
+  regular/bold-only rule Garet itself is under. Swap `--font-heading`
+  below the moment real Garet files land; nothing else needs to change.
+*/
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@1,400;1,600&family=Urbanist:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette — one accent per section, never mixed within a section */
+  --color-navy: #283679;
+  --color-navy-light: #34449a;
+  --color-cyan: #26b7bd;
+  --color-lime: #d2d831;
+  --color-blue: #2f87c8;
+  --color-green: #71ba43;
+  --color-grey: #b0aeb2;
+  --color-slate: #727981;
+  --color-ink: #0b1030;
+  --color-paper: #f4f4f1;
+
+  --font-heading: "Urbanist", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "IBM Plex Serif", ui-serif, Georgia, serif;
+  --font-arabic: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+
+  --ease-roya: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background: var(--color-navy);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    margin: 0;
+    min-height: 100svh;
+    /* transparent on purpose: html carries the fallback color. A background
+       here would paint above the fixed, negative-z-index canvas layers
+       (non-positioned in-flow boxes stack above negative-z siblings per the
+       CSS2 stacking order), hiding the generative background entirely. */
+    background: transparent;
+    color: var(--color-paper);
+    font-family: var(--font-heading);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  #root {
+    min-height: 100svh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  :lang(ar) {
+    font-family: var(--font-arabic);
+  }
+
+  ::selection {
+    background: var(--color-cyan);
+    color: var(--color-navy);
+  }
+
+  a {
+    color: inherit;
+  }
+
+  /* Editorial voice — vlog/podcast descriptions, recaps, bios, pull quotes.
+     The only place IBM Plex Serif is used, and always italic: shared class
+     so upright serif can never appear by accident. */
+  .editorial {
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+
+  /* Data / metadata / labels — timestamps, tags, section numbering */
+  .label-mono {
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+}
