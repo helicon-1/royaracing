@@ -7,10 +7,12 @@ import { fileURLToPath } from 'node:url'
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // https://vite.dev/config/
-export default defineConfig(({ command }) => ({
-  // GitHub Pages serves this as a project site under /royaracing/; local
-  // dev keeps the normal root path.
-  base: command === 'build' ? '/royaracing/' : '/',
+export default defineConfig(() => ({
+  // Most hosts (Vercel, Netlify, a plain static server) serve this from the
+  // domain root. GitHub Pages is the one exception — it serves a project
+  // site under /royaracing/ — so only that workflow sets GITHUB_PAGES=true
+  // to opt into the subpath build.
+  base: process.env.GITHUB_PAGES === 'true' ? '/royaracing/' : '/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
