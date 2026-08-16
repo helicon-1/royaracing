@@ -7,7 +7,10 @@ import { fileURLToPath } from 'node:url'
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  // GitHub Pages serves this as a project site under /royaracing/; local
+  // dev keeps the normal root path.
+  base: command === 'build' ? '/royaracing/' : '/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
@@ -18,4 +21,4 @@ export default defineConfig({
     target: 'es2022',
     chunkSizeWarningLimit: 900,
   },
-})
+}))
