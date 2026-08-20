@@ -4,7 +4,7 @@ import { RevealText } from '@/components/RevealText';
 import { Wheel } from './Wheel';
 import { BudgetAllocator } from './BudgetAllocator';
 import { DetailPanel } from './DetailPanel';
-import { PILLARS, type PillarId } from './data';
+import { PILLARS, PILLAR_TINTS, type PillarId } from './data';
 
 export function Sustainability() {
   const [active, setActive] = useState<PillarId>('economic');
@@ -45,8 +45,9 @@ export function Sustainability() {
                   onPointerEnter={() => setHovered(p.id)}
                   onPointerLeave={() => setHovered(null)}
                   className={`label-mono text-[11px] transition-colors duration-300 ${
-                    active === p.id ? 'text-green' : 'text-paper/40 hover:text-paper/70'
+                    active === p.id ? '' : 'text-paper/40 hover:text-paper/70'
                   }`}
+                  style={active === p.id ? { color: PILLAR_TINTS[p.id].active } : undefined}
                 >
                   {p.label}
                 </button>
@@ -55,7 +56,9 @@ export function Sustainability() {
           </div>
 
           <div>
-            <p className="label-mono text-green">{activePillar.label}</p>
+            <p className="label-mono" style={{ color: PILLAR_TINTS[active].active }}>
+              {activePillar.label}
+            </p>
             <p className="mt-3 max-w-xl text-paper/70">{activePillar.practice}</p>
             <div className="mt-8">
               <DetailPanel id={active} />

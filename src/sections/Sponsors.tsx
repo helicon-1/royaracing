@@ -74,32 +74,32 @@ const SPONSORS: Sponsor[] = [
   },
 ];
 
-// Vision reads slightly larger than Platinum, down to Bronze — the only
-// signal of the 5-tier structure. No labels, no grouping, no borders.
+// Vision reads larger than Platinum, down to Bronze — the only signal of
+// the 5-tier structure. No labels, no grouping, no borders.
 const TIER_SCALE: Record<Sponsor['tier'], number> = {
-  vision: 1,
-  platinum: 0.88,
-  gold: 0.8,
-  silver: 0.72,
-  bronze: 0.64,
+  vision: 1.5,
+  platinum: 1.32,
+  gold: 1.18,
+  silver: 1.06,
+  bronze: 0.94,
 };
 
 export function Sponsors() {
   return (
-    <div className="px-6 py-16 md:px-10">
+    <div className="px-6 py-20 md:px-10">
       <div className="mx-auto max-w-[1400px]">
-        <p className="label-mono mb-10 text-center text-[10px] text-paper/30">Backed by</p>
-        <div className="flex flex-wrap items-center justify-center gap-x-14 gap-y-8">
+        <p className="label-mono mb-12 text-center text-[10px] text-paper/35">Backed by</p>
+        <div className="flex flex-wrap items-center justify-center gap-x-16 gap-y-10">
           {SPONSORS.map(({ name, tier, mark: Mark }) => {
             const scale = TIER_SCALE[tier];
             return (
               <div
                 key={name}
-                className="group flex items-center gap-2.5 text-paper/40 transition-colors duration-300 hover:text-paper/80"
+                className="group flex items-center gap-3 text-paper/65 transition-colors duration-300 hover:text-paper"
                 style={{ fontSize: `${scale}rem` }}
               >
-                <Mark className="h-[1.6em] w-[1.6em] shrink-0" />
-                <span className="label-mono whitespace-nowrap text-[0.72em]">{name}</span>
+                <Mark className="h-[1.7em] w-[1.7em] shrink-0" />
+                <span className="label-mono whitespace-nowrap text-[0.78em]">{name}</span>
               </div>
             );
           })}

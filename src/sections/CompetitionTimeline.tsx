@@ -114,28 +114,37 @@ export function CompetitionTimeline() {
 
         <div className="mt-24 px-2">
           <div ref={trackRef} className="relative h-px w-full bg-paper/15">
-            {stops.map((s, i) => (
-              <button
-                key={s}
-                type="button"
-                onClick={() => setActive(i)}
-                className="absolute top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-3"
-                style={{ left: `${s}%` }}
-              >
-                <span
-                  className={`h-2.5 w-2.5 rounded-full transition-colors duration-300 ${
-                    i <= active ? 'bg-cyan' : 'bg-paper/25'
-                  }`}
-                />
-                <span
-                  className={`label-mono absolute top-6 whitespace-nowrap text-[11px] transition-colors duration-300 ${
-                    i === active ? 'text-cyan' : 'text-paper/40'
-                  }`}
+            {stops.map((s, i) => {
+              // First/last labels anchor to their own edge instead of
+              // centering, so they can't clip past the track's ends —
+              // centering every label caused "Regionals" and "World
+              // Finals" to overflow past the viewport edge.
+              const isFirst = i === 0;
+              const isLast = i === stops.length - 1;
+              const labelAnchor = isFirst ? 'left-0' : isLast ? 'right-0' : 'left-0 -translate-x-1/2';
+              return (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => setActive(i)}
+                  className="absolute top-1/2 -translate-y-1/2"
+                  style={{ left: `${s}%` }}
                 >
-                  {STAGES[i].label} — {STAGES[i].month}
-                </span>
-              </button>
-            ))}
+                  <span
+                    className={`absolute left-0 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full transition-colors duration-300 ${
+                      i <= active ? 'bg-cyan' : 'bg-paper/25'
+                    }`}
+                  />
+                  <span
+                    className={`label-mono absolute top-4 whitespace-nowrap text-[11px] transition-colors duration-300 ${labelAnchor} ${
+                      i === active ? 'text-cyan' : 'text-paper/40'
+                    }`}
+                  >
+                    {STAGES[i].label} — {STAGES[i].month}
+                  </span>
+                </button>
+              );
+            })}
 
             <div
               role="slider"
@@ -165,18 +174,39 @@ export function CompetitionTimeline() {
           </div>
         </div>
 
-        <div className="mt-24 grid gap-10 lg:grid-cols-[1fr_1fr]">
-          <div>
-            <p className="label-mono text-cyan">
-              {stage.month} — {stage.status === 'upcoming' ? 'Upcoming' : 'Complete'}
-            </p>
-            <h3 className="mt-3 text-3xl font-bold text-paper">{stage.label}</h3>
-            <p className="mt-4 max-w-md text-paper/70">{stage.blurb}</p>
+        <div className="mt-24 grid items-stretch gap-10 lg:grid-cols-[1fr_1fr]">
+          <div className="relative flex flex-col justify-between overflow-hidden bg-ink/60 p-8 md:p-10">
+            <div
+              aria-hidden="true"
+              className="absolute left-0 top-0 h-full w-2 bg-cyan transition-colors duration-300"
+              style={{ clipPath: 'polygon(0 0, 100% 0, 100% 82%, 45% 100%, 0 100%)' }}
+            />
+            <div className="pl-5">
+              <div className="flex items-start justify-between gap-4">
+                <span
+                  aria-hidden="true"
+                  className="label-mono select-none text-7xl font-bold leading-none text-paper/10 md:text-8xl"
+                >
+                  {String(active + 1).padStart(2, '0')}
+                </span>
+                <span
+                  className={`label-mono shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-[10px] transition-colors duration-300 ${
+                    stage.status === 'upcoming'
+                      ? 'border-paper/25 text-paper/50'
+                      : 'border-cyan/50 text-cyan'
+                  }`}
+                >
+                  {stage.status === 'upcoming' ? 'Upcoming' : 'Complete'}
+                </span>
+              </div>
+              <h3 className="mt-2 text-3xl font-bold leading-[1.05] text-paper md:text-4xl">
+                {stage.label}
+              </h3>
+              <p className="label-mono mt-2 text-cyan">{stage.month}</p>
+              <p className="mt-6 max-w-md text-paper/70">{stage.blurb}</p>
+            </div>
           </div>
-          <PhotoPlaceholder
-            label={`Photo pending — ${stage.label}`}
-            className="aspect-video w-full"
-          />
+          <PhotoPlaceholder label={`Photo pending — ${stage.label}`} className="h-full min-h-64 w-full" />
         </div>
       </div>
     </Section>

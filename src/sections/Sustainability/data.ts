@@ -1,5 +1,13 @@
 export type PillarId = 'economic' | 'social' | 'environmental';
 
+// Each pillar gets its own hue instead of sharing one green — the wheel
+// needs to visually distinguish the three, not just the section identity.
+export const PILLAR_TINTS: Record<PillarId, { base: string; active: string }> = {
+  economic: { base: '#1f4f73', active: '#5bb3f0' },
+  social: { base: '#6b6f1a', active: '#e0e64f' },
+  environmental: { base: '#3f6f2e', active: '#8fd459' },
+};
+
 export interface Pillar {
   id: PillarId;
   label: string;
