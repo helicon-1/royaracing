@@ -6,8 +6,8 @@ import vision2030 from '@/assets/emblems/vision-2030.svg';
 export function OurStory() {
   return (
     <Section id="story" className="relative px-6 py-32 md:px-10">
-      <div className="mx-auto grid max-w-[1400px] gap-16 lg:grid-cols-[1.1fr_0.9fr]">
-        <div>
+      <div className="mx-auto grid max-w-[1400px] items-stretch gap-16 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="flex flex-col">
           <p className="label-mono mb-6 text-cyan">01 — Our Story</p>
           <RevealText
             as="h2"
@@ -43,11 +43,11 @@ export function OurStory() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-6 pt-2 lg:pt-24">
-          <PhotoPlaceholder label="Photo pending — workshop" className="aspect-[4/5] w-full" />
+        <div className="flex flex-col gap-6">
+          <PhotoPlaceholder label="Photo pending — workshop" className="flex-[1.2] w-full" />
           <PhotoPlaceholder
             label="Photo pending — team at work"
-            className="aspect-[4/3] w-2/3 self-end"
+            className="flex-1 w-2/3 self-end"
             accent="var(--color-navy-light)"
           />
         </div>

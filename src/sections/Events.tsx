@@ -43,7 +43,7 @@ export function Events() {
   return (
     <Section id="events" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
-        <p className="label-mono mb-6 text-cyan">07 — Events</p>
+        <p className="label-mono mb-6 text-cyan">06 — Events</p>
         <RevealText
           as="h2"
           text="Come see the team."

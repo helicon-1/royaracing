@@ -10,7 +10,6 @@ import { OurStory } from '@/sections/OurStory';
 import { Team } from '@/sections/Team';
 import { CompetitionTimeline } from '@/sections/CompetitionTimeline';
 import { Sustainability } from '@/sections/Sustainability';
-import { PaddockTV } from '@/sections/PaddockTV';
 import { AbsoluteRoya } from '@/sections/AbsoluteRoya';
 import { Events } from '@/sections/Events';
 import { Press } from '@/sections/Press';
@@ -37,7 +36,6 @@ function App() {
         <Team />
         <CompetitionTimeline />
         <Sustainability />
-        <PaddockTV />
         <AbsoluteRoya />
         <Events />
         <Press />

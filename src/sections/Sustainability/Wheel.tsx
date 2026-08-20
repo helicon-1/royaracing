@@ -1,6 +1,6 @@
 import { useEasedValue } from '@/hooks/useEasedValue';
 import { interpolateHsv } from '@/lib/theme';
-import type { Pillar, PillarId } from './data';
+import { PILLAR_TINTS, type Pillar, type PillarId } from './data';
 
 const RADIUS_OUTER = 160;
 const RADIUS_INNER = 96;
@@ -21,9 +21,6 @@ function ringPath(startDeg: number, endDeg: number, rOuter: number, rInner: numb
   return `M ${x1} ${y1} A ${rOuter} ${rOuter} 0 ${large} 1 ${x2} ${y2} L ${x3} ${y3} A ${rInner} ${rInner} 0 ${large} 0 ${x4} ${y4} Z`;
 }
 
-const BASE_TINT = '#3f6f2e'; // muted, low-key green
-const ACTIVE_TINT = '#8fd459'; // bright highlighted green — both within the green family (HSV-interpolated between the two, never crossing into another section's accent)
-
 function WheelSegment({
   pillar,
   index,
@@ -39,8 +36,11 @@ function WheelSegment({
   onSelect: () => void;
   onHover: (v: boolean) => void;
 }) {
+  const tint = PILLAR_TINTS[pillar.id];
   const activation = useEasedValue(isActive || isHovered ? 1 : 0, 0.1);
-  const fill = interpolateHsv(BASE_TINT, ACTIVE_TINT, activation);
+  const fill = interpolateHsv(tint.base, tint.active, activation);
+  const rimFill = interpolateHsv(tint.active, '#ffffff', 0.2 + activation * 0.15);
+  const gradientId = `wheel-grad-${pillar.id}`;
   const start = index * 120 + GAP_DEG / 2;
   const end = (index + 1) * 120 - GAP_DEG / 2;
   const midDeg = (start + end) / 2;
@@ -73,7 +73,19 @@ function WheelSegment({
         transition: 'transform 300ms var(--ease-roya)',
       }}
     >
-      <path d={ringPath(start, end, RADIUS_OUTER, RADIUS_INNER)} fill={fill} />
+      <defs>
+        <radialGradient
+          id={gradientId}
+          cx={CENTER}
+          cy={CENTER}
+          r={RADIUS_OUTER}
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0%" stopColor={fill} />
+          <stop offset="100%" stopColor={rimFill} />
+        </radialGradient>
+      </defs>
+      <path d={ringPath(start, end, RADIUS_OUTER, RADIUS_INNER)} fill={`url(#${gradientId})`} />
     </g>
   );
 }
@@ -92,6 +104,7 @@ export function Wheel({
   onHover: (id: PillarId | null) => void;
 }) {
   const shown = pillars.find((p) => p.id === (hovered ?? active))!;
+  const shownTint = PILLAR_TINTS[shown.id];
 
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[360px]">
@@ -109,9 +122,26 @@ export function Wheel({
         ))}
       </svg>
 
-      <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-14 text-center">
-        <p className="label-mono text-[11px] text-green">{shown.label}</p>
-        <p className="mt-2 text-sm leading-snug text-paper/75">{shown.definition}</p>
+      {/* Text box is sized to the square inscribed inside the inner radius
+          (96 * sqrt(2) ≈ 136px) so it can never spill past the ring,
+          however long a pillar's definition runs. */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+        <div className="flex w-[128px] flex-col items-center text-center">
+          <p className="label-mono text-[10px] transition-colors duration-300" style={{ color: shownTint.active }}>
+            {shown.label}
+          </p>
+          <p
+            className="mt-2 text-[11px] leading-snug text-paper/75"
+            style={{
+              display: '-webkit-box',
+              WebkitLineClamp: 4,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+            }}
+          >
+            {shown.definition}
+          </p>
+        </div>
       </div>
     </div>
   );

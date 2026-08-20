@@ -6,7 +6,7 @@ export function Press() {
   return (
     <Section id="press" className="relative px-6 py-24 md:px-10">
       <div className="mx-auto max-w-[1400px]">
-        <p className="label-mono mb-6 text-cyan">08 — Press</p>
+        <p className="label-mono mb-6 text-cyan">07 — Press</p>
         <RevealText
           as="h2"
           text="Recognition."
