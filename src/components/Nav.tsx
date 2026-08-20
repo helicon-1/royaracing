@@ -10,7 +10,6 @@ const LINKS: { id: SectionId; label: string }[] = [
   { id: 'sustainability', label: 'Sustainability' },
   { id: 'paddock-tv', label: 'Paddock TV' },
   { id: 'absolute-roya', label: 'Absolute Roya' },
-  { id: 'livery', label: 'Build Your Livery' },
   { id: 'events', label: 'Events' },
   { id: 'press', label: 'Press' },
 ];

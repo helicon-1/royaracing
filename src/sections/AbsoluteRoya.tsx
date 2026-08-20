@@ -16,16 +16,19 @@ export function AbsoluteRoya() {
   const [open, setOpen] = useState<string | null>(null);
 
   return (
-    <Section id="absolute-roya" className="relative px-6 py-32 md:px-10">
-      <div className="mx-auto max-w-[1400px]">
+    <Section id="absolute-roya" className="relative px-6 py-24 md:px-10">
+      <div className="mx-auto max-w-2xl">
         <p className="label-mono mb-6 text-cyan">06 — Absolute Roya</p>
         <RevealText
           as="h2"
           text="The team's podcast."
-          className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl"
+          className="text-4xl font-bold leading-[1.05] text-paper md:text-5xl"
         />
+        <p className="editorial mt-6 text-xl text-paper/60">
+          Off-workshop conversation — what the build looked like from the inside, unscripted.
+        </p>
 
-        <ul className="mt-16 divide-y divide-paper/10 border-t border-paper/10">
+        <ul className="mt-14 divide-y divide-paper/10 border-t border-paper/10">
           {EPISODES.map((ep) => {
             const isOpen = open === ep.code;
             return (

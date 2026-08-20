@@ -24,7 +24,6 @@ export type SectionId =
   | 'sustainability'
   | 'paddock-tv'
   | 'absolute-roya'
-  | 'livery'
   | 'events'
   | 'press';
 
@@ -37,7 +36,6 @@ export const SECTION_ACCENT: Record<SectionId, string> = {
   sustainability: COLORS.green,
   'paddock-tv': COLORS.cyan,
   'absolute-roya': COLORS.cyan,
-  livery: COLORS.lime,
   events: COLORS.cyan,
   press: COLORS.cyan,
 };

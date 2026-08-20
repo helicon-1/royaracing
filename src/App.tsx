@@ -1,4 +1,3 @@
-import { lazy, Suspense } from 'react';
 import { GenerativeBackground } from '@/components/GenerativeBackground';
 import { SkylineBackground } from '@/components/SkylineBackground';
 import { CursorGlow } from '@/components/CursorGlow';
@@ -6,6 +5,7 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { useScrollProgress } from '@/hooks/useScrollProgress';
 import { Home } from '@/sections/Home';
+import { Sponsors } from '@/sections/Sponsors';
 import { OurStory } from '@/sections/OurStory';
 import { Team } from '@/sections/Team';
 import { CompetitionTimeline } from '@/sections/CompetitionTimeline';
@@ -14,8 +14,6 @@ import { PaddockTV } from '@/sections/PaddockTV';
 import { AbsoluteRoya } from '@/sections/AbsoluteRoya';
 import { Events } from '@/sections/Events';
 import { Press } from '@/sections/Press';
-
-const BuildYourLivery = lazy(() => import('@/sections/BuildYourLivery'));
 
 function App() {
   useScrollProgress();
@@ -34,21 +32,13 @@ function App() {
 
       <main>
         <Home />
+        <Sponsors />
         <OurStory />
         <Team />
         <CompetitionTimeline />
         <Sustainability />
         <PaddockTV />
         <AbsoluteRoya />
-        <Suspense
-          fallback={
-            <div className="flex min-h-screen items-center justify-center px-6 py-32 md:px-10">
-              <p className="label-mono text-paper/40">Loading…</p>
-            </div>
-          }
-        >
-          <BuildYourLivery />
-        </Suspense>
         <Events />
         <Press />
       </main>

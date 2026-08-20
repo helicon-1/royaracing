@@ -6,9 +6,7 @@ Official website for **Roya Racing** — Saudi STEM Racing (F1 in Schools), Prof
 
 - React + TypeScript + Vite
 - Tailwind CSS v4
-- Three.js via `@react-three/fiber` / `@react-three/drei` (Build Your Livery)
 - Zustand (client state)
-- Firebase Firestore (Fan Livery Wall)
 
 ## Development
 
