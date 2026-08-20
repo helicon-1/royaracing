@@ -23,8 +23,7 @@ export type SectionId =
   | 'timeline'
   | 'sustainability'
   | 'absolute-roya'
-  | 'events'
-  | 'press';
+  | 'events';
 
 // One accent per section — never mixed within a section (brief section 3).
 export const SECTION_ACCENT: Record<SectionId, string> = {
@@ -35,13 +34,15 @@ export const SECTION_ACCENT: Record<SectionId, string> = {
   sustainability: COLORS.green,
   'absolute-roya': COLORS.cyan,
   events: COLORS.cyan,
-  press: COLORS.cyan,
 };
 
-export function hexToHsv(hex: string): [number, number, number] {
-  const r = parseInt(hex.slice(1, 3), 16) / 255;
-  const g = parseInt(hex.slice(3, 5), 16) / 255;
-  const b = parseInt(hex.slice(5, 7), 16) / 255;
+/** Accepts either "#rrggbb" or "rgb(r, g, b)" (interpolateHsv's own output
+ *  format) — colors computed by one call often need to feed into another. */
+export function hexToHsv(color: string): [number, number, number] {
+  const rgbMatch = color.match(/^rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/);
+  const r = rgbMatch ? Number(rgbMatch[1]) / 255 : parseInt(color.slice(1, 3), 16) / 255;
+  const g = rgbMatch ? Number(rgbMatch[2]) / 255 : parseInt(color.slice(3, 5), 16) / 255;
+  const b = rgbMatch ? Number(rgbMatch[3]) / 255 : parseInt(color.slice(5, 7), 16) / 255;
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
   const d = max - min;

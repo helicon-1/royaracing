@@ -117,3 +117,12 @@
     text-transform: uppercase;
   }
 }
+
+/* Sustainability wheel: a very slow ambient rotation on the conic-gradient
+   ring so it reads as alive rather than static. Neutralized by the
+   prefers-reduced-motion rule above regardless of the JS-side check. */
+@keyframes wheel-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

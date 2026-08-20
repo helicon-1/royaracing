@@ -1,17 +1,17 @@
 import type { ReactElement } from 'react';
+import { Reveal } from '@/components/Reveal';
 
 interface Sponsor {
   name: string;
-  tier: 'vision' | 'platinum' | 'gold' | 'silver' | 'bronze';
   mark: (props: { className?: string }) => ReactElement;
 }
 
 // Placeholder sponsors — fictional names, not real companies or endorsements.
-// Roya never appears in its own sponsor strip.
+// Roya never appears in its own sponsor strip. All logos render at the same
+// size — no tier hierarchy signaled visually.
 const SPONSORS: Sponsor[] = [
   {
     name: 'Falcon Steel Works',
-    tier: 'vision',
     mark: ({ className }) => (
       <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
         <path d="M4 19V5l8 6 8-6v14" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
@@ -20,7 +20,6 @@ const SPONSORS: Sponsor[] = [
   },
   {
     name: 'Nomad Coffee Co.',
-    tier: 'platinum',
     mark: ({ className }) => (
       <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
         <path
@@ -35,7 +34,6 @@ const SPONSORS: Sponsor[] = [
   },
   {
     name: 'Waypoint Logistics',
-    tier: 'gold',
     mark: ({ className }) => (
       <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
         <path d="M12 3 3 8l9 5 9-5-9-5Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
@@ -45,7 +43,6 @@ const SPONSORS: Sponsor[] = [
   },
   {
     name: 'Circuit & Co.',
-    tier: 'silver',
     mark: ({ className }) => (
       <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
         <path
@@ -60,7 +57,6 @@ const SPONSORS: Sponsor[] = [
   },
   {
     name: 'Riyadh Print House',
-    tier: 'bronze',
     mark: ({ className }) => (
       <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
         <path
@@ -74,35 +70,20 @@ const SPONSORS: Sponsor[] = [
   },
 ];
 
-// Vision reads larger than Platinum, down to Bronze — the only signal of
-// the 5-tier structure. No labels, no grouping, no borders.
-const TIER_SCALE: Record<Sponsor['tier'], number> = {
-  vision: 1.5,
-  platinum: 1.32,
-  gold: 1.18,
-  silver: 1.06,
-  bronze: 0.94,
-};
-
 export function Sponsors() {
   return (
     <div className="px-6 py-20 md:px-10">
       <div className="mx-auto max-w-[1400px]">
         <p className="label-mono mb-12 text-center text-[10px] text-paper/35">Backed by</p>
         <div className="flex flex-wrap items-center justify-center gap-x-16 gap-y-10">
-          {SPONSORS.map(({ name, tier, mark: Mark }) => {
-            const scale = TIER_SCALE[tier];
-            return (
-              <div
-                key={name}
-                className="group flex items-center gap-3 text-paper/65 transition-colors duration-300 hover:text-paper"
-                style={{ fontSize: `${scale}rem` }}
-              >
-                <Mark className="h-[1.7em] w-[1.7em] shrink-0" />
-                <span className="label-mono whitespace-nowrap text-[0.78em]">{name}</span>
+          {SPONSORS.map(({ name, mark: Mark }, i) => (
+            <Reveal key={name} delay={i * 80}>
+              <div className="group flex items-center gap-3 text-paper/65 transition-colors duration-300 hover:text-paper">
+                <Mark className="h-7 w-7 shrink-0" />
+                <span className="label-mono whitespace-nowrap text-sm">{name}</span>
               </div>
-            );
-          })}
+            </Reveal>
+          ))}
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
+import { Reveal } from '@/components/Reveal';
 import { Wheel } from './Wheel';
 import { BudgetAllocator } from './BudgetAllocator';
 import { DetailPanel } from './DetailPanel';
@@ -28,7 +29,7 @@ export function Sustainability() {
         </p>
 
         <div className="mt-20 grid gap-16 lg:grid-cols-[380px_1fr]">
-          <div>
+          <Reveal>
             <Wheel
               pillars={PILLARS}
               active={active}
@@ -53,9 +54,9 @@ export function Sustainability() {
                 </button>
               ))}
             </div>
-          </div>
+          </Reveal>
 
-          <div>
+          <Reveal delay={120}>
             <p className="label-mono" style={{ color: PILLAR_TINTS[active].active }}>
               {activePillar.label}
             </p>
@@ -63,7 +64,7 @@ export function Sustainability() {
             <div className="mt-8">
               <DetailPanel id={active} />
             </div>
-          </div>
+          </Reveal>
         </div>
 
         <div className="mx-auto mt-24 max-w-2xl">

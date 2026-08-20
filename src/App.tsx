@@ -12,7 +12,6 @@ import { CompetitionTimeline } from '@/sections/CompetitionTimeline';
 import { Sustainability } from '@/sections/Sustainability';
 import { AbsoluteRoya } from '@/sections/AbsoluteRoya';
 import { Events } from '@/sections/Events';
-import { Press } from '@/sections/Press';
 
 function App() {
   useScrollProgress();
@@ -38,7 +37,6 @@ function App() {
         <Sustainability />
         <AbsoluteRoya />
         <Events />
-        <Press />
       </main>
       <Footer />
     </>

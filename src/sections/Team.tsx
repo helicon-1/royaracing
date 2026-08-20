@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
+import { Reveal } from '@/components/Reveal';
 import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
 
 interface Member {
@@ -43,28 +44,29 @@ export function Team() {
         </p>
 
         <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-          {MEMBERS.map((member) => (
-            <button
-              key={member.name}
-              type="button"
-              onClick={() => setActiveMember(member)}
-              className="group text-left"
-            >
-              <div className="relative aspect-[4/5] w-full overflow-hidden">
-                <PhotoPlaceholder
-                  label={`${member.name.split(' ')[0]} — pose A`}
-                  className="absolute inset-0 h-full w-full transition-opacity duration-500 group-hover:opacity-0"
-                />
-                <PhotoPlaceholder
-                  label={`${member.name.split(' ')[0]} — pose B`}
-                  className="absolute inset-0 h-full w-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                />
-              </div>
-              <p className="mt-4 text-lg font-semibold text-paper transition-colors duration-300 group-hover:text-cyan">
-                {member.name}
-              </p>
-              <p className="label-mono mt-1 text-[11px] text-paper/50">{member.role}</p>
-            </button>
+          {MEMBERS.map((member, i) => (
+            <Reveal key={member.name} delay={i * 70}>
+              <button
+                type="button"
+                onClick={() => setActiveMember(member)}
+                className="group w-full text-left transition-transform duration-300 ease-[var(--ease-roya)] hover:-translate-y-1.5"
+              >
+                <div className="relative aspect-[4/5] w-full overflow-hidden shadow-none transition-shadow duration-300 group-hover:shadow-[0_20px_40px_-12px_rgba(11,16,48,0.55)]">
+                  <PhotoPlaceholder
+                    label={`${member.name.split(' ')[0]} — pose A`}
+                    className="absolute inset-0 h-full w-full transition-opacity duration-500 group-hover:opacity-0"
+                  />
+                  <PhotoPlaceholder
+                    label={`${member.name.split(' ')[0]} — pose B`}
+                    className="absolute inset-0 h-full w-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  />
+                </div>
+                <p className="mt-4 text-lg font-semibold text-paper transition-colors duration-300 group-hover:text-cyan">
+                  {member.name}
+                </p>
+                <p className="label-mono mt-1 text-[11px] text-paper/50">{member.role}</p>
+              </button>
+            </Reveal>
           ))}
         </div>
       </div>

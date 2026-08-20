@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
-import { SOCIAL_ACTIVITIES } from './data';
+import { PILLAR_TINTS, SOCIAL_ACTIVITIES } from './data';
 import type { PillarId } from './data';
+
+const social = PILLAR_TINTS.social;
 
 const ECONOMIC_POINTS = [
   'Sponsor value delivered — tracked and reported back to partners, not just collected.',
@@ -31,8 +33,8 @@ function SocialDetail() {
   const [open, setOpen] = useState<string | null>(null);
 
   return (
-    <div>
-      <div className="border border-green/30 bg-green/[0.06] p-6">
+    <div style={{ '--pillar-active': social.active } as CSSProperties}>
+      <div className="border border-[var(--pillar-active)]/30 bg-[var(--pillar-active)]/[0.06] p-6">
         <p className="text-paper/85">
           Roya runs a mentoring program pairing team engineers with younger students exploring
           STEM Racing.
@@ -43,7 +45,7 @@ function SocialDetail() {
         </p>
         <a
           href="mailto:roya.racing2026@gmail.com?subject=Mentoring%20Program%20Application"
-          className="label-mono mt-4 inline-block text-[11px] text-green transition-colors duration-200 hover:text-paper"
+          className="label-mono mt-4 inline-block text-[11px] text-[var(--pillar-active)] transition-colors duration-200 hover:text-paper"
         >
           Apply to the mentoring program →
         </a>
@@ -58,14 +60,16 @@ function SocialDetail() {
                 type="button"
                 onClick={() => setOpen(isOpen ? null : activity.title)}
                 aria-expanded={isOpen}
-                className="group flex w-full items-center justify-between gap-4 py-4 text-left transition-colors duration-200 hover:text-green"
+                className="group flex w-full items-center justify-between gap-4 py-4 text-left transition-colors duration-200 hover:text-[var(--pillar-active)]"
               >
                 <span>
-                  <span className="block text-paper/85 group-hover:text-green">{activity.title}</span>
+                  <span className="block text-paper/85 group-hover:text-[var(--pillar-active)]">
+                    {activity.title}
+                  </span>
                   <span className="block text-sm text-paper/50">{activity.summary}</span>
                 </span>
                 <span
-                  className={`label-mono shrink-0 text-lg text-paper/40 transition-transform duration-300 group-hover:text-green ${isOpen ? 'rotate-45' : ''}`}
+                  className={`label-mono shrink-0 text-lg text-paper/40 transition-transform duration-300 group-hover:text-[var(--pillar-active)] ${isOpen ? 'rotate-45' : ''}`}
                   aria-hidden="true"
                 >
                   +
