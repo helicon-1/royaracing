@@ -2,13 +2,25 @@ import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
 import { Reveal } from '@/components/Reveal';
 import sadu from '@/assets/emblems/sadu-asterisk.svg';
+import mamlakaTower from '@/assets/emblems/mamlaka-tower.svg';
 
 export function Home() {
   return (
     <Section
       id="home"
-      className="relative flex min-h-[100svh] flex-col justify-end px-6 pb-20 pt-40 md:px-10 md:pb-28"
+      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden px-6 pb-20 pt-40 md:px-10 md:pb-28"
     >
+      {/* Mamlaka Tower — the real emblem, not a generic pattern, anchoring
+          the hero. Large and faint rather than a small icon: a backdrop,
+          not a decoration competing with the headline. */}
+      <img
+        src={mamlakaTower}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-10 bottom-0 h-[85%] w-auto opacity-[0.16] md:right-0 md:h-[95%]"
+        style={{ filter: 'brightness(0) invert(1)' }}
+      />
+
       <Reveal delay={300} className="absolute right-6 top-28 md:right-10">
         <img
           src={sadu}

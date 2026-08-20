@@ -1,13 +1,18 @@
 import { useAppStore } from '@/store/useAppStore';
+import mamlakaTower from '@/assets/emblems/mamlaka-tower.svg';
 
 /**
  * Placeholder Riyadh skyline treatment. The brief calls for real, properly
  * licensed photography here — none was supplied with this build, and an
  * AI-generated image should never be passed off as real photography, so
- * this renders a restrained vector silhouette instead (anchored by the
- * Kingdom Centre / Mamlaka Tower's distinctive keyhole form) until a real
- * licensed photo is provided. Swap the <svg> below for an <img> once one
- * lands — the opacity/scroll-fade wiring stays the same.
+ * this renders a restrained vector silhouette instead until a real licensed
+ * photo is provided. Swap the <svg> below for an <img> once one lands — the
+ * opacity/scroll-fade wiring stays the same.
+ *
+ * The tower is the actual Mamlaka Tower emblem (not a hand-drawn
+ * approximation), recolored to match the silhouette via brightness(0) — it
+ * has real alpha-shaped detail (the keyhole window cut, the base fins)
+ * a hand-traced path can't match.
  */
 export function SkylineBackground() {
   const scrollProgress = useAppStore((s) => s.scrollProgress);
@@ -17,7 +22,7 @@ export function SkylineBackground() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 -z-30 h-full w-full overflow-hidden"
+      className="pointer-events-none fixed inset-0 -z-[15] h-full w-full overflow-hidden"
       style={{ opacity, transition: 'opacity 200ms linear' }}
     >
       <svg
@@ -29,12 +34,14 @@ export function SkylineBackground() {
         <rect x="130" y="520" width="90" height="380" fill="#0b1030" />
         <rect x="230" y="640" width="70" height="260" fill="#0b1030" />
         <rect x="310" y="560" width="60" height="340" fill="#0b1030" />
-        {/* Mamlaka / Kingdom Centre Tower — keyhole silhouette, visual anchor */}
-        <path
-          d="M470 900 L470 340 Q470 300 510 300 L620 300 Q660 300 660 340 L660 900 Z
-             M560 900 L560 560 Q560 470 592 470 Q624 470 624 560 L624 900 Z"
-          fill="#0b1030"
-          fillRule="evenodd"
+        {/* Mamlaka / Kingdom Centre Tower — the real emblem, visual anchor */}
+        <image
+          href={mamlakaTower}
+          x="440"
+          y="298"
+          width="230"
+          height="602"
+          style={{ filter: 'brightness(0)' }}
         />
         <rect x="700" y="600" width="50" height="300" fill="#0b1030" />
         <rect x="760" y="660" width="80" height="240" fill="#0b1030" />

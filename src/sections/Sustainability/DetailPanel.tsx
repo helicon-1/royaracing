@@ -33,7 +33,7 @@ function SocialDetail() {
   const [open, setOpen] = useState<string | null>(null);
 
   return (
-    <div style={{ '--pillar-active': social.active } as CSSProperties}>
+    <div style={{ '--pillar-active': social } as CSSProperties}>
       <div className="border border-[var(--pillar-active)]/30 bg-[var(--pillar-active)]/[0.06] p-6">
         <p className="text-paper/85">
           Roya runs a mentoring program pairing team engineers with younger students exploring

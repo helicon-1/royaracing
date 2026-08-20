@@ -58,6 +58,7 @@ export function Team() {
                   />
                   <PhotoPlaceholder
                     label={`${member.name.split(' ')[0]} — pose B`}
+                    accent="var(--color-lime)"
                     className="absolute inset-0 h-full w-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                   />
                 </div>
@@ -98,7 +99,9 @@ export function Team() {
               </button>
             </div>
 
-            <div className="mt-8 flex aspect-video w-full items-center justify-center border border-paper/10 bg-ink/40">
+            <p className="editorial mt-6 text-paper/60">Full introduction coming soon.</p>
+
+            <div className="mt-6 flex aspect-video w-full items-center justify-center border border-paper/10 bg-ink/40">
               <p className="label-mono text-paper/40">Video coming soon</p>
             </div>
           </div>
