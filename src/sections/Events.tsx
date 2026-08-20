@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
+import { Reveal } from '@/components/Reveal';
 import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
 import { TireRating } from '@/components/TireRating';
 
@@ -52,7 +53,7 @@ export function Events() {
 
         {/* Upcoming */}
         <div className="mt-20 grid gap-12 lg:grid-cols-[1fr_1fr]">
-          <div>
+          <Reveal>
             <p className="label-mono text-cyan">Upcoming</p>
             <p className="mt-4 text-paper/50">
               No upcoming public events are announced yet — check back soon.
@@ -61,9 +62,9 @@ export function Events() {
               Volunteers, press, and participants get a certificate for their involvement, and
               getting involved can help toward joining a racing team next season.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="border border-paper/10 p-8">
+          <Reveal delay={120} className="border border-paper/10 p-8">
             {submitted ? (
               <p className="text-paper/80">
                 Thanks — we'll be in touch when the next event is confirmed.
@@ -123,21 +124,21 @@ export function Events() {
                 </button>
               </form>
             )}
-          </div>
+          </Reveal>
         </div>
 
         {/* Past */}
         <div className="mt-28">
           <p className="label-mono text-cyan">Past</p>
-          <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_1fr]">
-            <PhotoPlaceholder label="Photo pending — recap" className="aspect-video w-full" />
-            <div>
+          <Reveal as="div" className="mt-8 grid items-stretch gap-10 lg:grid-cols-[1fr_1fr]">
+            <PhotoPlaceholder label="Photo pending — recap" className="h-full min-h-64 w-full" />
+            <div className="flex flex-col justify-center">
               <h3 className="text-2xl font-bold text-paper">Recap coming soon</h3>
               <p className="mt-3 max-w-md text-paper/70">
                 Public results and a full recap will be posted here once available.
               </p>
             </div>
-          </div>
+          </Reveal>
 
           <div className="mt-16">
             <p className="label-mono text-[11px] text-paper/40">Fan wall</p>

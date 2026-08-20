@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
+import { Reveal } from '@/components/Reveal';
 import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
 
 interface Stage {
@@ -174,7 +175,7 @@ export function CompetitionTimeline() {
           </div>
         </div>
 
-        <div className="mt-24 grid items-stretch gap-10 lg:grid-cols-[1fr_1fr]">
+        <Reveal as="div" className="mt-24 grid items-stretch gap-10 lg:grid-cols-[1fr_1fr]">
           <div className="relative flex flex-col justify-between overflow-hidden bg-ink/60 p-8 md:p-10">
             <div
               aria-hidden="true"
@@ -207,7 +208,7 @@ export function CompetitionTimeline() {
             </div>
           </div>
           <PhotoPlaceholder label={`Photo pending — ${stage.label}`} className="h-full min-h-64 w-full" />
-        </div>
+        </Reveal>
       </div>
     </Section>
   );

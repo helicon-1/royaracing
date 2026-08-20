@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
+import { Reveal } from '@/components/Reveal';
 
 interface Episode {
   code: string;
@@ -93,20 +94,24 @@ export function AbsoluteRoya() {
         </p>
 
         <div className="mt-16 grid gap-x-16 gap-y-16 lg:grid-cols-2">
-          <EpisodeGroup
-            label="Podcast"
-            episodes={PODCAST_EPISODES}
-            openCode={openPodcast}
-            toggleLabel="NOTES"
-            onToggle={setOpenPodcast}
-          />
-          <EpisodeGroup
-            label="Behind the scenes"
-            episodes={VLOG_EPISODES}
-            openCode={openVlog}
-            toggleLabel="WATCH"
-            onToggle={setOpenVlog}
-          />
+          <Reveal>
+            <EpisodeGroup
+              label="Podcast"
+              episodes={PODCAST_EPISODES}
+              openCode={openPodcast}
+              toggleLabel="NOTES"
+              onToggle={setOpenPodcast}
+            />
+          </Reveal>
+          <Reveal delay={120}>
+            <EpisodeGroup
+              label="Behind the scenes"
+              episodes={VLOG_EPISODES}
+              openCode={openVlog}
+              toggleLabel="WATCH"
+              onToggle={setOpenVlog}
+            />
+          </Reveal>
         </div>
       </div>
     </Section>

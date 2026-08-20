@@ -23,8 +23,7 @@ export type SectionId =
   | 'timeline'
   | 'sustainability'
   | 'absolute-roya'
-  | 'events'
-  | 'press';
+  | 'events';
 
 // One accent per section — never mixed within a section (brief section 3).
 export const SECTION_ACCENT: Record<SectionId, string> = {
@@ -35,7 +34,6 @@ export const SECTION_ACCENT: Record<SectionId, string> = {
   sustainability: COLORS.green,
   'absolute-roya': COLORS.cyan,
   events: COLORS.cyan,
-  press: COLORS.cyan,
 };
 
 /** Accepts either "#rrggbb" or "rgb(r, g, b)" (interpolateHsv's own output

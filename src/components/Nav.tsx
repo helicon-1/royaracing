@@ -10,7 +10,6 @@ const LINKS: { id: SectionId; label: string }[] = [
   { id: 'sustainability', label: 'Sustainability' },
   { id: 'absolute-roya', label: 'Absolute Roya' },
   { id: 'events', label: 'Events' },
-  { id: 'press', label: 'Press' },
 ];
 
 export function Nav() {
