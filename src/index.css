@@ -6,7 +6,7 @@
   regular/bold-only rule Garet itself is under. Swap `--font-heading`
   below the moment real Garet files land; nothing else needs to change.
 */
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@1,400;1,600&family=Urbanist:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@1,400;1,600&family=Urbanist:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -25,7 +25,6 @@
   --font-heading: "Urbanist", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "IBM Plex Serif", ui-serif, Georgia, serif;
   --font-arabic: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
 
   --ease-roya: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -99,17 +98,22 @@
   }
 
   /* Editorial voice — vlog/podcast descriptions, recaps, bios, pull quotes.
-     The only place IBM Plex Serif is used, and always italic: shared class
-     so upright serif can never appear by accident. */
+     IBM Plex Serif is always italic: shared class so upright serif can
+     never appear by accident. */
   .editorial {
     font-family: var(--font-serif);
     font-style: italic;
   }
 
-  /* Data / metadata / labels — timestamps, tags, section numbering */
+  /* Data / metadata / labels — timestamps, tags, section numbering, small
+     UI actions (WATCH / CLOSE / NOTES). Same italic-serif family as
+     .editorial, kept as a separate class since this one stays uppercase
+     and letter-spaced as a small kicker/tag treatment rather than running
+     text. IBM Plex Mono has been retired from the type system entirely. */
   .label-mono {
-    font-family: var(--font-mono);
-    letter-spacing: 0.08em;
+    font-family: var(--font-serif);
+    font-style: italic;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
   }
 }
