@@ -1,11 +1,42 @@
+import { COLORS, interpolateHsv } from '@/lib/theme';
+
 export type PillarId = 'economic' | 'social' | 'environmental';
 
-// Each pillar gets its own hue instead of sharing one green — the wheel
-// needs to visually distinguish the three, not just the section identity.
-export const PILLAR_TINTS: Record<PillarId, { base: string; active: string }> = {
-  economic: { base: '#1f4f73', active: '#5bb3f0' },
-  social: { base: '#6b6f1a', active: '#e0e64f' },
-  environmental: { base: '#3f6f2e', active: '#8fd459' },
+// Client-specified colors, one per pillar. `pure` is the exact hex as given —
+// safe to use for cyan/lime (already proven legible on the navy page
+// elsewhere in the UI) but NOT for economic's navy on its own, since it's
+// the exact same hex as the page background and would vanish entirely.
+// `base`/`active` are lifted variants used for anything rendered on the
+// navy background (ring fill, glow, label text); `pure` is reserved for
+// contexts with their own backdrop (e.g. a filled pill).
+//
+// Economic is lifted toward the palette's existing --color-blue rather than
+// toward white: navy's hue (~235°) desaturates into a lavender/purple read
+// once lightened with white, which no longer looks like "navy" at all.
+// Blending toward blue (~203°, already a proven-legible token) keeps it
+// recognizably in the blue family.
+const RAW: Record<PillarId, string> = {
+  economic: '#283679',
+  social: '#26b7bd',
+  environmental: '#d2d831',
+};
+
+export const PILLAR_TINTS: Record<PillarId, { base: string; active: string; pure: string }> = {
+  economic: {
+    pure: RAW.economic,
+    base: interpolateHsv(RAW.economic, COLORS.blue, 0.5),
+    active: COLORS.blue,
+  },
+  social: {
+    pure: RAW.social,
+    base: interpolateHsv(RAW.social, RAW.economic, 0.35),
+    active: RAW.social,
+  },
+  environmental: {
+    pure: RAW.environmental,
+    base: interpolateHsv(RAW.environmental, RAW.economic, 0.3),
+    active: RAW.environmental,
+  },
 };
 
 export interface Pillar {
