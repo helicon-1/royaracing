@@ -5,21 +5,223 @@ import { Reveal } from '@/components/Reveal';
 import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
 import { TireRating } from '@/components/TireRating';
 
-interface Opening {
-  id: string;
-  kind: 'event' | 'mentorship';
-  label: string;
-  meta: string;
+interface PastEvent {
+  title: string;
+  date: string;
+  duration: string;
 }
 
-const OPENINGS: Opening[] = [
-  {
-    id: 'mentorship',
-    kind: 'mentorship',
-    label: 'Mentoring Program',
-    meta: 'Ongoing — apply anytime',
-  },
+const PAST_EVENTS: PastEvent[] = [
+  { title: 'Event 1', date: 'Date pending', duration: 'Recap pending' },
+  { title: 'Event 2', date: 'Date pending', duration: 'Recap pending' },
+  { title: 'Event 3', date: 'Date pending', duration: 'Recap pending' },
 ];
+
+function MentorshipPanel() {
+  const [submitted, setSubmitted] = useState(false);
+
+  function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSubmitted(true);
+  }
+
+  return (
+    <div className="border border-paper/10 p-8">
+      <p className="label-mono text-[11px] text-cyan">Mentoring Program</p>
+      <p className="mt-3 text-2xl font-bold text-paper">Get mentored by the team</p>
+      <p className="mt-3 text-paper/70">
+        Ongoing — apply anytime. Mentors and mentees receive certificates of participation, and
+        involvement can help toward joining a racing team next season.
+      </p>
+
+      {submitted ? (
+        <p className="mt-6 text-paper/80">Thanks — we'll be in touch about the mentoring program.</p>
+      ) : (
+        <form onSubmit={onSubmit} className="mt-6 space-y-5">
+          <div>
+            <label htmlFor="mentor-name" className="label-mono text-[11px] text-paper/50">
+              Name
+            </label>
+            <input
+              id="mentor-name"
+              required
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
+            />
+          </div>
+          <div>
+            <label htmlFor="mentor-contact" className="label-mono text-[11px] text-paper/50">
+              Contact (email)
+            </label>
+            <input
+              id="mentor-contact"
+              type="email"
+              required
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
+            />
+          </div>
+          <div>
+            <label htmlFor="mentor-note" className="label-mono text-[11px] text-paper/50">
+              Why do you want to apply?
+            </label>
+            <textarea
+              id="mentor-note"
+              required
+              rows={3}
+              className="mt-2 w-full resize-none border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
+            />
+          </div>
+          <button
+            type="submit"
+            className="label-mono mt-2 border border-cyan px-6 py-3 text-[11px] text-cyan transition-colors duration-300 hover:bg-cyan hover:text-navy"
+          >
+            Submit
+          </button>
+        </form>
+      )}
+    </div>
+  );
+}
+
+function EventApplicationPanel() {
+  const [submitted, setSubmitted] = useState(false);
+
+  function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSubmitted(true);
+  }
+
+  return (
+    <div className="border border-paper/10 p-8">
+      <p className="label-mono text-[11px] text-cyan">Event Application</p>
+      <p className="mt-3 text-2xl font-bold text-paper">Apply to an upcoming event</p>
+      <p className="mt-3 text-paper/70">
+        No public events are scheduled yet — apply below and we'll reach out when one is
+        confirmed.
+      </p>
+
+      {submitted ? (
+        <p className="mt-6 text-paper/80">Thanks — we'll be in touch when an event is confirmed.</p>
+      ) : (
+        <form onSubmit={onSubmit} className="mt-6 space-y-5">
+          <div>
+            <label htmlFor="event-name" className="label-mono text-[11px] text-paper/50">
+              Name
+            </label>
+            <input
+              id="event-name"
+              required
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
+            />
+          </div>
+          <div>
+            <label htmlFor="event-contact" className="label-mono text-[11px] text-paper/50">
+              Contact (email)
+            </label>
+            <input
+              id="event-contact"
+              type="email"
+              required
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
+            />
+          </div>
+          <div>
+            <label htmlFor="event-role" className="label-mono text-[11px] text-paper/50">
+              Role
+            </label>
+            <select
+              id="event-role"
+              required
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
+            >
+              <option className="bg-navy" value="">
+                Select one
+              </option>
+              <option className="bg-navy" value="participant">
+                Participant
+              </option>
+              <option className="bg-navy" value="volunteer">
+                Volunteer
+              </option>
+              <option className="bg-navy" value="press">
+                Press
+              </option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="event-note" className="label-mono text-[11px] text-paper/50">
+              Why do you want to apply?
+            </label>
+            <textarea
+              id="event-note"
+              required
+              rows={3}
+              className="mt-2 w-full resize-none border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
+            />
+          </div>
+          <button
+            type="submit"
+            className="label-mono mt-2 border border-cyan px-6 py-3 text-[11px] text-cyan transition-colors duration-300 hover:bg-cyan hover:text-navy"
+          >
+            Submit
+          </button>
+        </form>
+      )}
+    </div>
+  );
+}
+
+function PastEventsList() {
+  const [openTitle, setOpenTitle] = useState<string | null>(null);
+
+  return (
+    <ul className="divide-y divide-paper/10 border-t border-paper/10">
+      {PAST_EVENTS.map((event) => {
+        const isOpen = openTitle === event.title;
+        return (
+          <li key={event.title}>
+            <button
+              type="button"
+              onClick={() => setOpenTitle(isOpen ? null : event.title)}
+              aria-expanded={isOpen}
+              className={`group flex w-full items-center justify-between gap-6 px-2 py-6 text-left transition-colors duration-300 ${
+                isOpen ? 'bg-paper text-navy' : 'hover:bg-paper hover:text-navy'
+              }`}
+            >
+              <span className="flex items-center gap-5">
+                <PhotoPlaceholder
+                  label=""
+                  className="h-12 w-12 shrink-0"
+                  accent={isOpen ? 'var(--color-navy)' : 'var(--color-cyan)'}
+                />
+                <span className="flex flex-col gap-1">
+                  <span className="label-mono text-[11px] opacity-50">{event.date}</span>
+                  <span className="text-xl font-semibold transition-transform duration-300 group-hover:translate-x-1">
+                    {event.title}
+                  </span>
+                </span>
+              </span>
+              <span className="flex shrink-0 items-center gap-4">
+                <span className="label-mono text-[11px] opacity-50">{event.duration}</span>
+                <span className="label-mono text-[11px] opacity-50">{isOpen ? 'CLOSE' : 'VIEW'}</span>
+              </span>
+            </button>
+            <div
+              className={`overflow-hidden transition-[max-height] duration-500 ease-[var(--ease-roya)] ${
+                isOpen ? 'max-h-[400px]' : 'max-h-0'
+              }`}
+            >
+              <div className="grid grid-cols-3 gap-3 py-4">
+                <PhotoPlaceholder label="Photo pending" className="aspect-square w-full" />
+                <PhotoPlaceholder label="Photo pending" className="aspect-square w-full" />
+                <PhotoPlaceholder label="Photo pending" className="aspect-square w-full" />
+              </div>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
 
 interface Comment {
   name: string;
@@ -35,25 +237,11 @@ function sanitize(input: string) {
 }
 
 export function Events() {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [submitted, setSubmitted] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
   const [rating, setRating] = useState(0);
   const [commentText, setCommentText] = useState('');
   const [commentName, setCommentName] = useState('');
   const [appliedFor, setAppliedFor] = useState('');
-
-  const selected = OPENINGS.find((o) => o.id === selectedId);
-
-  function onSelect(id: string) {
-    setSelectedId(id);
-    setSubmitted(false);
-  }
-
-  function onApplySubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
 
   function onCommentSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -83,133 +271,24 @@ export function Events() {
           className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl"
         />
 
-        {/* Get involved */}
-        <div className="mt-20 grid gap-12 lg:grid-cols-[1fr_1fr]">
-          <Reveal>
-            <p className="label-mono text-cyan">Get involved</p>
-            <p className="mt-4 max-w-md text-paper/70">
-              Public events, the mentoring program — every open way to get involved with Roya
-              lives in one list. Pick one to apply.
-            </p>
-            <ul className="mt-8 divide-y divide-paper/10 border-t border-paper/10">
-              {OPENINGS.map((opening) => (
-                <li key={opening.id}>
-                  <button
-                    type="button"
-                    onClick={() => onSelect(opening.id)}
-                    aria-pressed={selectedId === opening.id}
-                    className={`flex w-full items-center justify-between gap-4 py-4 text-left transition-colors duration-200 ${
-                      selectedId === opening.id ? 'text-cyan' : 'text-paper/85 hover:text-paper'
-                    }`}
-                  >
-                    <span>
-                      <span className="block">{opening.label}</span>
-                      <span className="label-mono block text-[11px] text-paper/40">{opening.meta}</span>
-                    </span>
-                    <span aria-hidden="true" className="label-mono text-[11px]">
-                      {selectedId === opening.id ? 'Selected' : 'Select →'}
-                    </span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-6 max-w-md text-sm text-paper/50">
-              Volunteers, press, and participants get a certificate for their involvement, and
-              getting involved can help toward joining a racing team next season.
-            </p>
-          </Reveal>
-
-          <Reveal delay={120} className="border border-paper/10 p-8">
-            {!selected ? (
-              <p className="text-paper/50">Select an opening from the list to apply.</p>
-            ) : submitted ? (
-              <p className="text-paper/80">
-                Thanks — we'll be in touch about {selected.label.toLowerCase()}.
-              </p>
-            ) : (
-              <form key={selected.id} onSubmit={onApplySubmit} className="space-y-5">
-                <p className="label-mono text-[11px] text-paper/40">
-                  Applying to <span className="text-cyan">{selected.label}</span>
-                </p>
-                <div>
-                  <label htmlFor="apply-name" className="label-mono text-[11px] text-paper/50">
-                    Name
-                  </label>
-                  <input
-                    id="apply-name"
-                    required
-                    className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="apply-contact" className="label-mono text-[11px] text-paper/50">
-                    Contact (email)
-                  </label>
-                  <input
-                    id="apply-contact"
-                    type="email"
-                    required
-                    className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
-                  />
-                </div>
-                {selected.kind === 'event' && (
-                  <div>
-                    <label htmlFor="apply-role" className="label-mono text-[11px] text-paper/50">
-                      Role
-                    </label>
-                    <select
-                      id="apply-role"
-                      required
-                      className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
-                    >
-                      <option className="bg-navy" value="">
-                        Select one
-                      </option>
-                      <option className="bg-navy" value="participant">
-                        Participant
-                      </option>
-                      <option className="bg-navy" value="volunteer">
-                        Volunteer
-                      </option>
-                      <option className="bg-navy" value="press">
-                        Press
-                      </option>
-                    </select>
-                  </div>
-                )}
-                <div>
-                  <label htmlFor="apply-note" className="label-mono text-[11px] text-paper/50">
-                    Why do you want to apply?
-                  </label>
-                  <textarea
-                    id="apply-note"
-                    required
-                    rows={3}
-                    className="mt-2 w-full resize-none border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="label-mono mt-2 border border-cyan px-6 py-3 text-[11px] text-cyan transition-colors duration-300 hover:bg-cyan hover:text-navy"
-                >
-                  Submit
-                </button>
-              </form>
-            )}
-          </Reveal>
+        {/* Get involved — two distinct paths, not one blended flow */}
+        <div className="mt-20">
+          <p className="label-mono text-cyan">Get Involved</p>
+          <div className="mt-8 grid gap-10 lg:grid-cols-2">
+            <Reveal>
+              <MentorshipPanel />
+            </Reveal>
+            <Reveal delay={120}>
+              <EventApplicationPanel />
+            </Reveal>
+          </div>
         </div>
 
-        {/* Past */}
+        {/* Past events — same visual pattern as the Absolute Roya episode list */}
         <div className="mt-28">
-          <p className="label-mono text-cyan">Past</p>
-          <Reveal as="div" className="mt-8 grid items-stretch gap-10 lg:grid-cols-[1fr_1fr]">
-            <PhotoPlaceholder label="Photo pending — recap" className="h-full min-h-64 w-full" />
-            <div className="flex flex-col justify-center">
-              <h3 className="text-2xl font-bold text-paper">Recap coming soon</h3>
-              <p className="mt-3 max-w-md text-paper/70">
-                Public results and a full recap will be posted here once available.
-              </p>
-            </div>
+          <p className="label-mono text-cyan">Past Events</p>
+          <Reveal as="div" className="mt-8">
+            <PastEventsList />
           </Reveal>
 
           <div className="mt-16">
@@ -226,7 +305,7 @@ export function Events() {
               <input
                 value={appliedFor}
                 onChange={(e) => setAppliedFor(e.target.value)}
-                placeholder="What did you attend or apply for? (e.g. Mentoring Program, Riyadh Regionals)"
+                placeholder="What did you attend or apply for? (e.g. Mentoring Program, Event 1)"
                 maxLength={60}
                 className="w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors placeholder:text-paper/30 focus:border-cyan"
               />

@@ -51,8 +51,8 @@ export function CompetitionTimeline() {
 
         {/* Stage selector — native range input, so click, drag and arrow
             keys all move the selection (the old custom slider only
-            responded to drag). */}
-        <div className="mx-auto mt-16 max-w-xl">
+            responded to drag) — stretched the full width of the section. */}
+        <div className="mt-16 w-full">
           <input
             type="range"
             min={0}
@@ -61,7 +61,7 @@ export function CompetitionTimeline() {
             value={active}
             onChange={(e) => setActive(Number(e.target.value))}
             aria-label="Select competition stage"
-            className="w-full accent-cyan"
+            className="range-car w-full accent-cyan"
           />
           <div className="mt-3 flex justify-between">
             {STAGES.map((s, i) => (
