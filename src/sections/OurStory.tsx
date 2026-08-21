@@ -48,7 +48,7 @@ export function OurStory() {
           <PhotoPlaceholder label="Photo pending — workshop" className="flex-[1.2] w-full" />
           <PhotoPlaceholder
             label="Photo pending — team at work"
-            className="flex-1 w-2/3 self-end"
+            className="flex-1 w-full"
             accent="var(--color-navy-light)"
           />
         </Reveal>

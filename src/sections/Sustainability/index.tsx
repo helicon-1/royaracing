@@ -2,16 +2,65 @@ import { useState } from 'react';
 import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
 import { Reveal } from '@/components/Reveal';
-import { Wheel } from './Wheel';
 import { BudgetAllocator } from './BudgetAllocator';
 import { DetailPanel } from './DetailPanel';
-import { PILLARS, PILLAR_TINTS, type PillarId } from './data';
+import { PILLARS, PILLAR_TINTS, type Pillar, type PillarId } from './data';
+
+function PillarCard({
+  pillar,
+  isOpen,
+  onToggle,
+}: {
+  pillar: Pillar;
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
+  const color = PILLAR_TINTS[pillar.id];
+
+  return (
+    <div
+      className="border-t-4 p-6 transition-colors duration-300 md:p-8"
+      style={{ borderColor: color, backgroundColor: `${color}0d` }}
+    >
+      <p className="label-mono text-[11px]" style={{ color }}>
+        {pillar.label}
+      </p>
+      <p className="mt-4 text-paper/80">{pillar.definition}</p>
+
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        className="label-mono mt-6 inline-flex items-center gap-2 text-[11px] transition-colors duration-300"
+        style={{ color }}
+      >
+        {isOpen ? 'Close' : 'See what we did'}
+        <span
+          aria-hidden="true"
+          className={`inline-block transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`}
+        >
+          +
+        </span>
+      </button>
+
+      <div
+        className={`overflow-hidden transition-[max-height] duration-500 ease-[var(--ease-roya)] ${
+          isOpen ? 'max-h-[1000px]' : 'max-h-0'
+        }`}
+      >
+        <div className="mt-6 border-t pt-6" style={{ borderColor: `${color}33` }}>
+          <p className="text-paper/70">{pillar.practice}</p>
+          <div className="mt-6">
+            <DetailPanel id={pillar.id} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function Sustainability() {
-  const [active, setActive] = useState<PillarId>('economic');
-  const [hovered, setHovered] = useState<PillarId | null>(null);
-
-  const activePillar = PILLARS.find((p) => p.id === active)!;
+  const [openId, setOpenId] = useState<PillarId | null>(null);
 
   return (
     <Section id="sustainability" className="relative px-6 py-32 md:px-10">
@@ -24,47 +73,20 @@ export function Sustainability() {
         />
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-paper/70">
           Sustainability here means more than the environment — it's whether the program can
-          keep running, who it brings along, and what it leaves behind. Select a pillar to
-          read more.
+          keep running, who it brings along, and what it leaves behind. Click a section below
+          to see what Roya does about it.
         </p>
 
-        <div className="mt-20 grid gap-16 lg:grid-cols-[380px_1fr]">
-          <Reveal>
-            <Wheel
-              pillars={PILLARS}
-              active={active}
-              hovered={hovered}
-              onSelect={setActive}
-              onHover={setHovered}
-            />
-            <div className="mx-auto mt-8 flex max-w-[360px] justify-center gap-6">
-              {PILLARS.map((p) => (
-                <button
-                  key={p.id}
-                  type="button"
-                  onClick={() => setActive(p.id)}
-                  onPointerEnter={() => setHovered(p.id)}
-                  onPointerLeave={() => setHovered(null)}
-                  className={`label-mono text-[11px] transition-colors duration-300 ${
-                    active === p.id ? '' : 'text-paper/40 hover:text-paper/70'
-                  }`}
-                  style={active === p.id ? { color: PILLAR_TINTS[p.id].active } : undefined}
-                >
-                  {p.label}
-                </button>
-              ))}
-            </div>
-          </Reveal>
-
-          <Reveal delay={120}>
-            <p className="label-mono" style={{ color: PILLAR_TINTS[active].active }}>
-              {activePillar.label}
-            </p>
-            <p className="mt-3 max-w-xl text-paper/70">{activePillar.practice}</p>
-            <div className="mt-8">
-              <DetailPanel id={active} />
-            </div>
-          </Reveal>
+        <div className="mt-16 grid gap-6 lg:grid-cols-3">
+          {PILLARS.map((pillar, i) => (
+            <Reveal key={pillar.id} delay={i * 100}>
+              <PillarCard
+                pillar={pillar}
+                isOpen={openId === pillar.id}
+                onToggle={() => setOpenId(openId === pillar.id ? null : pillar.id)}
+              />
+            </Reveal>
+          ))}
         </div>
 
         <div className="mx-auto mt-24 max-w-2xl">
