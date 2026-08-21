@@ -43,12 +43,6 @@ function SocialDetail() {
           Mentors and mentees receive certificates of participation, and involvement can help
           toward joining a racing team next season.
         </p>
-        <a
-          href="mailto:roya.racing2026@gmail.com?subject=Mentoring%20Program%20Application"
-          className="label-mono mt-4 inline-block text-[11px] text-[var(--pillar-active)] transition-colors duration-200 hover:text-paper"
-        >
-          Apply to the mentoring program →
-        </a>
       </div>
 
       <ul className="mt-6 divide-y divide-paper/10 border-t border-paper/10">

@@ -19,7 +19,7 @@ function PillarCard({
 
   return (
     <div
-      className="border-t-4 p-6 transition-colors duration-300 md:p-8"
+      className="flex h-full flex-col border-t-4 p-6 transition-colors duration-300 md:p-8"
       style={{ borderColor: color, backgroundColor: `${color}0d` }}
     >
       <p className="label-mono text-[11px]" style={{ color }}>
@@ -77,9 +77,9 @@ export function Sustainability() {
           to see what Roya does about it.
         </p>
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-3">
+        <div className="mt-16 grid items-stretch gap-6 lg:grid-cols-3">
           {PILLARS.map((pillar, i) => (
-            <Reveal key={pillar.id} delay={i * 100}>
+            <Reveal key={pillar.id} delay={i * 100} className="h-full">
               <PillarCard
                 pillar={pillar}
                 isOpen={openId === pillar.id}

@@ -5,8 +5,25 @@ import { Reveal } from '@/components/Reveal';
 import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
 import { TireRating } from '@/components/TireRating';
 
+interface Opening {
+  id: string;
+  kind: 'event' | 'mentorship';
+  label: string;
+  meta: string;
+}
+
+const OPENINGS: Opening[] = [
+  {
+    id: 'mentorship',
+    kind: 'mentorship',
+    label: 'Mentoring Program',
+    meta: 'Ongoing — apply anytime',
+  },
+];
+
 interface Comment {
   name: string;
+  appliedFor: string;
   rating: number;
   text: string;
 }
@@ -18,26 +35,41 @@ function sanitize(input: string) {
 }
 
 export function Events() {
+  const [selectedId, setSelectedId] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
   const [rating, setRating] = useState(0);
   const [commentText, setCommentText] = useState('');
   const [commentName, setCommentName] = useState('');
+  const [appliedFor, setAppliedFor] = useState('');
 
-  function onRsvpSubmit(e: FormEvent<HTMLFormElement>) {
+  const selected = OPENINGS.find((o) => o.id === selectedId);
+
+  function onSelect(id: string) {
+    setSelectedId(id);
+    setSubmitted(false);
+  }
+
+  function onApplySubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitted(true);
   }
 
   function onCommentSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!commentText.trim() || rating === 0) return;
+    if (!commentText.trim() || !appliedFor.trim() || rating === 0) return;
     setComments((prev) => [
-      { name: sanitize(commentName || 'Anonymous').slice(0, 60), rating, text: sanitize(commentText) },
+      {
+        name: sanitize(commentName || 'Anonymous').slice(0, 60),
+        appliedFor: sanitize(appliedFor).slice(0, 60),
+        rating,
+        text: sanitize(commentText),
+      },
       ...prev,
     ]);
     setCommentText('');
     setCommentName('');
+    setAppliedFor('');
     setRating(0);
   }
 
@@ -51,70 +83,110 @@ export function Events() {
           className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl"
         />
 
-        {/* Upcoming */}
+        {/* Get involved */}
         <div className="mt-20 grid gap-12 lg:grid-cols-[1fr_1fr]">
           <Reveal>
-            <p className="label-mono text-cyan">Upcoming</p>
-            <p className="mt-4 text-paper/50">
-              No upcoming public events are announced yet — check back soon.
+            <p className="label-mono text-cyan">Get involved</p>
+            <p className="mt-4 max-w-md text-paper/70">
+              Public events, the mentoring program — every open way to get involved with Roya
+              lives in one list. Pick one to apply.
             </p>
-            <p className="mt-6 max-w-md text-paper/70">
+            <ul className="mt-8 divide-y divide-paper/10 border-t border-paper/10">
+              {OPENINGS.map((opening) => (
+                <li key={opening.id}>
+                  <button
+                    type="button"
+                    onClick={() => onSelect(opening.id)}
+                    aria-pressed={selectedId === opening.id}
+                    className={`flex w-full items-center justify-between gap-4 py-4 text-left transition-colors duration-200 ${
+                      selectedId === opening.id ? 'text-cyan' : 'text-paper/85 hover:text-paper'
+                    }`}
+                  >
+                    <span>
+                      <span className="block">{opening.label}</span>
+                      <span className="label-mono block text-[11px] text-paper/40">{opening.meta}</span>
+                    </span>
+                    <span aria-hidden="true" className="label-mono text-[11px]">
+                      {selectedId === opening.id ? 'Selected' : 'Select →'}
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 max-w-md text-sm text-paper/50">
               Volunteers, press, and participants get a certificate for their involvement, and
               getting involved can help toward joining a racing team next season.
             </p>
           </Reveal>
 
           <Reveal delay={120} className="border border-paper/10 p-8">
-            {submitted ? (
+            {!selected ? (
+              <p className="text-paper/50">Select an opening from the list to apply.</p>
+            ) : submitted ? (
               <p className="text-paper/80">
-                Thanks — we'll be in touch when the next event is confirmed.
+                Thanks — we'll be in touch about {selected.label.toLowerCase()}.
               </p>
             ) : (
-              <form onSubmit={onRsvpSubmit} className="space-y-5">
-                <p className="label-mono text-[11px] text-paper/40">Get notified / apply to help</p>
+              <form key={selected.id} onSubmit={onApplySubmit} className="space-y-5">
+                <p className="label-mono text-[11px] text-paper/40">
+                  Applying to <span className="text-cyan">{selected.label}</span>
+                </p>
                 <div>
-                  <label htmlFor="rsvp-name" className="label-mono text-[11px] text-paper/50">
+                  <label htmlFor="apply-name" className="label-mono text-[11px] text-paper/50">
                     Name
                   </label>
                   <input
-                    id="rsvp-name"
+                    id="apply-name"
                     required
                     className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
                   />
                 </div>
                 <div>
-                  <label htmlFor="rsvp-contact" className="label-mono text-[11px] text-paper/50">
+                  <label htmlFor="apply-contact" className="label-mono text-[11px] text-paper/50">
                     Contact (email)
                   </label>
                   <input
-                    id="rsvp-contact"
+                    id="apply-contact"
                     type="email"
                     required
                     className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
                   />
                 </div>
+                {selected.kind === 'event' && (
+                  <div>
+                    <label htmlFor="apply-role" className="label-mono text-[11px] text-paper/50">
+                      Role
+                    </label>
+                    <select
+                      id="apply-role"
+                      required
+                      className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
+                    >
+                      <option className="bg-navy" value="">
+                        Select one
+                      </option>
+                      <option className="bg-navy" value="participant">
+                        Participant
+                      </option>
+                      <option className="bg-navy" value="volunteer">
+                        Volunteer
+                      </option>
+                      <option className="bg-navy" value="press">
+                        Press
+                      </option>
+                    </select>
+                  </div>
+                )}
                 <div>
-                  <label htmlFor="rsvp-role" className="label-mono text-[11px] text-paper/50">
-                    Role
+                  <label htmlFor="apply-note" className="label-mono text-[11px] text-paper/50">
+                    Why do you want to apply?
                   </label>
-                  <select
-                    id="rsvp-role"
+                  <textarea
+                    id="apply-note"
                     required
-                    className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
-                  >
-                    <option className="bg-navy" value="">
-                      Select one
-                    </option>
-                    <option className="bg-navy" value="participant">
-                      Participant
-                    </option>
-                    <option className="bg-navy" value="volunteer">
-                      Volunteer
-                    </option>
-                    <option className="bg-navy" value="press">
-                      Press
-                    </option>
-                  </select>
+                    rows={3}
+                    className="mt-2 w-full resize-none border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
+                  />
                 </div>
                 <button
                   type="submit"
@@ -151,6 +223,13 @@ export function Events() {
                 maxLength={60}
                 className="w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors placeholder:text-paper/30 focus:border-cyan"
               />
+              <input
+                value={appliedFor}
+                onChange={(e) => setAppliedFor(e.target.value)}
+                placeholder="What did you attend or apply for? (e.g. Mentoring Program, Riyadh Regionals)"
+                maxLength={60}
+                className="w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors placeholder:text-paper/30 focus:border-cyan"
+              />
               <textarea
                 value={commentText}
                 onChange={(e) => setCommentText(e.target.value)}
@@ -173,6 +252,7 @@ export function Events() {
                   <li key={i} className="flex items-start justify-between gap-6 py-4">
                     <div>
                       <p className="text-paper/85">{c.name}</p>
+                      <p className="label-mono mt-1 text-[10px] text-cyan">{c.appliedFor}</p>
                       <p className="mt-1 text-sm text-paper/60">{c.text}</p>
                     </div>
                     <TireRating value={c.rating} readOnly />

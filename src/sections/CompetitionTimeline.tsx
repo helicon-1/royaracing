@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
 import { Reveal } from '@/components/Reveal';
@@ -31,44 +32,10 @@ const STAGES: Stage[] = [
   },
 ];
 
-function StageCard({ stage, index }: { stage: Stage; index: number }) {
-  return (
-    <div className="flex h-full flex-col overflow-hidden bg-ink/60">
-      <div className="relative flex-1 p-6 md:p-8">
-        <div
-          aria-hidden="true"
-          className="absolute left-0 top-0 h-full w-2 bg-cyan"
-          style={{ clipPath: 'polygon(0 0, 100% 0, 100% 82%, 45% 100%, 0 100%)' }}
-        />
-        <div className="pl-5">
-          <div className="flex items-start justify-between gap-4">
-            <span
-              aria-hidden="true"
-              className="label-mono select-none text-6xl font-bold leading-none text-paper/10"
-            >
-              {String(index + 1).padStart(2, '0')}
-            </span>
-            <span
-              className={`label-mono shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-[10px] ${
-                stage.status === 'upcoming'
-                  ? 'border-paper/25 text-paper/50'
-                  : 'border-cyan/50 text-cyan'
-              }`}
-            >
-              {stage.status === 'upcoming' ? 'Upcoming' : 'Complete'}
-            </span>
-          </div>
-          <h3 className="mt-2 text-2xl font-bold leading-[1.05] text-paper">{stage.label}</h3>
-          <p className="label-mono mt-2 text-cyan">{stage.month}</p>
-          <p className="mt-4 text-sm text-paper/70">{stage.blurb}</p>
-        </div>
-      </div>
-      <PhotoPlaceholder label={`Photo pending — ${stage.label}`} className="aspect-video w-full" />
-    </div>
-  );
-}
-
 export function CompetitionTimeline() {
+  const [active, setActive] = useState(0);
+  const stage = STAGES[active];
+
   return (
     <Section id="timeline" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
@@ -82,13 +49,69 @@ export function CompetitionTimeline() {
           Regionals, then Nationals, then the World Finals — where Roya is headed next.
         </p>
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-3">
-          {STAGES.map((stage, i) => (
-            <Reveal key={stage.label} delay={i * 100} className="h-full">
-              <StageCard stage={stage} index={i} />
-            </Reveal>
-          ))}
+        {/* Stage selector — native range input, so click, drag and arrow
+            keys all move the selection (the old custom slider only
+            responded to drag). */}
+        <div className="mx-auto mt-16 max-w-xl">
+          <input
+            type="range"
+            min={0}
+            max={STAGES.length - 1}
+            step={1}
+            value={active}
+            onChange={(e) => setActive(Number(e.target.value))}
+            aria-label="Select competition stage"
+            className="w-full accent-cyan"
+          />
+          <div className="mt-3 flex justify-between">
+            {STAGES.map((s, i) => (
+              <button
+                key={s.label}
+                type="button"
+                onClick={() => setActive(i)}
+                className={`label-mono text-[11px] transition-colors duration-300 ${
+                  i === active ? 'text-cyan' : 'text-paper/40 hover:text-paper/70'
+                }`}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
         </div>
+
+        {/* Single F1-telemetry-style display panel — fixed size regardless
+            of which stage is selected, so it can never look inconsistent. */}
+        <Reveal key={stage.label} className="mx-auto mt-12 max-w-4xl">
+          <div className="grid min-h-[420px] overflow-hidden bg-ink/60 md:grid-cols-[1.1fr_1fr]">
+            <div className="relative flex flex-col justify-center p-8 md:p-12">
+              <div
+                aria-hidden="true"
+                className="absolute left-0 top-0 h-full w-2 bg-cyan"
+                style={{ clipPath: 'polygon(0 0, 100% 0, 100% 82%, 45% 100%, 0 100%)' }}
+              />
+              <div className="pl-6">
+                <div className="flex items-center justify-between gap-4">
+                  <span className="label-mono text-cyan">Stage {String(active + 1).padStart(2, '0')} / 03</span>
+                  <span
+                    className={`label-mono shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-[10px] ${
+                      stage.status === 'upcoming'
+                        ? 'border-paper/25 text-paper/50'
+                        : 'border-cyan/50 text-cyan'
+                    }`}
+                  >
+                    {stage.status === 'upcoming' ? 'Upcoming' : 'Complete'}
+                  </span>
+                </div>
+                <h3 className="mt-4 text-balance text-4xl font-bold leading-[1.1] text-paper md:text-5xl">
+                  {stage.label}
+                </h3>
+                <p className="label-mono mt-3 text-cyan">{stage.month}</p>
+                <p className="mt-6 max-w-sm text-paper/70">{stage.blurb}</p>
+              </div>
+            </div>
+            <PhotoPlaceholder label={`Photo pending — ${stage.label}`} className="h-full min-h-64 w-full" />
+          </div>
+        </Reveal>
       </div>
     </Section>
   );
