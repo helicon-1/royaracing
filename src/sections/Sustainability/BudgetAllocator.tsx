@@ -99,20 +99,37 @@ export function BudgetAllocator() {
         ) : (
           <div>
             <p className="label-mono text-[11px] text-paper/50">
-              Roya's allocation <span className="text-paper/30">— placeholder, pending real figures</span>
+              You vs. Roya <span className="text-paper/30">— Roya's split is a placeholder, pending real figures</span>
             </p>
-            <div className="mt-4 space-y-4">
+            <div className="mt-4 space-y-5">
               {PILLARS.map((pillar) => (
                 <div key={pillar.id}>
-                  <div className="flex items-center justify-between text-xs text-paper/50">
-                    <span>{pillar.label}</span>
-                    <span className="label-mono">{ROYA_ALLOCATION[pillar.id]}</span>
-                  </div>
-                  <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-paper/10">
-                    <div
-                      className="h-full rounded-full bg-paper/30"
-                      style={{ width: `${ROYA_ALLOCATION[pillar.id]}%` }}
-                    />
+                  <p className="label-mono text-[11px] text-paper/70">{pillar.label}</p>
+                  <div className="mt-2 space-y-1.5">
+                    <div className="flex items-center gap-2">
+                      <span className="label-mono w-11 shrink-0 text-[10px] text-cyan">You</span>
+                      <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-paper/10">
+                        <div
+                          className="h-full rounded-full bg-cyan"
+                          style={{ width: `${allocation[pillar.id]}%` }}
+                        />
+                      </div>
+                      <span className="label-mono w-6 shrink-0 text-right text-[10px] text-cyan">
+                        {allocation[pillar.id]}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="label-mono w-11 shrink-0 text-[10px] text-green">Roya</span>
+                      <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-paper/10">
+                        <div
+                          className="h-full rounded-full bg-green"
+                          style={{ width: `${ROYA_ALLOCATION[pillar.id]}%` }}
+                        />
+                      </div>
+                      <span className="label-mono w-6 shrink-0 text-right text-[10px] text-green">
+                        {ROYA_ALLOCATION[pillar.id]}
+                      </span>
+                    </div>
                   </div>
                 </div>
               ))}

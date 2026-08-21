@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Reveal } from '@/components/Reveal';
-import sadu from '@/assets/emblems/sadu-asterisk.svg';
+import saudiEmblem from '@/assets/emblems/sadu-asterisk.svg';
 import fanajeel from '@/assets/emblems/fanajeel-cup.svg';
 import mamlakaTower from '@/assets/emblems/mamlaka-tower.svg';
 import vision2030 from '@/assets/emblems/vision-2030.svg';
-import bowtie from '@/assets/emblems/bowtie.svg';
+import sadu from '@/assets/emblems/bowtie.svg';
 
 interface Emblem {
   id: string;
@@ -15,11 +15,11 @@ interface Emblem {
 
 const EMBLEMS: Emblem[] = [
   {
-    id: 'sadu',
-    name: 'Sadu',
-    src: sadu,
+    id: 'saudi-emblem',
+    name: 'Saudi Emblem',
+    src: saudiEmblem,
     meaning:
-      'A traditional Najdi weaving pattern — a mark of Saudi craftsmanship, the same care the team puts into building the car by hand.',
+      "Saudi Arabia's national emblem — two crossed swords beneath a palm tree, echoing the same mark carried on the Kingdom's own royal insignia. A direct nod to national identity.",
   },
   {
     id: 'fanajeel',
@@ -41,10 +41,11 @@ const EMBLEMS: Emblem[] = [
     meaning: "Saudi Arabia's national transformation plan — the direct inspiration for the team's name, Roya.",
   },
   {
-    id: 'bowtie',
-    name: 'Bowtie',
-    src: bowtie,
-    meaning: 'A small nod to motorsport and mechanical craft, carried as a mark on the site itself.',
+    id: 'sadu',
+    name: 'Sadu',
+    src: sadu,
+    meaning:
+      'A traditional Najdi weaving pattern — a mark of Saudi craftsmanship, the same care the team puts into building the car by hand.',
   },
 ];
 
@@ -58,29 +59,27 @@ export function Emblems() {
         <p className="label-mono mb-12 text-center text-[10px] text-paper/35">
           Our emblems — click one
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-16 gap-y-10">
+        <div className="flex flex-wrap items-center justify-center gap-x-20 gap-y-12">
           {EMBLEMS.map((emblem, i) => (
             <Reveal key={emblem.id} delay={i * 80}>
               <button
                 type="button"
                 onClick={() => setSelectedId(selectedId === emblem.id ? null : emblem.id)}
                 aria-expanded={selectedId === emblem.id}
-                className={`group flex items-center gap-3 transition-colors duration-300 ${
+                className={`group flex flex-col items-center gap-3 transition-colors duration-300 ${
                   selectedId === emblem.id ? 'text-cyan' : 'text-paper/65 hover:text-paper'
                 }`}
               >
-                <img src={emblem.src} alt="" aria-hidden="true" className="h-7 w-7 shrink-0" />
+                <img src={emblem.src} alt="" aria-hidden="true" className="h-14 w-14 shrink-0 md:h-16 md:w-16" />
                 <span className="label-mono whitespace-nowrap text-sm">{emblem.name}</span>
               </button>
             </Reveal>
           ))}
         </div>
 
-        <div
-          className={`mx-auto max-w-xl overflow-hidden text-center transition-[max-height] duration-500 ease-[var(--ease-roya)] ${
-            selected ? 'mt-10 max-h-40' : 'max-h-0'
-          }`}
-        >
+        {/* Fixed height (not min-height) so switching between short and
+            long descriptions never shifts the Team section below. */}
+        <div className="mx-auto mt-10 flex h-24 max-w-xl items-center justify-center text-center">
           {selected && <p className="text-paper/70">{selected.meaning}</p>}
         </div>
       </div>

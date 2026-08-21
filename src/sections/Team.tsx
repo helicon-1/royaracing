@@ -72,6 +72,15 @@ export function Team() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={MEMBERS.length * 70 + 100}>
+          <a
+            href="#events"
+            className="label-mono mt-16 inline-block text-[11px] text-cyan transition-colors duration-200 hover:text-paper"
+          >
+            Interested in being mentored by our team? Apply →
+          </a>
+        </Reveal>
       </div>
 
       {activeMember && (
