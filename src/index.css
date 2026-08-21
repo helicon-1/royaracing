@@ -1,10 +1,15 @@
 /*
-  Garet is Roya Racing's specified heading/UI font, but no licensed font
-  files were made available for this build (flagged back to the team).
-  Urbanist is used as an interim substitute — a geometric sans with a
-  similar confident, technical character — restricted to the same
-  regular/bold-only rule Garet itself is under. Swap `--font-heading`
-  below the moment real Garet files land; nothing else needs to change.
+  Garet is Roya Racing's specified heading/UI font. Two files were supplied
+  for this round expecting them to be real licensed Regular/Bold files, but
+  they turned out to be Fontspring's watermarked DEMO fonts (confirmed via
+  the font's own internal name table: "FSP DEMO - Garet Bold" /
+  FONTSPRINGDEMO-GaretBold) — trial fonts that deliberately corrupt certain
+  glyphs (the apostrophe renders as a decorative "DEMO" mark) to block
+  production use, flagged back to the team rather than shipped. Urbanist
+  stays as the interim substitute — a geometric sans with a similar
+  confident, technical character — restricted to the same regular/bold-only
+  rule Garet itself is under. Swap `--font-heading` below the moment
+  genuinely licensed Garet files land; nothing else needs to change.
 */
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@1,400;1,600&family=Urbanist:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
@@ -115,5 +120,61 @@
     font-style: italic;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+  }
+
+  /* Competition Timeline's stage selector — a native range input (so click,
+     drag and arrow keys all work) with its thumb shaped into a small F1-car
+     silhouette via clip-path instead of the default round handle. */
+  .range-car {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: color-mix(in srgb, var(--color-paper) 20%, transparent);
+    border-radius: 999px;
+  }
+
+  .range-car::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 34px;
+    height: 16px;
+    background: var(--color-cyan);
+    clip-path: polygon(
+      0% 60%,
+      10% 60%,
+      16% 20%,
+      60% 20%,
+      70% 45%,
+      100% 45%,
+      100% 100%,
+      70% 100%,
+      60% 75%,
+      16% 75%,
+      10% 100%,
+      0% 100%
+    );
+    cursor: pointer;
+  }
+
+  .range-car::-moz-range-thumb {
+    width: 34px;
+    height: 16px;
+    border: none;
+    background: var(--color-cyan);
+    clip-path: polygon(
+      0% 60%,
+      10% 60%,
+      16% 20%,
+      60% 20%,
+      70% 45%,
+      100% 45%,
+      100% 100%,
+      70% 100%,
+      60% 75%,
+      16% 75%,
+      10% 100%,
+      0% 100%
+    );
+    cursor: pointer;
   }
 }

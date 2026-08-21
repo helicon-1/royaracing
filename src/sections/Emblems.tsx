@@ -18,34 +18,31 @@ const EMBLEMS: Emblem[] = [
     id: 'saudi-emblem',
     name: 'Saudi Emblem',
     src: saudiEmblem,
-    meaning:
-      "Saudi Arabia's national emblem — two crossed swords beneath a palm tree, echoing the same mark carried on the Kingdom's own royal insignia. A direct nod to national identity.",
+    meaning: "Saudi Arabia's national emblem: two crossed swords beneath a palm tree.",
   },
   {
     id: 'fanajeel',
     name: 'Fanajeel',
     src: fanajeel,
-    meaning:
-      'Traditional Arabic coffee cups — a symbol of hospitality, poured for sponsors, mentors and visitors at the workshop.',
+    meaning: 'Traditional Saudi coffee cups, symbolizing hospitality.',
   },
   {
     id: 'mamlaka',
     name: 'Mamlaka Tower',
     src: mamlakaTower,
-    meaning: "Riyadh's Kingdom Centre Tower — the skyline of the city the team calls home.",
+    meaning: "Riyadh's Kingdom Centre Tower — the city's landmark skyscraper.",
   },
   {
     id: 'vision2030',
     name: 'Vision 2030',
     src: vision2030,
-    meaning: "Saudi Arabia's national transformation plan — the direct inspiration for the team's name, Roya.",
+    meaning: "Saudi Arabia's national transformation plan, the inspiration for the team's name, Roya.",
   },
   {
     id: 'sadu',
     name: 'Sadu',
     src: sadu,
-    meaning:
-      'A traditional Najdi weaving pattern — a mark of Saudi craftsmanship, the same care the team puts into building the car by hand.',
+    meaning: 'A traditional Saudi Bedouin weaving pattern, used in textiles and handicrafts.',
   },
 ];
 
@@ -54,12 +51,12 @@ export function Emblems() {
   const selected = EMBLEMS.find((e) => e.id === selectedId);
 
   return (
-    <div className="px-6 py-20 md:px-10">
+    <div className="px-6 py-20 md:px-[120px]">
       <div className="mx-auto max-w-[1400px]">
         <p className="label-mono mb-12 text-center text-[10px] text-paper/35">
           Our emblems — click one
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-20 gap-y-12">
+        <div className="flex flex-wrap items-center justify-center gap-x-24 gap-y-14">
           {EMBLEMS.map((emblem, i) => (
             <Reveal key={emblem.id} delay={i * 80}>
               <button
@@ -70,7 +67,12 @@ export function Emblems() {
                   selectedId === emblem.id ? 'text-cyan' : 'text-paper/65 hover:text-paper'
                 }`}
               >
-                <img src={emblem.src} alt="" aria-hidden="true" className="h-14 w-14 shrink-0 md:h-16 md:w-16" />
+                <img
+                  src={emblem.src}
+                  alt=""
+                  aria-hidden="true"
+                  className="h-20 w-auto shrink-0 md:h-28"
+                />
                 <span className="label-mono whitespace-nowrap text-sm">{emblem.name}</span>
               </button>
             </Reveal>
