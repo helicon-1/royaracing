@@ -123,8 +123,10 @@
   }
 
   /* Competition Timeline's stage selector — a native range input (so click,
-     drag and arrow keys all work) with its thumb shaped into a small F1-car
-     silhouette via clip-path instead of the default round handle. */
+     drag and arrow keys all work), thumb hidden (opacity 0, still a real
+     hit target) since the visible car is a separately animated overlay
+     (.car-marker) that can transition smoothly between stages instead of
+     snapping with the input's value. */
   .range-car {
     -webkit-appearance: none;
     appearance: none;
@@ -133,9 +135,7 @@
     border-radius: 999px;
   }
 
-  .range-car::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
+  .car-marker {
     width: 34px;
     height: 16px;
     background: var(--color-cyan);
@@ -153,6 +153,14 @@
       10% 100%,
       0% 100%
     );
+  }
+
+  .range-car::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 34px;
+    height: 16px;
+    opacity: 0;
     cursor: pointer;
   }
 
@@ -160,21 +168,7 @@
     width: 34px;
     height: 16px;
     border: none;
-    background: var(--color-cyan);
-    clip-path: polygon(
-      0% 60%,
-      10% 60%,
-      16% 20%,
-      60% 20%,
-      70% 45%,
-      100% 45%,
-      100% 100%,
-      70% 100%,
-      60% 75%,
-      16% 75%,
-      10% 100%,
-      0% 100%
-    );
+    opacity: 0;
     cursor: pointer;
   }
 }
