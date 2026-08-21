@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from 'react';
 import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
 import { Reveal } from '@/components/Reveal';
@@ -32,74 +31,44 @@ const STAGES: Stage[] = [
   },
 ];
 
-const STOPS = [0, 50, 100];
-
-function nearestStageIndex(pct: number) {
-  let closest = 0;
-  let closestDist = Infinity;
-  STOPS.forEach((s, i) => {
-    const d = Math.abs(s - pct);
-    if (d < closestDist) {
-      closestDist = d;
-      closest = i;
-    }
-  });
-  return closest;
+function StageCard({ stage, index }: { stage: Stage; index: number }) {
+  return (
+    <div className="flex h-full flex-col overflow-hidden bg-ink/60">
+      <div className="relative flex-1 p-6 md:p-8">
+        <div
+          aria-hidden="true"
+          className="absolute left-0 top-0 h-full w-2 bg-cyan"
+          style={{ clipPath: 'polygon(0 0, 100% 0, 100% 82%, 45% 100%, 0 100%)' }}
+        />
+        <div className="pl-5">
+          <div className="flex items-start justify-between gap-4">
+            <span
+              aria-hidden="true"
+              className="label-mono select-none text-6xl font-bold leading-none text-paper/10"
+            >
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <span
+              className={`label-mono shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-[10px] ${
+                stage.status === 'upcoming'
+                  ? 'border-paper/25 text-paper/50'
+                  : 'border-cyan/50 text-cyan'
+              }`}
+            >
+              {stage.status === 'upcoming' ? 'Upcoming' : 'Complete'}
+            </span>
+          </div>
+          <h3 className="mt-2 text-2xl font-bold leading-[1.05] text-paper">{stage.label}</h3>
+          <p className="label-mono mt-2 text-cyan">{stage.month}</p>
+          <p className="mt-4 text-sm text-paper/70">{stage.blurb}</p>
+        </div>
+      </div>
+      <PhotoPlaceholder label={`Photo pending — ${stage.label}`} className="aspect-video w-full" />
+    </div>
+  );
 }
 
 export function CompetitionTimeline() {
-  const [active, setActive] = useState(0);
-  const [dragging, setDragging] = useState(false);
-  const [dragPct, setDragPct] = useState<number | null>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  const stops = STOPS;
-  const handlePct = dragging && dragPct !== null ? dragPct : stops[active];
-
-  function pctFromClientX(clientX: number) {
-    const track = trackRef.current;
-    if (!track) return 0;
-    const rect = track.getBoundingClientRect();
-    return Math.min(100, Math.max(0, ((clientX - rect.left) / rect.width) * 100));
-  }
-
-  useEffect(() => {
-    if (!dragging) return;
-    function onMove(e: PointerEvent) {
-      setDragPct(pctFromClientX(e.clientX));
-    }
-    function onUp(e: PointerEvent) {
-      const pct = pctFromClientX(e.clientX);
-      setActive(nearestStageIndex(pct));
-      setDragging(false);
-      setDragPct(null);
-    }
-    window.addEventListener('pointermove', onMove);
-    window.addEventListener('pointerup', onUp);
-    return () => {
-      window.removeEventListener('pointermove', onMove);
-      window.removeEventListener('pointerup', onUp);
-    };
-  }, [dragging]);
-
-  function onKeyDown(e: React.KeyboardEvent) {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
-      e.preventDefault();
-      setActive((a) => Math.min(STAGES.length - 1, a + 1));
-    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
-      e.preventDefault();
-      setActive((a) => Math.max(0, a - 1));
-    } else if (e.key === 'Home') {
-      e.preventDefault();
-      setActive(0);
-    } else if (e.key === 'End') {
-      e.preventDefault();
-      setActive(STAGES.length - 1);
-    }
-  }
-
-  const stage = STAGES[active];
-
   return (
     <Section id="timeline" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
@@ -110,105 +79,16 @@ export function CompetitionTimeline() {
           className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl"
         />
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-paper/70">
-          Drag the car along the track — or use the arrow keys — to move between stages.
+          Regionals, then Nationals, then the World Finals — where Roya is headed next.
         </p>
 
-        <div className="mt-24 px-2">
-          <div ref={trackRef} className="relative h-px w-full bg-paper/15">
-            {stops.map((s, i) => {
-              // First/last labels anchor to their own edge instead of
-              // centering, so they can't clip past the track's ends —
-              // centering every label caused "Regionals" and "World
-              // Finals" to overflow past the viewport edge.
-              const isFirst = i === 0;
-              const isLast = i === stops.length - 1;
-              const labelAnchor = isFirst ? 'left-0' : isLast ? 'right-0' : 'left-0 -translate-x-1/2';
-              return (
-                <button
-                  key={s}
-                  type="button"
-                  onClick={() => setActive(i)}
-                  className="absolute top-1/2 -translate-y-1/2"
-                  style={{ left: `${s}%` }}
-                >
-                  <span
-                    className={`absolute left-0 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full transition-colors duration-300 ${
-                      i <= active ? 'bg-cyan' : 'bg-paper/25'
-                    }`}
-                  />
-                  <span
-                    className={`label-mono absolute top-4 whitespace-nowrap text-[11px] transition-colors duration-300 ${labelAnchor} ${
-                      i === active ? 'text-cyan' : 'text-paper/40'
-                    }`}
-                  >
-                    {STAGES[i].label} — {STAGES[i].month}
-                  </span>
-                </button>
-              );
-            })}
-
-            <div
-              role="slider"
-              tabIndex={0}
-              aria-label="Competition stage"
-              aria-valuemin={0}
-              aria-valuemax={STAGES.length - 1}
-              aria-valuenow={active}
-              aria-valuetext={`${stage.label}, ${stage.month}`}
-              onKeyDown={onKeyDown}
-              onPointerDown={(e) => {
-                e.preventDefault();
-                (e.target as HTMLElement).focus();
-                setDragging(true);
-                setDragPct(pctFromClientX(e.clientX));
-              }}
-              className="absolute top-1/2 flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 cursor-grab items-center justify-center rounded-full bg-cyan text-navy shadow-[0_0_0_4px_rgba(38,183,189,0.2)] outline-none focus-visible:ring-2 focus-visible:ring-paper active:cursor-grabbing"
-              style={{
-                left: `${handlePct}%`,
-                transition: dragging ? 'none' : 'left 400ms var(--ease-roya)',
-              }}
-            >
-              <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
-                <path d="M3 14.5 5 9h14l2 5.5v3a1 1 0 0 1-1 1h-1.2a1.8 1.8 0 0 1-3.6 0H8.8a1.8 1.8 0 0 1-3.6 0H4a1 1 0 0 1-1-1zM6.5 10.5 5.3 13h13.4l-1.2-2.5z" />
-              </svg>
-            </div>
-          </div>
+        <div className="mt-16 grid gap-6 lg:grid-cols-3">
+          {STAGES.map((stage, i) => (
+            <Reveal key={stage.label} delay={i * 100} className="h-full">
+              <StageCard stage={stage} index={i} />
+            </Reveal>
+          ))}
         </div>
-
-        <Reveal as="div" className="mt-24 grid items-stretch gap-10 lg:grid-cols-[1fr_1fr]">
-          <div className="relative flex flex-col justify-between overflow-hidden bg-ink/60 p-8 md:p-10">
-            <div
-              aria-hidden="true"
-              className="absolute left-0 top-0 h-full w-2 bg-cyan transition-colors duration-300"
-              style={{ clipPath: 'polygon(0 0, 100% 0, 100% 82%, 45% 100%, 0 100%)' }}
-            />
-            <div className="pl-5">
-              <div className="flex items-start justify-between gap-4">
-                <span
-                  aria-hidden="true"
-                  className="label-mono select-none text-7xl font-bold leading-none text-paper/10 md:text-8xl"
-                >
-                  {String(active + 1).padStart(2, '0')}
-                </span>
-                <span
-                  className={`label-mono shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-[10px] transition-colors duration-300 ${
-                    stage.status === 'upcoming'
-                      ? 'border-paper/25 text-paper/50'
-                      : 'border-cyan/50 text-cyan'
-                  }`}
-                >
-                  {stage.status === 'upcoming' ? 'Upcoming' : 'Complete'}
-                </span>
-              </div>
-              <h3 className="mt-2 text-3xl font-bold leading-[1.05] text-paper md:text-4xl">
-                {stage.label}
-              </h3>
-              <p className="label-mono mt-2 text-cyan">{stage.month}</p>
-              <p className="mt-6 max-w-md text-paper/70">{stage.blurb}</p>
-            </div>
-          </div>
-          <PhotoPlaceholder label={`Photo pending — ${stage.label}`} className="h-full min-h-64 w-full" />
-        </Reveal>
       </div>
     </Section>
   );

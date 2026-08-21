@@ -7,6 +7,7 @@ import { useScrollProgress } from '@/hooks/useScrollProgress';
 import { Home } from '@/sections/Home';
 import { Sponsors } from '@/sections/Sponsors';
 import { OurStory } from '@/sections/OurStory';
+import { Emblems } from '@/sections/Emblems';
 import { Team } from '@/sections/Team';
 import { CompetitionTimeline } from '@/sections/CompetitionTimeline';
 import { Sustainability } from '@/sections/Sustainability';
@@ -32,6 +33,7 @@ function App() {
         <Home />
         <Sponsors />
         <OurStory />
+        <Emblems />
         <Team />
         <CompetitionTimeline />
         <Sustainability />

@@ -89,9 +89,9 @@ export function Sustainability() {
           ))}
         </div>
 
-        <div className="mx-auto mt-24 max-w-2xl">
+        <div className="mt-24">
           <p className="label-mono text-green">Your allocation</p>
-          <h3 className="mt-3 text-2xl font-bold text-paper">
+          <h3 className="mt-3 max-w-2xl text-2xl font-bold text-paper">
             If you ran Roya's sustainability budget, where would the points go?
           </h3>
           <BudgetAllocator />

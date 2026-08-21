@@ -36,7 +36,7 @@ export function Home() {
         <RevealText
           as="h1"
           text="Roya Racing"
-          className="text-[13vw] font-bold leading-[0.95] text-paper md:text-[7.5rem]"
+          className="text-[13vw] font-bold leading-[1.1] text-paper md:text-[7.5rem]"
         />
 
         <Reveal delay={450}>
@@ -47,11 +47,8 @@ export function Home() {
 
         <Reveal delay={600}>
           <p className="mt-8 max-w-xl text-balance text-base leading-relaxed text-paper/70 md:text-lg">
-            Roya — Arabic for <span className="text-paper">vision</span> — is Saudi Arabia's
-            entry in STEM Racing (F1 in Schools), a global competition where student teams
-            design, engineer and race miniature CO₂-powered F1 cars. Founded in Riyadh in
-            November 2025, Roya Racing's mission is to become the first Saudi team to reach
-            the STEM Racing World Finals podium — a direct expression of Saudi Vision 2030.
+            Saudi Arabia's STEM Racing team, built in Riyadh with one goal: reach the World
+            Finals podium first.
           </p>
         </Reveal>
       </div>

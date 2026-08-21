@@ -1,5 +1,4 @@
 import { useAppStore } from '@/store/useAppStore';
-import mamlakaTower from '@/assets/emblems/mamlaka-tower.svg';
 
 /**
  * Placeholder Riyadh skyline treatment. The brief calls for real, properly
@@ -9,10 +8,9 @@ import mamlakaTower from '@/assets/emblems/mamlaka-tower.svg';
  * photo is provided. Swap the <svg> below for an <img> once one lands — the
  * opacity/scroll-fade wiring stays the same.
  *
- * The tower is the actual Mamlaka Tower emblem (not a hand-drawn
- * approximation), recolored to match the silhouette via brightness(0) — it
- * has real alpha-shaped detail (the keyhole window cut, the base fins)
- * a hand-traced path can't match.
+ * The Mamlaka Tower itself lives only in the Home hero (a large, deliberate
+ * backdrop there) — deliberately not repeated here, so it doesn't become
+ * background wallpaper on every section.
  */
 export function SkylineBackground() {
   const scrollProgress = useAppStore((s) => s.scrollProgress);
@@ -34,15 +32,7 @@ export function SkylineBackground() {
         <rect x="130" y="520" width="90" height="380" fill="#0b1030" />
         <rect x="230" y="640" width="70" height="260" fill="#0b1030" />
         <rect x="310" y="560" width="60" height="340" fill="#0b1030" />
-        {/* Mamlaka / Kingdom Centre Tower — the real emblem, visual anchor */}
-        <image
-          href={mamlakaTower}
-          x="440"
-          y="298"
-          width="230"
-          height="602"
-          style={{ filter: 'brightness(0)' }}
-        />
+        <rect x="470" y="300" width="190" height="600" fill="#0b1030" />
         <rect x="700" y="600" width="50" height="300" fill="#0b1030" />
         <rect x="760" y="660" width="80" height="240" fill="#0b1030" />
         <rect x="850" y="540" width="65" height="360" fill="#0b1030" />
