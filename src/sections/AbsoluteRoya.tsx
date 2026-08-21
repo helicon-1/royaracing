@@ -2,21 +2,23 @@ import { useState } from 'react';
 import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
 import { Reveal } from '@/components/Reveal';
+import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
 
 interface Episode {
   code: string;
   title: string;
+  duration: string;
 }
 
 const PODCAST_EPISODES: Episode[] = [
-  { code: 'EP.01', title: 'Why Roya' },
-  { code: 'EP.02', title: 'Inside the Workshop' },
+  { code: 'EP.01', title: 'Why Roya', duration: '18:24' },
+  { code: 'EP.02', title: 'Inside the Workshop', duration: '22:07' },
 ];
 
 const VLOG_EPISODES: Episode[] = [
-  { code: 'EP.01', title: 'Build Log 01' },
-  { code: 'EP.02', title: 'Build Log 02' },
-  { code: 'EP.03', title: 'Race Day Debrief' },
+  { code: 'EP.01', title: 'Build Log 01', duration: '6:12' },
+  { code: 'EP.02', title: 'Build Log 02', duration: '7:45' },
+  { code: 'EP.03', title: 'Race Day Debrief', duration: '9:30' },
 ];
 
 function EpisodeGroup({
@@ -48,14 +50,24 @@ function EpisodeGroup({
                   isOpen ? 'bg-paper text-navy' : 'hover:bg-paper hover:text-navy'
                 }`}
               >
-                <span className="flex items-center gap-6">
-                  <span className="label-mono text-[11px] opacity-50">{ep.code}</span>
-                  <span className="text-xl font-semibold transition-transform duration-300 group-hover:translate-x-1">
-                    {ep.title}
+                <span className="flex items-center gap-5">
+                  <PhotoPlaceholder
+                    label=""
+                    className="h-12 w-12 shrink-0"
+                    accent={isOpen ? 'var(--color-navy)' : 'var(--color-cyan)'}
+                  />
+                  <span className="flex flex-col gap-1">
+                    <span className="label-mono text-[11px] opacity-50">{ep.code}</span>
+                    <span className="text-xl font-semibold transition-transform duration-300 group-hover:translate-x-1">
+                      {ep.title}
+                    </span>
                   </span>
                 </span>
-                <span className="label-mono text-[11px] opacity-50">
-                  {isOpen ? 'CLOSE' : toggleLabel}
+                <span className="flex shrink-0 items-center gap-4">
+                  <span className="label-mono text-[11px] opacity-50">{ep.duration}</span>
+                  <span className="label-mono text-[11px] opacity-50">
+                    {isOpen ? 'CLOSE' : toggleLabel}
+                  </span>
                 </span>
               </button>
               <div

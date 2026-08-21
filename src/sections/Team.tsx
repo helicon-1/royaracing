@@ -62,10 +62,12 @@ export function Team() {
                     className="absolute inset-0 h-full w-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                   />
                 </div>
-                <p className="mt-4 text-lg font-semibold text-paper transition-colors duration-300 group-hover:text-cyan">
+                <p className="mt-4 min-h-[1.5em] text-lg font-semibold leading-tight text-paper transition-colors duration-300 group-hover:text-cyan">
                   {member.name}
                 </p>
-                <p className="label-mono mt-1 text-[11px] text-paper/50">{member.role}</p>
+                <p className="label-mono mt-1.5 min-h-[2.4em] text-[11px] leading-snug text-paper/50">
+                  {member.role}
+                </p>
               </button>
             </Reveal>
           ))}

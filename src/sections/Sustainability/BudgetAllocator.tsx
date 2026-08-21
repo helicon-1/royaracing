@@ -9,16 +9,14 @@ function Bar({ pct, eased = true }: { pct: number; eased?: boolean }) {
   const value = useEasedValue(pct, eased ? 0.1 : 1);
   return (
     <div className="h-2 w-full overflow-hidden rounded-full bg-paper/10">
-      <div
-        className="h-full rounded-full bg-green"
-        style={{ width: `${value}%` }}
-      />
+      <div className="h-full rounded-full bg-green" style={{ width: `${value}%` }} />
     </div>
   );
 }
 
 export function BudgetAllocator() {
   const [allocation, setAllocation] = useState<Record<PillarId, number>>(START);
+  const [compared, setCompared] = useState(false);
   const total = allocation.economic + allocation.social + allocation.environmental;
   const remaining = 100 - total;
 
@@ -46,65 +44,82 @@ export function BudgetAllocator() {
   }, [allocation]);
 
   return (
-    <div className="mt-10">
-      <div className="flex items-baseline justify-between">
-        <p className="label-mono text-[11px] text-paper/50">Distribute 100 points across the three pillars</p>
-        <p className="label-mono text-[11px] text-green">{remaining} remaining</p>
-      </div>
+    <div className="mt-10 grid gap-10 lg:grid-cols-3">
+      <div className="lg:col-span-2">
+        <div className="flex items-baseline justify-between">
+          <p className="label-mono text-[11px] text-paper/50">Distribute 100 points across the three pillars</p>
+          <p className="label-mono text-[11px] text-green">{remaining} remaining</p>
+        </div>
 
-      <div className="mt-6 space-y-6">
-        {PILLARS.map((pillar) => (
-          <div key={pillar.id}>
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-paper/80">{pillar.label}</span>
-              <span className="label-mono text-paper/50">{allocation[pillar.id]}</span>
-            </div>
-            <div className="mt-2 flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => adjust(pillar.id, -STEP)}
-                disabled={allocation[pillar.id] <= 0}
-                aria-label={`Decrease ${pillar.label}`}
-                className="flex h-7 w-7 shrink-0 items-center justify-center border border-paper/20 text-paper/70 transition-colors duration-200 hover:border-green hover:text-green disabled:opacity-30"
-              >
-                −
-              </button>
-              <Bar pct={allocation[pillar.id]} />
-              <button
-                type="button"
-                onClick={() => adjust(pillar.id, STEP)}
-                disabled={remaining < STEP}
-                aria-label={`Increase ${pillar.label}`}
-                className="flex h-7 w-7 shrink-0 items-center justify-center border border-paper/20 text-paper/70 transition-colors duration-200 hover:border-green hover:text-green disabled:opacity-30"
-              >
-                +
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-10 border-t border-paper/10 pt-8">
-        <p className="label-mono text-[11px] text-paper/50">
-          Roya's current allocation <span className="text-paper/30">— placeholder, pending real figures</span>
-        </p>
-        <div className="mt-4 space-y-4">
+        <div className="mt-6 space-y-6">
           {PILLARS.map((pillar) => (
             <div key={pillar.id}>
-              <div className="flex items-center justify-between text-xs text-paper/50">
-                <span>{pillar.label}</span>
-                <span className="label-mono">{ROYA_ALLOCATION[pillar.id]}</span>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-paper/80">{pillar.label}</span>
+                <span className="label-mono text-paper/50">{allocation[pillar.id]}</span>
               </div>
-              <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-paper/10">
-                <div
-                  className="h-full rounded-full bg-paper/30"
-                  style={{ width: `${ROYA_ALLOCATION[pillar.id]}%` }}
-                />
+              <div className="mt-2 flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => adjust(pillar.id, -STEP)}
+                  disabled={allocation[pillar.id] <= 0}
+                  aria-label={`Decrease ${pillar.label}`}
+                  className="flex h-7 w-7 shrink-0 items-center justify-center border border-paper/20 text-paper/70 transition-colors duration-200 hover:border-green hover:text-green disabled:opacity-30"
+                >
+                  −
+                </button>
+                <Bar pct={allocation[pillar.id]} />
+                <button
+                  type="button"
+                  onClick={() => adjust(pillar.id, STEP)}
+                  disabled={remaining < STEP}
+                  aria-label={`Increase ${pillar.label}`}
+                  className="flex h-7 w-7 shrink-0 items-center justify-center border border-paper/20 text-paper/70 transition-colors duration-200 hover:border-green hover:text-green disabled:opacity-30"
+                >
+                  +
+                </button>
               </div>
             </div>
           ))}
         </div>
-        <p className="editorial mt-6 text-paper/70">{note}</p>
+      </div>
+
+      <div className="border-t border-paper/10 pt-8 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+        {!compared ? (
+          <div className="flex h-full flex-col justify-center">
+            <p className="text-paper/70">See how your split compares to Roya's own.</p>
+            <button
+              type="button"
+              onClick={() => setCompared(true)}
+              className="label-mono mt-6 w-fit border border-green px-6 py-3 text-[11px] text-green transition-colors duration-300 hover:bg-green hover:text-navy"
+            >
+              Compare with Roya
+            </button>
+          </div>
+        ) : (
+          <div>
+            <p className="label-mono text-[11px] text-paper/50">
+              Roya's allocation <span className="text-paper/30">— placeholder, pending real figures</span>
+            </p>
+            <div className="mt-4 space-y-4">
+              {PILLARS.map((pillar) => (
+                <div key={pillar.id}>
+                  <div className="flex items-center justify-between text-xs text-paper/50">
+                    <span>{pillar.label}</span>
+                    <span className="label-mono">{ROYA_ALLOCATION[pillar.id]}</span>
+                  </div>
+                  <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-paper/10">
+                    <div
+                      className="h-full rounded-full bg-paper/30"
+                      style={{ width: `${ROYA_ALLOCATION[pillar.id]}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="editorial mt-6 text-paper/70">{note}</p>
+          </div>
+        )}
       </div>
     </div>
   );

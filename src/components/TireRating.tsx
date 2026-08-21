@@ -1,4 +1,4 @@
-/** Fan rating as clickable tire icons (1–4), not a dropdown. */
+/** Fan rating as clickable tire icons (1–5), not a dropdown. */
 export function TireRating({
   value,
   onChange,
@@ -9,8 +9,8 @@ export function TireRating({
   readOnly?: boolean;
 }) {
   return (
-    <div className="flex items-center gap-1.5" role={readOnly ? undefined : 'radiogroup'} aria-label="Rating out of 4 tires">
-      {[1, 2, 3, 4].map((n) => (
+    <div className="flex items-center gap-1.5" role={readOnly ? undefined : 'radiogroup'} aria-label="Rating out of 5 tires">
+      {[1, 2, 3, 4, 5].map((n) => (
         <button
           key={n}
           type="button"
