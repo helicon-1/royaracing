@@ -4,6 +4,7 @@ import { RevealText } from '@/components/RevealText';
 import { Reveal } from '@/components/Reveal';
 import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
 import { TireRating } from '@/components/TireRating';
+import { AnimatedLink } from '@/components/ui/animated-link';
 
 const MENTORSHIP_TRACKS = [
   'Marketing Mentorship',
@@ -17,12 +18,28 @@ interface PastEvent {
   title: string;
   date: string;
   duration: string;
+  description: string;
 }
 
 const PAST_EVENTS: PastEvent[] = [
-  { title: 'Event 1', date: 'Date pending', duration: 'Recap pending' },
-  { title: 'Event 2', date: 'Date pending', duration: 'Recap pending' },
-  { title: 'Event 3', date: 'Date pending', duration: 'Recap pending' },
+  {
+    title: 'Event 1',
+    date: 'Date pending',
+    duration: 'Recap pending',
+    description: 'Details and photos pending — check back after the event is confirmed.',
+  },
+  {
+    title: 'Event 2',
+    date: 'Date pending',
+    duration: 'Recap pending',
+    description: 'Details and photos pending — check back after the event is confirmed.',
+  },
+  {
+    title: 'Event 3',
+    date: 'Date pending',
+    duration: 'Recap pending',
+    description: 'Details and photos pending — check back after the event is confirmed.',
+  },
 ];
 
 function MentorshipPanel() {
@@ -65,6 +82,17 @@ function MentorshipPanel() {
               type="email"
               required
               className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
+            />
+          </div>
+          <div>
+            <label htmlFor="mentor-age" className="label-mono text-[11px] text-paper/50">
+              Age / grade
+            </label>
+            <input
+              id="mentor-age"
+              required
+              placeholder="e.g. 16 / Grade 11"
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors placeholder:text-paper/30 focus:border-cyan"
             />
           </div>
           <div>
@@ -153,6 +181,17 @@ function EventApplicationPanel() {
             />
           </div>
           <div>
+            <label htmlFor="event-age" className="label-mono text-[11px] text-paper/50">
+              Age / grade
+            </label>
+            <input
+              id="event-age"
+              required
+              placeholder="e.g. 16 / Grade 11"
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors placeholder:text-paper/30 focus:border-cyan"
+            />
+          </div>
+          <div>
             <label htmlFor="event-role" className="label-mono text-[11px] text-paper/50">
               Role
             </label>
@@ -223,9 +262,10 @@ function PastEventsList() {
                 />
                 <span className="flex flex-col gap-1">
                   <span className="label-mono text-[11px] opacity-50">{event.date}</span>
-                  <span className="text-xl font-semibold transition-transform duration-300 group-hover:translate-x-1">
+                  <AnimatedLink className="text-2xl font-semibold transition-transform duration-300 group-hover:translate-x-1 md:text-3xl">
                     {event.title}
-                  </span>
+                  </AnimatedLink>
+                  <span className="text-sm opacity-60">{event.description}</span>
                 </span>
               </span>
               <span className="flex shrink-0 items-center gap-4">
@@ -333,7 +373,10 @@ export function Events() {
           <div className="mt-16">
             <p className="label-mono text-[11px] text-paper/40">Fan wall</p>
             <form onSubmit={onCommentSubmit} className="mt-4 space-y-4 border border-paper/10 p-6">
-              <TireRating value={rating} onChange={setRating} />
+              <div>
+                <TireRating value={rating} onChange={setRating} />
+                <p className="label-mono mt-1 text-[10px] text-paper/35">Rated out of 5 tires</p>
+              </div>
               <input
                 value={commentName}
                 onChange={(e) => setCommentName(e.target.value)}

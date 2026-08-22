@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Reveal } from '@/components/Reveal';
+import { AnimatedLink } from '@/components/ui/animated-link';
 import saudiEmblem from '@/assets/emblems/sadu-asterisk.svg';
 import fanajeel from '@/assets/emblems/fanajeel-cup.svg';
 import mamlakaTower from '@/assets/emblems/mamlaka-tower.svg';
@@ -18,31 +19,31 @@ const EMBLEMS: Emblem[] = [
     id: 'saudi-emblem',
     name: 'Saudi Emblem',
     src: saudiEmblem,
-    meaning: "Saudi Arabia's national emblem: two crossed swords beneath a palm tree.",
+    meaning: "Saudi Arabia's national emblem: crossed swords and a palm tree.",
   },
   {
     id: 'fanajeel',
     name: 'Fanajeel',
     src: fanajeel,
-    meaning: 'Traditional Saudi coffee cups, symbolizing hospitality.',
+    meaning: 'Traditional Saudi coffee cups — a symbol of hospitality.',
   },
   {
     id: 'mamlaka',
     name: 'Mamlaka Tower',
     src: mamlakaTower,
-    meaning: "Riyadh's Kingdom Centre Tower — the city's landmark skyscraper.",
+    meaning: "Riyadh's Kingdom Centre Tower, the city's landmark skyscraper.",
   },
   {
     id: 'vision2030',
     name: 'Vision 2030',
     src: vision2030,
-    meaning: "Saudi Arabia's national transformation plan, the inspiration for the team's name, Roya.",
+    meaning: "Saudi Arabia's transformation plan — inspiration for our name.",
   },
   {
     id: 'sadu',
     name: 'Sadu',
     src: sadu,
-    meaning: 'A traditional Saudi Bedouin weaving pattern, used in textiles and handicrafts.',
+    meaning: 'A traditional Saudi Bedouin weaving pattern.',
   },
 ];
 
@@ -88,16 +89,24 @@ export function Emblems() {
                     +
                   </span>
                 </span>
-                <span className="label-mono whitespace-nowrap text-sm">{emblem.name}</span>
+                <AnimatedLink className="label-mono whitespace-nowrap text-sm">
+                  {emblem.name}
+                </AnimatedLink>
               </button>
             </Reveal>
           ))}
         </div>
 
         {/* Fixed height (not min-height) so switching between short and
-            long descriptions never shifts the Team section below. */}
-        <div className="mx-auto mt-10 flex h-24 max-w-xl items-center justify-center">
-          {selected && <p className="text-paper/70">{selected.meaning}</p>}
+            long descriptions never shifts the Team section below. The
+            meaning itself is forced to a single line — never wraps — with
+            an ellipsis as a safety net at narrow widths. */}
+        <div className="mx-auto mt-10 flex h-10 max-w-2xl items-center justify-center px-4">
+          {selected && (
+            <p className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-paper/70">
+              {selected.meaning}
+            </p>
+          )}
         </div>
       </div>
     </div>

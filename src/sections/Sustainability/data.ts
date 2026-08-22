@@ -9,8 +9,8 @@ export type PillarId = 'economic' | 'social' | 'environmental';
 // family.
 export const PILLAR_TINTS: Record<PillarId, string> = {
   economic: COLORS.blue,
-  social: '#26b7bd',
-  environmental: '#d2d831',
+  social: '#d2d831',
+  environmental: '#71ba43',
 };
 
 export interface Pillar {

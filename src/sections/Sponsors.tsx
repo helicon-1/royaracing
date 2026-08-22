@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import { Reveal } from '@/components/Reveal';
+import { AnimatedLink } from '@/components/ui/animated-link';
 
 interface Sponsor {
   name: string;
@@ -75,12 +76,14 @@ export function Sponsors() {
     <div className="px-6 py-20 md:px-10">
       <div className="mx-auto max-w-[1400px]">
         <p className="label-mono mb-12 text-center text-[10px] text-paper/35">Backed by</p>
-        <div className="flex flex-wrap items-center justify-center gap-x-16 gap-y-10">
+        <div className="flex flex-wrap items-center justify-center gap-x-20 gap-y-12">
           {SPONSORS.map(({ name, mark: Mark }, i) => (
             <Reveal key={name} delay={i * 80}>
-              <div className="group flex items-center gap-3 text-paper/65 transition-colors duration-300 hover:text-paper">
-                <Mark className="h-7 w-7 shrink-0" />
-                <span className="label-mono whitespace-nowrap text-sm">{name}</span>
+              <div className="group flex items-center gap-4 text-paper/65 transition-colors duration-300 hover:text-paper">
+                <Mark className="h-10 w-10 shrink-0 md:h-12 md:w-12" />
+                <AnimatedLink className="label-mono whitespace-nowrap text-base md:text-lg">
+                  {name}
+                </AnimatedLink>
               </div>
             </Reveal>
           ))}
