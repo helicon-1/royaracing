@@ -1,7 +1,17 @@
 import bowtie from '@/assets/emblems/bowtie.svg';
+import fanajeel from '@/assets/emblems/fanajeel-cup.svg';
+import mamlakaTower from '@/assets/emblems/mamlaka-tower.svg';
+import saudiEmblem from '@/assets/emblems/sadu-asterisk.svg';
 import { Logo } from './Logo';
 
 const SOCIALS = ['Instagram', 'X', 'LinkedIn', 'YouTube'];
+
+const FOOTER_EMBLEMS = [
+  { name: 'Sadu', src: bowtie },
+  { name: 'Fanajeel', src: fanajeel },
+  { name: 'Mamlaka Tower', src: mamlakaTower },
+  { name: 'Saudi Emblem', src: saudiEmblem },
+];
 
 export function Footer() {
   return (
@@ -46,7 +56,17 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col items-center gap-6 border-t border-paper/10 pt-8 md:flex-row md:justify-between">
-          <img src={bowtie} alt="" aria-hidden="true" className="h-5 w-5 opacity-60" />
+          <div className="flex items-center gap-4">
+            {FOOTER_EMBLEMS.map((emblem) => (
+              <img
+                key={emblem.name}
+                src={emblem.src}
+                alt=""
+                aria-hidden="true"
+                className="h-5 w-5 opacity-60"
+              />
+            ))}
+          </div>
           <p className="label-mono text-[10px] text-paper/35">
             Roya Racing — Saudi STEM Racing, Professional Class — Riyadh, founded November 2025
           </p>

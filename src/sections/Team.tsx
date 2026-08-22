@@ -7,6 +7,8 @@ import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
 interface Member {
   name: string;
   role: string;
+  /** Honest placeholder until each member confirms their answer. */
+  favoriteDriver?: string;
 }
 
 const MEMBERS: Member[] = [
@@ -102,6 +104,9 @@ export function Team() {
             </div>
 
             <p className="editorial mt-6 text-paper/60">Full introduction coming soon.</p>
+            <p className="label-mono mt-4 text-[11px] text-paper/40">
+              Favorite F1 driver — {activeMember.favoriteDriver ?? 'TBC'}
+            </p>
 
             <div className="mt-6 flex aspect-video w-full items-center justify-center border border-paper/10 bg-ink/40">
               <p className="label-mono text-paper/40">Video coming soon</p>

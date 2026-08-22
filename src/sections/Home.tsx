@@ -10,12 +10,12 @@ export function Home() {
           <p className="font-heading text-md font-semibold uppercase tracking-widest text-paper">
             Welcome to Roya Racing
           </p>
-          <h1 className="mt-2 text-5xl font-bold leading-tight text-cyan md:text-7xl">
+          <h1 className="mt-2 text-6xl font-bold leading-tight text-cyan md:text-8xl">
             Your Vision, Our Roya
           </h1>
           <p className="font-heading mt-4 text-sm font-normal text-paper/60 md:text-base">
-            Saudi Arabia's STEM Racing team, built in Riyadh and competing toward the World
-            Finals podium.
+            A Saudi STEM Racing team, built in Riyadh and competing toward the World Finals
+            podium.
           </p>
         </div>
       </ScrollFlyIn>
