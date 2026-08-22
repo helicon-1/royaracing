@@ -1,5 +1,6 @@
 import { GenerativeBackground } from '@/components/GenerativeBackground';
 import { SkylineBackground } from '@/components/SkylineBackground';
+import { HeroTexture } from '@/components/HeroTexture';
 import { CursorGlow } from '@/components/CursorGlow';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
@@ -21,6 +22,7 @@ function App() {
     <>
       <SkylineBackground />
       <GenerativeBackground />
+      <HeroTexture />
       <div
         aria-hidden="true"
         className="pointer-events-none fixed inset-0 -z-10 bg-gradient-to-b from-navy/70 via-navy/55 to-navy/85"
