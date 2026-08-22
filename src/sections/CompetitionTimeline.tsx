@@ -51,8 +51,11 @@ export function CompetitionTimeline() {
 
         {/* Stage selector — native range input, so click, drag and arrow
             keys all move the selection (the old custom slider only
-            responded to drag) — stretched the full width of the section. */}
-        <div className="mt-16 w-full">
+            responded to drag) — stretched the full width of the section.
+            The native thumb is invisible; a separately animated car marker
+            drives smoothly to the new position instead of teleporting,
+            however the change was triggered. */}
+        <div className="relative mt-16 w-full">
           <input
             type="range"
             min={0}
@@ -61,7 +64,12 @@ export function CompetitionTimeline() {
             value={active}
             onChange={(e) => setActive(Number(e.target.value))}
             aria-label="Select competition stage"
-            className="range-car w-full accent-cyan"
+            className="range-car relative z-10 w-full"
+          />
+          <div
+            aria-hidden="true"
+            className="car-marker pointer-events-none absolute top-1/2 -translate-y-1/2 transition-[left] duration-700 ease-[var(--ease-roya)]"
+            style={{ left: `calc(${(active / (STAGES.length - 1)) * 100}% - ${(active / (STAGES.length - 1)) * 34}px)` }}
           />
           <div className="mt-3 flex justify-between">
             {STAGES.map((s, i) => (

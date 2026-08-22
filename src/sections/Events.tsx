@@ -5,6 +5,14 @@ import { Reveal } from '@/components/Reveal';
 import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
 import { TireRating } from '@/components/TireRating';
 
+const MENTORSHIP_TRACKS = [
+  'Marketing Mentorship',
+  'Entrepreneurship Mentorship',
+  'Project Management Mentorship',
+  'Design & Engineering Mentorship',
+  'Manufacturing Mentorship',
+];
+
 interface PastEvent {
   title: string;
   date: string;
@@ -30,8 +38,8 @@ function MentorshipPanel() {
       <p className="label-mono text-[11px] text-cyan">Mentoring Program</p>
       <p className="mt-3 text-2xl font-bold text-paper">Get mentored by the team</p>
       <p className="mt-3 text-paper/70">
-        Ongoing — apply anytime. Mentors and mentees receive certificates of participation, and
-        involvement can help toward joining a racing team next season.
+        Ongoing — apply anytime. Those who take part receive a certificate of participation, and
+        involvement can help toward joining a STEM Racing team next season.
       </p>
 
       {submitted ? (
@@ -58,6 +66,26 @@ function MentorshipPanel() {
               required
               className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
             />
+          </div>
+          <div>
+            <label htmlFor="mentor-track" className="label-mono text-[11px] text-paper/50">
+              Which mentorship track?
+            </label>
+            <select
+              id="mentor-track"
+              required
+              defaultValue=""
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
+            >
+              <option className="bg-navy" value="" disabled>
+                Select one
+              </option>
+              {MENTORSHIP_TRACKS.map((track) => (
+                <option key={track} className="bg-navy" value={track}>
+                  {track}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label htmlFor="mentor-note" className="label-mono text-[11px] text-paper/50">
@@ -236,20 +264,30 @@ function sanitize(input: string) {
   return input.replace(/<[^>]*>/g, '').slice(0, MAX_COMMENT_LEN);
 }
 
+type AppliedForKind = '' | 'mentorship' | 'event';
+
 export function Events() {
   const [comments, setComments] = useState<Comment[]>([]);
   const [rating, setRating] = useState(0);
   const [commentText, setCommentText] = useState('');
   const [commentName, setCommentName] = useState('');
-  const [appliedFor, setAppliedFor] = useState('');
+  const [appliedForKind, setAppliedForKind] = useState<AppliedForKind>('');
+  const [appliedForValue, setAppliedForValue] = useState('');
+
+  const appliedForOptions = appliedForKind === 'mentorship' ? MENTORSHIP_TRACKS : PAST_EVENTS.map((e) => e.title);
+
+  function onKindChange(kind: AppliedForKind) {
+    setAppliedForKind(kind);
+    setAppliedForValue('');
+  }
 
   function onCommentSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!commentText.trim() || !appliedFor.trim() || rating === 0) return;
+    if (!commentText.trim() || !appliedForValue || rating === 0) return;
     setComments((prev) => [
       {
         name: sanitize(commentName || 'Anonymous').slice(0, 60),
-        appliedFor: sanitize(appliedFor).slice(0, 60),
+        appliedFor: appliedForValue,
         rating,
         text: sanitize(commentText),
       },
@@ -257,7 +295,8 @@ export function Events() {
     ]);
     setCommentText('');
     setCommentName('');
-    setAppliedFor('');
+    setAppliedForKind('');
+    setAppliedForValue('');
     setRating(0);
   }
 
@@ -302,13 +341,49 @@ export function Events() {
                 maxLength={60}
                 className="w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors placeholder:text-paper/30 focus:border-cyan"
               />
-              <input
-                value={appliedFor}
-                onChange={(e) => setAppliedFor(e.target.value)}
-                placeholder="What did you attend or apply for? (e.g. Mentoring Program, Event 1)"
-                maxLength={60}
-                className="w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors placeholder:text-paper/30 focus:border-cyan"
-              />
+              <div>
+                <label htmlFor="fan-kind" className="label-mono text-[11px] text-paper/50">
+                  What did you attend or apply for?
+                </label>
+                <select
+                  id="fan-kind"
+                  value={appliedForKind}
+                  onChange={(e) => onKindChange(e.target.value as AppliedForKind)}
+                  className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
+                >
+                  <option className="bg-navy" value="">
+                    Select one
+                  </option>
+                  <option className="bg-navy" value="mentorship">
+                    Mentorship
+                  </option>
+                  <option className="bg-navy" value="event">
+                    Event
+                  </option>
+                </select>
+              </div>
+              {appliedForKind && (
+                <div>
+                  <label htmlFor="fan-which" className="label-mono text-[11px] text-paper/50">
+                    Which {appliedForKind === 'mentorship' ? 'track' : 'event'}?
+                  </label>
+                  <select
+                    id="fan-which"
+                    value={appliedForValue}
+                    onChange={(e) => setAppliedForValue(e.target.value)}
+                    className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
+                  >
+                    <option className="bg-navy" value="">
+                      Select one
+                    </option>
+                    {appliedForOptions.map((option) => (
+                      <option key={option} className="bg-navy" value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
               <textarea
                 value={commentText}
                 onChange={(e) => setCommentText(e.target.value)}

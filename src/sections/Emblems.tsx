@@ -52,11 +52,16 @@ export function Emblems() {
 
   return (
     <div className="px-6 py-20 md:px-[120px]">
-      <div className="mx-auto max-w-[1400px]">
-        <p className="label-mono mb-12 text-center text-[10px] text-paper/35">
-          Our emblems — click one
+      <div className="mx-auto max-w-[1400px] text-center">
+        <p className="text-2xl font-bold text-paper md:text-3xl">
+          Our emblems <span className="text-paper/45">(click one)</span>
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-24 gap-y-14">
+        <p className="mx-auto mt-3 max-w-xl text-paper/60">
+          Each mark on this site was chosen on purpose — together they tell a short story about
+          who Roya is and where the team comes from.
+        </p>
+
+        <div className="mt-14 flex flex-wrap items-center justify-center gap-x-24 gap-y-14">
           {EMBLEMS.map((emblem, i) => (
             <Reveal key={emblem.id} delay={i * 80}>
               <button
@@ -67,12 +72,22 @@ export function Emblems() {
                   selectedId === emblem.id ? 'text-cyan' : 'text-paper/65 hover:text-paper'
                 }`}
               >
-                <img
-                  src={emblem.src}
-                  alt=""
-                  aria-hidden="true"
-                  className="h-20 w-auto shrink-0 md:h-28"
-                />
+                <span className="relative inline-flex transition-transform duration-300 group-hover:-translate-y-1">
+                  <img
+                    src={emblem.src}
+                    alt=""
+                    aria-hidden="true"
+                    className="h-20 w-auto shrink-0 md:h-28"
+                  />
+                  {/* Hover-only cue that this is clickable — the meaning itself
+                      still only appears on click, never on hover. */}
+                  <span
+                    aria-hidden="true"
+                    className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border border-current bg-navy text-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  >
+                    +
+                  </span>
+                </span>
                 <span className="label-mono whitespace-nowrap text-sm">{emblem.name}</span>
               </button>
             </Reveal>
@@ -81,7 +96,7 @@ export function Emblems() {
 
         {/* Fixed height (not min-height) so switching between short and
             long descriptions never shifts the Team section below. */}
-        <div className="mx-auto mt-10 flex h-24 max-w-xl items-center justify-center text-center">
+        <div className="mx-auto mt-10 flex h-24 max-w-xl items-center justify-center">
           {selected && <p className="text-paper/70">{selected.meaning}</p>}
         </div>
       </div>
