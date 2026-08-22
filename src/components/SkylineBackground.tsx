@@ -3,23 +3,21 @@ import riyadhSkyline from '@/assets/skyline/riyadh-skyline.jpg';
 
 /**
  * Real Riyadh skyline photo (Kingdom Centre Tower), supplied by the team.
- * Prominent behind the hero, then gently fades to a low ambient opacity
- * that holds for the rest of the site — a slow fade over a real scroll
- * distance rather than a blunt drop right after the hero.
+ * Full opacity at the very top of the hero, then drops instantly to a low
+ * ambient opacity the moment the page scrolls at all — no eased fade.
  *
  * The Mamlaka Tower vector emblem lives separately in the Home hero
  * content itself — this photo is the ambient backdrop, not that mark.
  */
 export function SkylineBackground() {
   const scrollProgress = useAppStore((s) => s.scrollProgress);
-  const t = Math.min(1, scrollProgress / 0.22);
-  const opacity = 0.65 - t * 0.45;
+  const opacity = scrollProgress > 0 ? 0.2 : 0.65;
 
   return (
     <div
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 -z-[15] h-full w-full overflow-hidden"
-      style={{ opacity, transition: 'opacity 200ms linear' }}
+      style={{ opacity }}
     >
       <img
         src={riyadhSkyline}

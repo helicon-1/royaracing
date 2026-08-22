@@ -10,7 +10,11 @@ import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 const FIELD_W = 96;
 const FIELD_H = 64;
 
-export function GenerativeBackground() {
+export function GenerativeBackground({
+  className = 'pointer-events-none fixed inset-0 -z-20 h-full w-full',
+}: {
+  className?: string;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const smallCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const rafRef = useRef<number>(0);
@@ -107,13 +111,7 @@ export function GenerativeBackground() {
     };
   }, [reducedMotion]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      aria-hidden="true"
-      className="pointer-events-none fixed inset-0 -z-20 h-full w-full"
-    />
-  );
+  return <canvas ref={canvasRef} aria-hidden="true" className={className} />;
 }
 
 function hsvComponents(h: number, s: number, v: number): [number, number, number] {
