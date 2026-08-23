@@ -3,6 +3,7 @@ import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
 import { Reveal } from '@/components/Reveal';
 import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
+import { AnimatedLink } from '@/components/ui/animated-link';
 
 interface Member {
   name: string;
@@ -35,15 +36,15 @@ export function Team() {
   return (
     <Section id="team" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
-        <p className="label-mono mb-6 text-cyan">02 — Team</p>
-        <RevealText
-          as="h2"
-          text="Six people, one goal."
-          className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl"
-        />
-        <p className="mt-6 max-w-xl text-lg leading-relaxed text-paper/70">
+        <AnimatedLink className="label-mono mb-6 text-cyan">02 — Team</AnimatedLink>
+        <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
+          <AnimatedLink>
+            <RevealText as="span" text="Six people, one goal." />
+          </AnimatedLink>
+        </h2>
+        <AnimatedLink className="mt-6 max-w-xl text-lg leading-relaxed text-paper/70">
           Click a member to hear them introduce themselves.
-        </p>
+        </AnimatedLink>
 
         <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
           {MEMBERS.map((member, i) => (
@@ -64,12 +65,12 @@ export function Team() {
                     className="absolute inset-0 h-full w-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                   />
                 </div>
-                <p className="mt-4 min-h-[1.5em] text-lg font-semibold leading-tight text-paper transition-colors duration-300 group-hover:text-cyan">
+                <AnimatedLink className="mt-4 min-h-[1.5em] text-lg font-semibold leading-tight text-paper transition-colors duration-300 group-hover:text-cyan">
                   {member.name}
-                </p>
-                <p className="label-mono mt-1.5 min-h-[2.4em] text-[11px] leading-snug text-paper/50">
+                </AnimatedLink>
+                <AnimatedLink className="label-mono mt-1.5 min-h-[2.4em] text-[11px] leading-snug text-paper/50">
                   {member.role}
-                </p>
+                </AnimatedLink>
               </button>
             </Reveal>
           ))}
@@ -90,8 +91,10 @@ export function Team() {
           >
             <div className="flex items-start justify-between gap-6">
               <div>
-                <p className="text-2xl font-bold text-paper">{activeMember.name}</p>
-                <p className="label-mono mt-1 text-[11px] text-cyan">{activeMember.role}</p>
+                <AnimatedLink className="text-2xl font-bold text-paper">{activeMember.name}</AnimatedLink>
+                <AnimatedLink className="label-mono mt-1 text-[11px] text-cyan">
+                  {activeMember.role}
+                </AnimatedLink>
               </div>
               <button
                 type="button"
@@ -104,13 +107,14 @@ export function Team() {
             </div>
 
             <p className="editorial mt-6 text-paper/60">Full introduction coming soon.</p>
-            <p className="label-mono mt-4 text-[11px] text-paper/40">
-              Favorite F1 driver — {activeMember.favoriteDriver ?? 'TBC'}
-            </p>
 
             <div className="mt-6 flex aspect-video w-full items-center justify-center border border-paper/10 bg-ink/40">
               <p className="label-mono text-paper/40">Video coming soon</p>
             </div>
+            <p className="mt-4 text-lg text-paper/80">
+              Favorite F1 driver —{' '}
+              <span className="font-semibold text-cyan">{activeMember.favoriteDriver ?? 'TBC'}</span>
+            </p>
           </div>
         </div>
       )}

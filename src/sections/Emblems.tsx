@@ -54,13 +54,17 @@ export function Emblems() {
   return (
     <div className="px-6 py-20 md:px-[120px]">
       <div className="mx-auto max-w-[1400px] text-center">
-        <p className="text-2xl font-bold text-paper md:text-3xl">
-          Our emblems <span className="text-paper/45">(click one)</span>
-        </p>
-        <p className="mx-auto mt-3 max-w-xl text-paper/60">
-          Each mark on this site was chosen on purpose — together they tell a short story about
-          who Roya is and where the team comes from.
-        </p>
+        <div className="text-2xl font-bold text-paper md:text-3xl">
+          <AnimatedLink>
+            Our emblems <span className="text-paper/45">(click one)</span>
+          </AnimatedLink>
+        </div>
+        <div className="mx-auto mt-3 max-w-xl text-paper/60">
+          <AnimatedLink>
+            Each mark on this site was chosen on purpose — together they tell a short story
+            about who Roya is and where the team comes from.
+          </AnimatedLink>
+        </div>
 
         <div className="mt-14 flex flex-wrap items-center justify-center gap-x-24 gap-y-14">
           {EMBLEMS.map((emblem, i) => (

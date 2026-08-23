@@ -52,8 +52,10 @@ function MentorshipPanel() {
 
   return (
     <div className="border border-paper/10 p-8">
-      <p className="label-mono text-[11px] text-cyan">Mentoring Program</p>
-      <p className="mt-3 text-2xl font-bold text-paper">Get mentored by the team</p>
+      <AnimatedLink className="label-mono text-[11px] text-cyan">Mentoring Program</AnimatedLink>
+      <div className="mt-3 text-2xl font-bold text-paper">
+        <AnimatedLink>Get mentored by the team</AnimatedLink>
+      </div>
       <p className="mt-3 text-paper/70">
         Ongoing — apply anytime. Those who take part receive a certificate of participation, and
         involvement can help toward joining a STEM Racing team next season.
@@ -85,15 +87,25 @@ function MentorshipPanel() {
             />
           </div>
           <div>
-            <label htmlFor="mentor-age" className="label-mono text-[11px] text-paper/50">
-              Age / grade
+            <label htmlFor="mentor-level" className="label-mono text-[11px] text-paper/50">
+              Academic level
             </label>
-            <input
-              id="mentor-age"
+            <select
+              id="mentor-level"
               required
-              placeholder="e.g. 16 / Grade 11"
-              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors placeholder:text-paper/30 focus:border-cyan"
-            />
+              defaultValue=""
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
+            >
+              <option className="bg-navy" value="" disabled>
+                Select one
+              </option>
+              <option className="bg-navy" value="high-school">
+                High School
+              </option>
+              <option className="bg-navy" value="university">
+                University
+              </option>
+            </select>
           </div>
           <div>
             <label htmlFor="mentor-track" className="label-mono text-[11px] text-paper/50">
@@ -148,8 +160,10 @@ function EventApplicationPanel() {
 
   return (
     <div className="border border-paper/10 p-8">
-      <p className="label-mono text-[11px] text-cyan">Event Application</p>
-      <p className="mt-3 text-2xl font-bold text-paper">Apply to an upcoming event</p>
+      <AnimatedLink className="label-mono text-[11px] text-cyan">Event Application</AnimatedLink>
+      <div className="mt-3 text-2xl font-bold text-paper">
+        <AnimatedLink>Apply to an upcoming event</AnimatedLink>
+      </div>
       <p className="mt-3 text-paper/70">
         No public events are scheduled yet — apply below and we'll reach out when one is
         confirmed.
@@ -181,15 +195,25 @@ function EventApplicationPanel() {
             />
           </div>
           <div>
-            <label htmlFor="event-age" className="label-mono text-[11px] text-paper/50">
-              Age / grade
+            <label htmlFor="event-level" className="label-mono text-[11px] text-paper/50">
+              Academic level
             </label>
-            <input
-              id="event-age"
+            <select
+              id="event-level"
               required
-              placeholder="e.g. 16 / Grade 11"
-              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors placeholder:text-paper/30 focus:border-cyan"
-            />
+              defaultValue=""
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-cyan"
+            >
+              <option className="bg-navy" value="" disabled>
+                Select one
+              </option>
+              <option className="bg-navy" value="high-school">
+                High School
+              </option>
+              <option className="bg-navy" value="university">
+                University
+              </option>
+            </select>
           </div>
           <div>
             <label htmlFor="event-role" className="label-mono text-[11px] text-paper/50">
@@ -343,16 +367,16 @@ export function Events() {
   return (
     <Section id="events" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
-        <p className="label-mono mb-6 text-cyan">06 — Events</p>
-        <RevealText
-          as="h2"
-          text="Come see the team."
-          className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl"
-        />
+        <AnimatedLink className="label-mono mb-6 text-cyan">06 — Events</AnimatedLink>
+        <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
+          <AnimatedLink>
+            <RevealText as="span" text="Come see the team." />
+          </AnimatedLink>
+        </h2>
 
         {/* Get involved — two distinct paths, not one blended flow */}
         <div className="mt-20">
-          <p className="label-mono text-cyan">Get Involved</p>
+          <AnimatedLink className="label-mono text-cyan">Get Involved</AnimatedLink>
           <div className="mt-8 grid gap-10 lg:grid-cols-2">
             <Reveal>
               <MentorshipPanel />
@@ -365,13 +389,16 @@ export function Events() {
 
         {/* Past events — same visual pattern as the Absolute Roya episode list */}
         <div className="mt-28">
-          <p className="label-mono text-cyan">Past Events</p>
+          <AnimatedLink className="label-mono text-cyan">Past Events</AnimatedLink>
           <Reveal as="div" className="mt-8">
             <PastEventsList />
           </Reveal>
 
           <div className="mt-16">
-            <p className="label-mono text-[11px] text-paper/40">Fan wall</p>
+            <AnimatedLink className="label-mono text-cyan">Fan wall</AnimatedLink>
+            <p className="mt-2 max-w-lg text-paper/60">
+              Attended an event or joined our mentoring program? Rate it and share your thoughts.
+            </p>
             <form onSubmit={onCommentSubmit} className="mt-4 space-y-4 border border-paper/10 p-6">
               <div>
                 <TireRating value={rating} onChange={setRating} />
@@ -382,7 +409,7 @@ export function Events() {
                 onChange={(e) => setCommentName(e.target.value)}
                 placeholder="Name"
                 maxLength={60}
-                className="w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors placeholder:text-paper/30 focus:border-cyan"
+                className="w-full border-b border-paper/20 bg-transparent py-2 text-lg text-paper outline-none transition-colors placeholder:text-paper/30 focus:border-cyan"
               />
               <div>
                 <label htmlFor="fan-kind" className="label-mono text-[11px] text-paper/50">
@@ -433,7 +460,7 @@ export function Events() {
                 placeholder="What did you think?"
                 maxLength={MAX_COMMENT_LEN}
                 rows={3}
-                className="w-full resize-none border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors placeholder:text-paper/30 focus:border-cyan"
+                className="w-full resize-none border-b border-paper/20 bg-transparent py-2 text-lg text-paper outline-none transition-colors placeholder:text-paper/30 focus:border-cyan"
               />
               <button
                 type="submit"
@@ -448,9 +475,9 @@ export function Events() {
                 {comments.map((c, i) => (
                   <li key={i} className="flex items-start justify-between gap-6 py-4">
                     <div>
-                      <p className="text-paper/85">{c.name}</p>
+                      <p className="text-lg font-semibold text-paper/85">{c.name}</p>
                       <p className="label-mono mt-1 text-[10px] text-cyan">{c.appliedFor}</p>
-                      <p className="mt-1 text-sm text-paper/60">{c.text}</p>
+                      <p className="mt-1 text-paper/60">{c.text}</p>
                     </div>
                     <TireRating value={c.rating} readOnly />
                   </li>

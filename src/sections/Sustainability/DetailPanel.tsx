@@ -1,5 +1,6 @@
 import { useState, type CSSProperties } from 'react';
 import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
+import { AnimatedLink } from '@/components/ui/animated-link';
 import { PILLAR_TINTS, SOCIAL_ACTIVITIES } from './data';
 import type { PillarId } from './data';
 
@@ -57,9 +58,9 @@ function SocialDetail() {
                 className="group flex w-full items-center justify-between gap-4 py-4 text-left transition-colors duration-200 hover:text-[var(--pillar-active)]"
               >
                 <span>
-                  <span className="block text-paper/85 group-hover:text-[var(--pillar-active)]">
+                  <AnimatedLink className="text-paper/85 group-hover:text-[var(--pillar-active)]">
                     {activity.title}
-                  </span>
+                  </AnimatedLink>
                   <span className="block text-sm text-paper/50">{activity.summary}</span>
                 </span>
                 <span

@@ -2,7 +2,9 @@ import bowtie from '@/assets/emblems/bowtie.svg';
 import fanajeel from '@/assets/emblems/fanajeel-cup.svg';
 import mamlakaTower from '@/assets/emblems/mamlaka-tower.svg';
 import saudiEmblem from '@/assets/emblems/sadu-asterisk.svg';
+import vision2030 from '@/assets/emblems/vision-2030.svg';
 import { Logo } from './Logo';
+import { AnimatedLink } from './ui/animated-link';
 
 const SOCIALS = ['Instagram', 'X', 'LinkedIn', 'YouTube'];
 
@@ -11,6 +13,7 @@ const FOOTER_EMBLEMS = [
   { name: 'Fanajeel', src: fanajeel },
   { name: 'Mamlaka Tower', src: mamlakaTower },
   { name: 'Saudi Emblem', src: saudiEmblem },
+  { name: 'Vision 2030', src: vision2030 },
 ];
 
 export function Footer() {
@@ -27,7 +30,7 @@ export function Footer() {
 
           <div className="grid grid-cols-2 gap-x-16 gap-y-8 md:flex md:gap-16">
             <div>
-              <p className="label-mono text-[11px] text-paper/40">Contact</p>
+              <AnimatedLink className="label-mono text-[11px] text-paper/40">Contact</AnimatedLink>
               <a
                 href="mailto:roya.racing2026@gmail.com"
                 className="mt-3 block text-paper/80 transition-colors hover:text-cyan"
@@ -38,7 +41,7 @@ export function Footer() {
             </div>
 
             <div>
-              <p className="label-mono text-[11px] text-paper/40">Follow</p>
+              <AnimatedLink className="label-mono text-[11px] text-paper/40">Follow</AnimatedLink>
               <ul className="mt-3 space-y-2">
                 {SOCIALS.map((s) => (
                   <li key={s}>
@@ -56,14 +59,14 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col items-center gap-6 border-t border-paper/10 pt-8 md:flex-row md:justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5">
             {FOOTER_EMBLEMS.map((emblem) => (
               <img
                 key={emblem.name}
                 src={emblem.src}
                 alt=""
                 aria-hidden="true"
-                className="h-5 w-5 opacity-60"
+                className="h-9 w-9 opacity-60"
               />
             ))}
           </div>

@@ -107,12 +107,12 @@ export function Sustainability() {
   return (
     <Section id="sustainability" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
-        <p className="label-mono mb-6 text-green">04 — Sustainability</p>
-        <RevealText
-          as="h2"
-          text="Three pillars, one program."
-          className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl"
-        />
+        <AnimatedLink className="label-mono mb-6 text-green">04 — Sustainability</AnimatedLink>
+        <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
+          <AnimatedLink>
+            <RevealText as="span" text="Three pillars, one program." />
+          </AnimatedLink>
+        </h2>
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-paper/70">
           Three things have to hold at once for Roya to last beyond one season: the budget
           staying solvent, the people the program brings along, and the footprint it leaves
@@ -132,9 +132,11 @@ export function Sustainability() {
         </div>
 
         <div className="mt-24">
-          <p className="label-mono text-green">Your allocation</p>
+          <AnimatedLink className="label-mono text-green">Your allocation</AnimatedLink>
           <h3 className="mt-3 max-w-2xl text-2xl font-bold text-paper">
-            If you ran Roya's sustainability budget, where would the points go?
+            <AnimatedLink>
+              If you ran Roya's sustainability budget, where would the points go?
+            </AnimatedLink>
           </h3>
           <p className="mt-3 max-w-xl text-paper/60">
             You have 100 points to split across the three pillars above. Move the sliders to
