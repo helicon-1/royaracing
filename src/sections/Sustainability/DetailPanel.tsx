@@ -7,9 +7,9 @@ import type { PillarId } from './data';
 const social = PILLAR_TINTS.social;
 
 const ECONOMIC_POINTS = [
-  'Sponsor value delivered — tracked and reported back to partners, not just collected.',
-  'Cost-efficient engineering — the car is designed to a fixed budget, not an open one.',
-  'Financial sustainability — funding planned a season ahead, not sponsor to sponsor.',
+  'Every purchase is weighed against its value before it is made — not bought on impulse.',
+  'The car is engineered to a fixed budget, not an open one.',
+  'Spending is tracked closely across the season, so nothing goes to waste.',
 ];
 
 const ENVIRONMENTAL_POINTS = [
@@ -58,7 +58,11 @@ function SocialDetail() {
                 className="group flex w-full items-center justify-between gap-4 py-4 text-left transition-colors duration-200 hover:text-[var(--pillar-active)]"
               >
                 <span>
-                  <AnimatedLink className="text-paper/85 group-hover:text-[var(--pillar-active)]">
+                  <AnimatedLink
+                    accentColor={social}
+                    showArrow
+                    className="text-paper/85 group-hover:text-[var(--pillar-active)]"
+                  >
                     {activity.title}
                   </AnimatedLink>
                   <span className="block text-sm text-paper/50">{activity.summary}</span>

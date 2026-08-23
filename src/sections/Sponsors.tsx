@@ -79,6 +79,10 @@ export function Sponsors() {
           <AnimatedLink color="lime" className="label-mono text-[10px] text-paper/35">
             Backed by
           </AnimatedLink>
+          <p className="mx-auto mt-3 max-w-lg text-paper/60">
+            We'd love to thank our amazing sponsors for helping us build the car and get to the
+            track.
+          </p>
         </div>
         {/* Single row, never wraps — on viewports too narrow to fit all
             five marks, it scrolls horizontally instead. */}

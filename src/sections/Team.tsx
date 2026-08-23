@@ -99,7 +99,7 @@ export function Team() {
           >
             <div className="flex items-start justify-between gap-6">
               <div>
-                <AnimatedLink color="lime" className="text-2xl font-bold text-paper">
+                <AnimatedLink color="lime" className="text-2xl font-bold text-lime">
                   {activeMember.name}
                 </AnimatedLink>
                 <AnimatedLink color="lime" className="label-mono mt-1 text-[11px] text-lime">

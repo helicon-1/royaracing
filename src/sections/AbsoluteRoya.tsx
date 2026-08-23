@@ -37,7 +37,7 @@ function EpisodeGroup({
 }) {
   return (
     <div>
-      <AnimatedLink color="cyan" className="label-mono mb-4 text-[11px] text-paper/40">
+      <AnimatedLink color="lime" className="label-mono mb-4 text-[11px] text-paper/40">
         {label}
       </AnimatedLink>
       <ul className="divide-y divide-paper/10 border-t border-paper/10">
@@ -57,12 +57,13 @@ function EpisodeGroup({
                   <PhotoPlaceholder
                     label=""
                     className="h-12 w-12 shrink-0"
-                    accent={isOpen ? 'var(--color-navy)' : 'var(--color-cyan)'}
+                    accent={isOpen ? 'var(--color-navy)' : 'var(--color-lime)'}
                   />
                   <span className="flex flex-col gap-1">
                     <span className="label-mono text-[11px] opacity-50">{ep.code}</span>
                     <AnimatedLink
-                      color="cyan"
+                      color="lime"
+                      showArrow
                       className="text-xl font-semibold transition-transform duration-300 group-hover:translate-x-1"
                     >
                       {ep.title}
@@ -100,11 +101,11 @@ export function AbsoluteRoya() {
   return (
     <Section id="absolute-roya" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
-        <AnimatedLink color="cyan" className="label-mono mb-6 text-cyan">
+        <AnimatedLink color="lime" className="label-mono mb-6 text-lime">
           05 — Absolute Roya
         </AnimatedLink>
         <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
-          <AnimatedLink color="cyan">
+          <AnimatedLink color="lime">
             <RevealText as="span" text="The podcast and the build vlogs." />
           </AnimatedLink>
         </h2>

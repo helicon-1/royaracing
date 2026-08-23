@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
 import { Reveal } from '@/components/Reveal';
@@ -20,6 +20,15 @@ interface PastEvent {
   duration: string;
   description: string;
 }
+
+interface UpcomingEvent {
+  title: string;
+  /** External application form (e.g. Google Forms) — the real submission happens there. */
+  formUrl: string;
+}
+
+/** No upcoming events confirmed yet — the panel below shows the empty state until this fills in. */
+const UPCOMING_EVENTS: UpcomingEvent[] = [];
 
 const PAST_EVENTS: PastEvent[] = [
   {
@@ -152,7 +161,7 @@ function MentorshipPanel() {
   );
 }
 
-function EventApplicationPanel() {
+function RegistryOfInterestPanel() {
   const [submitted, setSubmitted] = useState(false);
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -161,49 +170,49 @@ function EventApplicationPanel() {
   }
 
   return (
-    <div className="border border-paper/10 p-8">
+    <div className="flex min-h-[380px] flex-col border border-paper/10 p-8">
       <AnimatedLink color="lime" className="label-mono text-[11px] text-lime">
-        Event Application
+        Registry of Interest
       </AnimatedLink>
       <div className="mt-3 text-2xl font-bold text-paper">
-        <AnimatedLink color="lime">Apply to an upcoming event</AnimatedLink>
+        <AnimatedLink color="lime">Stay in the loop</AnimatedLink>
       </div>
       <p className="mt-3 text-paper/70">
-        No public events are scheduled yet — apply below and we'll reach out when one is
-        confirmed.
+        Not tied to any specific event — tell us who you are, and we'll reach out when something's
+        scheduled.
       </p>
 
       {submitted ? (
-        <p className="mt-6 text-paper/80">Thanks — we'll be in touch when an event is confirmed.</p>
+        <p className="mt-6 text-paper/80">Thanks — we'll be in touch.</p>
       ) : (
         <form onSubmit={onSubmit} className="mt-6 space-y-5">
           <div>
-            <label htmlFor="event-name" className="label-mono text-[11px] text-paper/50">
+            <label htmlFor="roi-name" className="label-mono text-[11px] text-paper/50">
               Name
             </label>
             <input
-              id="event-name"
+              id="roi-name"
               required
               className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-lime"
             />
           </div>
           <div>
-            <label htmlFor="event-contact" className="label-mono text-[11px] text-paper/50">
-              Contact (email)
+            <label htmlFor="roi-email" className="label-mono text-[11px] text-paper/50">
+              Email
             </label>
             <input
-              id="event-contact"
+              id="roi-email"
               type="email"
               required
               className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-lime"
             />
           </div>
           <div>
-            <label htmlFor="event-level" className="label-mono text-[11px] text-paper/50">
+            <label htmlFor="roi-level" className="label-mono text-[11px] text-paper/50">
               Academic level
             </label>
             <select
-              id="event-level"
+              id="roi-level"
               required
               defaultValue=""
               className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-lime"
@@ -219,40 +228,6 @@ function EventApplicationPanel() {
               </option>
             </select>
           </div>
-          <div>
-            <label htmlFor="event-role" className="label-mono text-[11px] text-paper/50">
-              Role
-            </label>
-            <select
-              id="event-role"
-              required
-              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-lime"
-            >
-              <option className="bg-navy" value="">
-                Select one
-              </option>
-              <option className="bg-navy" value="participant">
-                Participant
-              </option>
-              <option className="bg-navy" value="volunteer">
-                Volunteer
-              </option>
-              <option className="bg-navy" value="press">
-                Press
-              </option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="event-note" className="label-mono text-[11px] text-paper/50">
-              Why do you want to apply?
-            </label>
-            <textarea
-              id="event-note"
-              required
-              rows={3}
-              className="mt-2 w-full resize-none border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-lime"
-            />
-          </div>
           <button
             type="submit"
             className="label-mono mt-2 border border-lime px-6 py-3 text-[11px] text-lime transition-colors duration-300 hover:bg-lime hover:text-navy"
@@ -260,6 +235,61 @@ function EventApplicationPanel() {
             Submit
           </button>
         </form>
+      )}
+    </div>
+  );
+}
+
+function ApplyToEventPanel() {
+  const hasEvents = UPCOMING_EVENTS.length > 0;
+
+  function onSelect(e: ChangeEvent<HTMLSelectElement>) {
+    const url = e.target.value;
+    if (url) window.open(url, '_blank', 'noopener,noreferrer');
+  }
+
+  return (
+    <div className="flex min-h-[380px] flex-col border border-paper/10 p-8">
+      <AnimatedLink color="lime" className="label-mono text-[11px] text-lime">
+        Event Application
+      </AnimatedLink>
+      <div className="mt-3 text-2xl font-bold text-paper">
+        <AnimatedLink color="lime">
+          {hasEvents ? 'Come to one of our upcoming events!' : 'No events scheduled yet'}
+        </AnimatedLink>
+      </div>
+
+      {hasEvents ? (
+        <>
+          <p className="mt-3 text-paper/70">
+            Pick an event below — you'll be taken to its application form.
+          </p>
+          <div className="mt-6">
+            <label htmlFor="upcoming-event" className="label-mono text-[11px] text-paper/50">
+              Which event?
+            </label>
+            <select
+              id="upcoming-event"
+              defaultValue=""
+              onChange={onSelect}
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-lime"
+            >
+              <option className="bg-navy" value="" disabled>
+                Select one
+              </option>
+              {UPCOMING_EVENTS.map((ev) => (
+                <option key={ev.title} className="bg-navy" value={ev.formUrl}>
+                  {ev.title}
+                </option>
+              ))}
+            </select>
+          </div>
+        </>
+      ) : (
+        <p className="mt-3 text-paper/70">
+          Sorry, we don't have any upcoming events right now — join our Registry of Interest above
+          to hear from us when something's scheduled.
+        </p>
       )}
     </div>
   );
@@ -292,6 +322,7 @@ function PastEventsList() {
                   <span className="label-mono text-[11px] opacity-50">{event.date}</span>
                   <AnimatedLink
                     color="lime"
+                    showArrow
                     className="text-2xl font-semibold transition-transform duration-300 group-hover:translate-x-1 md:text-3xl"
                   >
                     {event.title}
@@ -301,7 +332,11 @@ function PastEventsList() {
               </span>
               <span className="flex shrink-0 items-center gap-4">
                 <span className="label-mono text-[11px] opacity-50">{event.duration}</span>
-                <span className="label-mono text-[11px] opacity-50">{isOpen ? 'CLOSE' : 'VIEW'}</span>
+                <span
+                  className={`label-mono text-[11px] ${isOpen ? 'text-navy/60' : 'text-lime'}`}
+                >
+                  {isOpen ? 'CLOSE' : 'VIEW'}
+                </span>
               </span>
             </button>
             <div
@@ -383,7 +418,8 @@ export function Events() {
           </AnimatedLink>
         </h2>
 
-        {/* Get involved — two distinct paths, not one blended flow */}
+        {/* Get involved — mentorship stays a distinct path on its own; the
+            registry and event-application boxes are a matched pair. */}
         <div className="mt-20">
           <AnimatedLink color="lime" className="label-mono text-lime">
             Get Involved
@@ -392,9 +428,14 @@ export function Events() {
             <Reveal>
               <MentorshipPanel />
             </Reveal>
-            <Reveal delay={120}>
-              <EventApplicationPanel />
-            </Reveal>
+            <div className="flex flex-col gap-10">
+              <Reveal delay={120}>
+                <RegistryOfInterestPanel />
+              </Reveal>
+              <Reveal delay={200}>
+                <ApplyToEventPanel />
+              </Reveal>
+            </div>
           </div>
         </div>
 

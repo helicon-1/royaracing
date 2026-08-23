@@ -58,7 +58,11 @@ export function RevealText({
   const nodes: ReactNode[] = [];
   units.forEach((unit, i) => {
     nodes.push(
-      <span key={`w${i}`} className="inline-block overflow-hidden" style={{ verticalAlign: 'top' }}>
+      <span
+        key={`w${i}`}
+        className="inline-block overflow-hidden"
+        style={{ verticalAlign: 'top', lineHeight: 1.25 }}
+      >
         <span
           className="inline-block transition-[transform,opacity] ease-[var(--ease-roya)]"
           style={{
