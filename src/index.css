@@ -125,7 +125,7 @@
   .car-marker {
     width: 34px;
     height: 16px;
-    background: var(--color-cyan);
+    background: var(--color-lime);
     clip-path: polygon(
       0% 60%,
       10% 60%,

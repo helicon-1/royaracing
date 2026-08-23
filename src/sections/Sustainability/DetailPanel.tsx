@@ -16,17 +16,21 @@ const ENVIRONMENTAL_POINTS = [
   'Material sourcing chosen deliberately, not by default.',
   'Manufacturing waste reduced and reused — offcuts and failed prints go back into the process, not the bin.',
   'A digital-first pit display in place of printed material.',
+  'Energy and travel choices weighed for events and testing, not just the parts list.',
 ];
 
-function ListDetail({ points }: { points: string[] }) {
+function ListDetail({ intro, points }: { intro?: string; points: string[] }) {
   return (
-    <ul className="divide-y divide-paper/10 border-t border-paper/10">
-      {points.map((point) => (
-        <li key={point} className="py-4 text-paper/75">
-          {point}
-        </li>
-      ))}
-    </ul>
+    <div>
+      {intro && <p className="mb-4 text-paper/70">{intro}</p>}
+      <ul className="divide-y divide-paper/10 border-t border-paper/10">
+        {points.map((point) => (
+          <li key={point} className="py-4 text-paper/75">
+            {point}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -89,6 +93,13 @@ function SocialDetail() {
 
 export function DetailPanel({ id }: { id: PillarId }) {
   if (id === 'economic') return <ListDetail points={ECONOMIC_POINTS} />;
-  if (id === 'environmental') return <ListDetail points={ENVIRONMENTAL_POINTS} />;
+  if (id === 'environmental') {
+    return (
+      <ListDetail
+        intro="This covers more than just the car itself — from sourcing to what happens after a season ends. A few concrete examples:"
+        points={ENVIRONMENTAL_POINTS}
+      />
+    );
+  }
   return <SocialDetail />;
 }

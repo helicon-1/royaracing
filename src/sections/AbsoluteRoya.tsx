@@ -50,7 +50,7 @@ function EpisodeGroup({
                 onClick={() => onToggle(isOpen ? null : ep.code)}
                 aria-expanded={isOpen}
                 className={`group flex w-full items-center justify-between gap-6 px-2 py-6 text-left transition-colors duration-300 ${
-                  isOpen ? 'bg-paper text-navy' : 'hover:bg-paper hover:text-navy'
+                  isOpen ? 'bg-lime text-navy' : 'hover:bg-paper hover:text-navy'
                 }`}
               >
                 <span className="flex items-center gap-5">
@@ -63,6 +63,7 @@ function EpisodeGroup({
                     <span className="label-mono text-[11px] opacity-50">{ep.code}</span>
                     <AnimatedLink
                       color="lime"
+                      accentColor={isOpen ? 'var(--color-navy)' : undefined}
                       showArrow
                       className="text-xl font-semibold transition-transform duration-300 group-hover:translate-x-1"
                     >
