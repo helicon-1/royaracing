@@ -21,21 +21,22 @@ export function OurStory() {
           <div className="mt-10 space-y-6 text-lg leading-relaxed text-paper/75">
             <Reveal delay={100}>
               <p>
-                <span className="text-cyan">Roya</span> Racing is a Saudi team competing in STEM
-                Racing — formerly known as F1 in Schools. Student teams design, build and race
-                miniature CO₂-powered cars, judged across three separate categories: Engineering,
-                Enterprise, and Project Management — covering the car itself, the business and
-                marketing side, and how well the team runs its own operation. Founded in Riyadh
-                in November 2025, aiming to become the first Saudi team to reach the World Finals
-                podium.
+                <span className="text-cyan">Roya Racing</span> is a Saudi team competing in{' '}
+                <span className="text-cyan">STEM Racing</span> — formerly known as F1 in Schools.
+                Student teams design, build and race miniature CO₂-powered cars, judged across
+                three separate categories: Engineering, Enterprise, and Project Management —
+                covering the car itself, the business and marketing side, and how well the team
+                runs its own operation. Founded in Riyadh in November 2025, aiming to become the
+                first Saudi team to reach the <span className="text-cyan">World Finals podium</span>.
               </p>
             </Reveal>
             <Reveal delay={220}>
               <p>
                 <span className="editorial text-cyan">"Roya"</span> (رؤية) is Arabic for{' '}
-                <span className="text-paper">vision</span> — a direct nod to Saudi Vision 2030.
-                The mission: build real engineering and business skill, develop young talent, and
-                put <span className="text-cyan">Roya</span> Racing on the world stage.
+                <span className="text-paper">vision</span> — a direct nod to{' '}
+                <span className="text-cyan">Saudi Vision 2030</span>. The mission: build real
+                engineering and business skill, develop young talent, and put{' '}
+                <span className="text-cyan">Roya Racing</span> on the world stage.
               </p>
             </Reveal>
           </div>

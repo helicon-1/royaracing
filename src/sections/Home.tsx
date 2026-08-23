@@ -15,21 +15,14 @@ export function Home() {
             Welcome to Roya Racing
           </AnimatedLink>
           <h1 className="mt-2 text-6xl font-bold leading-tight text-cyan md:text-8xl">
-            <AnimatedLink color="cyan" className="justify-center">
-              Your Vision
-            </AnimatedLink>
+            Your Vision
             <br />
-            <AnimatedLink color="cyan" className="justify-center">
-              Our Roya
-            </AnimatedLink>
+            Our Roya
           </h1>
-          <AnimatedLink
-            color="cyan"
-            className="font-heading mt-4 justify-center text-sm font-normal text-paper/60 md:text-base"
-          >
+          <p className="font-heading mt-4 text-sm font-normal text-paper/60 md:text-base">
             A Saudi STEM Racing team, built in Riyadh — aiming to become the first Saudi team to
             reach the World Finals podium.
-          </AnimatedLink>
+          </p>
         </div>
       </ScrollFlyIn>
     </Section>

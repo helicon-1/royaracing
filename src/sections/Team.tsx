@@ -69,13 +69,13 @@ export function Team() {
                 </div>
                 <AnimatedLink
                   color="lime"
-                  className="mt-4 min-h-[1.5em] text-lg font-semibold leading-tight text-paper transition-colors duration-300 group-hover:text-lime"
+                  className="mt-4 block min-h-[1.5em] text-lg font-semibold leading-tight text-paper transition-colors duration-300 group-hover:text-lime"
                 >
                   {member.name}
                 </AnimatedLink>
                 <AnimatedLink
                   color="lime"
-                  className="label-mono mt-1.5 min-h-[2.4em] text-[11px] leading-snug text-paper/50"
+                  className="label-mono mt-1.5 block min-h-[2.4em] text-[11px] leading-snug text-paper/50"
                 >
                   {member.role}
                 </AnimatedLink>

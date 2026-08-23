@@ -1,9 +1,11 @@
-import type { ReactElement } from 'react';
+import { useEffect, useState, type ReactElement } from 'react';
 import { Reveal } from '@/components/Reveal';
 import { AnimatedLink } from '@/components/ui/animated-link';
 
 interface Sponsor {
   name: string;
+  category: string;
+  blurb: string;
   mark: (props: { className?: string }) => ReactElement;
 }
 
@@ -13,6 +15,9 @@ interface Sponsor {
 const SPONSORS: Sponsor[] = [
   {
     name: 'Falcon Steel Works',
+    category: 'Materials Partner',
+    blurb:
+      'Supplies steel stock and fabrication support used across the build. Full partnership details will be added once confirmed.',
     mark: ({ className }) => (
       <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
         <path d="M4 19V5l8 6 8-6v14" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
@@ -21,6 +26,9 @@ const SPONSORS: Sponsor[] = [
   },
   {
     name: 'Nomad Coffee Co.',
+    category: 'Hospitality Partner',
+    blurb:
+      'Keeps the workshop running through late build nights. Full partnership details will be added once confirmed.',
     mark: ({ className }) => (
       <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
         <path
@@ -35,6 +43,9 @@ const SPONSORS: Sponsor[] = [
   },
   {
     name: 'Waypoint Logistics',
+    category: 'Logistics Partner',
+    blurb:
+      'Handles freight and shipping for parts and travel to competition. Full partnership details will be added once confirmed.',
     mark: ({ className }) => (
       <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
         <path d="M12 3 3 8l9 5 9-5-9-5Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
@@ -44,6 +55,9 @@ const SPONSORS: Sponsor[] = [
   },
   {
     name: 'Circuit & Co.',
+    category: 'Electronics Partner',
+    blurb:
+      "Supports the team's electronics and telemetry work. Full partnership details will be added once confirmed.",
     mark: ({ className }) => (
       <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
         <path
@@ -58,6 +72,9 @@ const SPONSORS: Sponsor[] = [
   },
   {
     name: 'Riyadh Print House',
+    category: 'Print & Signage Partner',
+    blurb:
+      'Produces team signage, banners and printed materials. Full partnership details will be added once confirmed.',
     mark: ({ className }) => (
       <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
         <path
@@ -72,33 +89,84 @@ const SPONSORS: Sponsor[] = [
 ];
 
 export function Sponsors() {
+  const [active, setActive] = useState<Sponsor | null>(null);
+
+  useEffect(() => {
+    if (!active) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActive(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [active]);
+
   return (
     <div className="px-6 py-20 md:px-10">
       <div className="mx-auto max-w-[1400px]">
         <div className="mb-12 text-center">
-          <AnimatedLink color="lime" className="label-mono text-[10px] text-paper/35">
-            Backed by
-          </AnimatedLink>
-          <p className="mx-auto mt-3 max-w-lg text-paper/60">
-            We'd love to thank our amazing sponsors for helping us build the car and get to the
-            track.
+          <h2 className="text-5xl font-bold text-paper md:text-7xl">
+            <AnimatedLink color="lime" className="justify-center">
+              Backed by
+            </AnimatedLink>
+          </h2>
+          <p className="mx-auto mt-4 max-w-lg text-paper/60">
+            Their support is what turns a first-season plan into a real shot at the podium.
           </p>
         </div>
         {/* Single row, never wraps — on viewports too narrow to fit all
             five marks, it scrolls horizontally instead. */}
         <div className="flex items-center justify-start gap-x-14 overflow-x-auto px-1 py-1 md:justify-center md:gap-x-20">
-          {SPONSORS.map(({ name, mark: Mark }, i) => (
-            <Reveal key={name} delay={i * 80}>
-              <div className="group flex shrink-0 items-center gap-4 text-paper/65 transition-colors duration-300 hover:text-lime">
-                <Mark className="h-10 w-10 shrink-0 md:h-12 md:w-12" />
-                <AnimatedLink color="lime" className="label-mono whitespace-nowrap text-base md:text-lg">
-                  {name}
-                </AnimatedLink>
-              </div>
-            </Reveal>
-          ))}
+          {SPONSORS.map((sponsor, i) => {
+            const { name, mark: Mark } = sponsor;
+            return (
+              <Reveal key={name} delay={i * 80}>
+                <button
+                  type="button"
+                  onClick={() => setActive(sponsor)}
+                  className="group flex shrink-0 items-center gap-4 text-paper/65 transition-colors duration-300 hover:text-lime"
+                >
+                  <Mark className="h-10 w-10 shrink-0 md:h-12 md:w-12" />
+                  <AnimatedLink color="lime" className="label-mono whitespace-nowrap text-base md:text-lg">
+                    {name}
+                  </AnimatedLink>
+                </button>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
+
+      {active && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${active.name} sponsor information`}
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-ink/85 px-6 backdrop-blur-sm"
+          onClick={() => setActive(null)}
+        >
+          <div className="w-full max-w-2xl bg-navy p-8 md:p-10" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-start justify-between gap-6">
+              <div>
+                <AnimatedLink color="lime" className="block text-2xl font-bold text-lime">
+                  {active.name}
+                </AnimatedLink>
+                <AnimatedLink color="lime" className="label-mono mt-2 block text-[11px] text-lime">
+                  {active.category}
+                </AnimatedLink>
+              </div>
+              <button
+                type="button"
+                onClick={() => setActive(null)}
+                aria-label="Close"
+                className="label-mono text-paper/50 transition-colors hover:text-paper"
+              >
+                CLOSE
+              </button>
+            </div>
+            <p className="editorial mt-6 text-paper/60">{active.blurb}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
