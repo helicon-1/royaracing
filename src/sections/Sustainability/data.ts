@@ -26,10 +26,9 @@ export const PILLARS: Pillar[] = [
   {
     id: 'economic',
     label: 'Economic',
-    definition:
-      'Whether the program can keep running: money spent wisely, and value delivered back to the people who fund it.',
+    definition: 'Spending money wisely: thinking a purchase through before making it, every time.',
     practice:
-      'Roya tracks the value delivered to sponsors, engineers the car to a fixed budget rather than an open one, and plans funding a season ahead so the team never depends on a single source.',
+      'Roya engineers the car to a fixed budget rather than an open one, weighs cost against value before every purchase, and tracks spending closely so nothing goes to waste.',
   },
   {
     id: 'social',

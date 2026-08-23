@@ -23,10 +23,10 @@ export function OurStory() {
               <p>
                 Roya Racing is a Saudi team competing in STEM Racing — formerly known as F1 in
                 Schools. Student teams design, build and race miniature CO₂-powered cars, judged
-                across two separate categories: Engineering, and Enterprise — the business,
-                marketing, and project management side of running the team. Founded in Riyadh in
-                November 2025, aiming to become the first Saudi team to reach the World Finals
-                podium.
+                across three separate categories: Engineering, Enterprise, and Project
+                Management — covering the car itself, the business and marketing side, and how
+                well the team runs its own operation. Founded in Riyadh in November 2025, aiming
+                to become the first Saudi team to reach the World Finals podium.
               </p>
             </Reveal>
             <Reveal delay={220}>

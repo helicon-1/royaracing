@@ -88,9 +88,9 @@ export function Emblems() {
                       still only appears on click, never on hover. */}
                   <span
                     aria-hidden="true"
-                    className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border border-current bg-navy text-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border border-current bg-navy text-sm leading-none opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   >
-                    +
+                    <span className="-translate-y-px">+</span>
                   </span>
                 </span>
                 <AnimatedLink className="label-mono whitespace-nowrap text-sm">

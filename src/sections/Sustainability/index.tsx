@@ -9,13 +9,18 @@ import { PILLARS, PILLAR_TINTS, type Pillar, type PillarId } from './data';
 
 const PILLAR_ICONS: Record<PillarId, (props: { className?: string }) => ReactElement> = {
   economic: ({ className }) => (
+    // Saudi Riyal sign (SAMA's 2025 symbol, Unicode U+20C1) — drawn rather
+    // than set as text, since the glyph is too new for reliable font
+    // coverage. Not a pixel-exact reproduction, just evokes the same
+    // crossbar-over-vertical-stroke shape as the official mark.
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
       <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.6" />
       <path
-        d="M12 7.5v9M14.5 9.7c0-1-1-1.7-2.5-1.7s-2.5.7-2.5 1.7c0 2.3 5 1 5 3.3 0 1-1 1.7-2.5 1.7s-2.5-.7-2.5-1.7"
+        d="M9.5 7.5v9M9.5 7.5c2 0 4 1.1 4 2.9s-2 2.9-4 2.9M7.5 10.8h8"
         stroke="currentColor"
         strokeWidth="1.4"
         strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   ),
@@ -58,39 +63,43 @@ function PillarCard({
 
   return (
     <div
-      className="flex h-full flex-col border-t-4 p-6 transition-colors duration-300 md:p-8"
+      className="flex h-full flex-col border-t-4 transition-colors duration-300"
       style={{ borderColor: color, backgroundColor: `${color}0d` }}
     >
-      <div className="flex items-center gap-3" style={{ color }}>
-        <Icon className="h-7 w-7 shrink-0" />
-        <AnimatedLink className="text-xl font-bold md:text-2xl" style={{ color }}>
-          {pillar.label}
-        </AnimatedLink>
-      </div>
-      <p className="mt-4 text-paper/80">{pillar.definition}</p>
+      {/* The whole box is the click target, not just the title or a
+          separate "see what we did" control — clicking anywhere here
+          triggers the same reveal. The expandable detail below sits
+          outside this button since it has its own nested interactive
+          controls (DetailPanel's activity toggles). */}
+      <button type="button" onClick={onToggle} aria-expanded={isOpen} className="flex flex-1 flex-col p-6 text-left md:p-8">
+        <div className="flex items-center gap-3" style={{ color }}>
+          <Icon className="h-7 w-7 shrink-0" />
+          <AnimatedLink accentColor={color} showArrow className="text-xl font-bold md:text-2xl" style={{ color }}>
+            {pillar.label}
+          </AnimatedLink>
+        </div>
+        <p className="mt-4 text-paper/80">{pillar.definition}</p>
 
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={isOpen}
-        className="label-mono mt-6 inline-flex items-center gap-2 text-[11px] transition-colors duration-300"
-        style={{ color }}
-      >
-        {isOpen ? 'Close' : 'See what we did'}
         <span
-          aria-hidden="true"
-          className={`inline-block transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`}
+          className="label-mono mt-6 inline-flex items-center gap-2 text-[11px] transition-colors duration-300"
+          style={{ color }}
         >
-          +
+          {isOpen ? 'Close' : 'See what we did'}
+          <span
+            aria-hidden="true"
+            className={`inline-block transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`}
+          >
+            +
+          </span>
         </span>
       </button>
 
       <div
-        className={`overflow-hidden transition-[max-height] duration-500 ease-[var(--ease-roya)] ${
-          isOpen ? 'max-h-[1000px]' : 'max-h-0'
+        className={`overflow-hidden px-6 transition-[max-height] duration-500 ease-[var(--ease-roya)] md:px-8 ${
+          isOpen ? 'max-h-[1000px] pb-6 md:pb-8' : 'max-h-0'
         }`}
       >
-        <div className="mt-6 border-t pt-6" style={{ borderColor: `${color}33` }}>
+        <div className="border-t pt-6" style={{ borderColor: `${color}33` }}>
           <p className="text-paper/70">{pillar.practice}</p>
           <div className="mt-6">
             <DetailPanel id={pillar.id} />
@@ -114,9 +123,8 @@ export function Sustainability() {
           </AnimatedLink>
         </h2>
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-paper/70">
-          Three things have to hold at once for Roya to last beyond one season: the budget
-          staying solvent, the people the program brings along, and the footprint it leaves
-          behind. Click a pillar below to see exactly what Roya does about each.
+          Roya cares a lot about sustainability. There are three types of sustainability we care
+          about the most. Click a pillar below to see what Roya does about each.
         </p>
 
         <div className="mt-16 grid items-stretch gap-6 lg:grid-cols-3">
