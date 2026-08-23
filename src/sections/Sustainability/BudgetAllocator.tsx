@@ -9,7 +9,7 @@ function Bar({ pct, eased = true }: { pct: number; eased?: boolean }) {
   const value = useEasedValue(pct, eased ? 0.1 : 1);
   return (
     <div className="h-2 w-full overflow-hidden rounded-full bg-paper/10">
-      <div className="h-full rounded-full bg-green" style={{ width: `${value}%` }} />
+      <div className="h-full rounded-full bg-lime" style={{ width: `${value}%` }} />
     </div>
   );
 }
@@ -48,7 +48,7 @@ export function BudgetAllocator() {
       <div className="lg:col-span-2">
         <div className="flex items-baseline justify-between">
           <p className="label-mono text-[11px] text-paper/50">Distribute 100 points across the three pillars</p>
-          <p className="label-mono text-[11px] text-green">{remaining} remaining</p>
+          <p className="label-mono text-[11px] text-lime">{remaining} remaining</p>
         </div>
 
         <div className="mt-6 space-y-6">
@@ -64,7 +64,7 @@ export function BudgetAllocator() {
                   onClick={() => adjust(pillar.id, -STEP)}
                   disabled={allocation[pillar.id] <= 0}
                   aria-label={`Decrease ${pillar.label}`}
-                  className="flex h-7 w-7 shrink-0 items-center justify-center border border-paper/20 text-paper/70 transition-colors duration-200 hover:border-green hover:text-green disabled:opacity-30"
+                  className="flex h-7 w-7 shrink-0 items-center justify-center border border-paper/20 text-paper/70 transition-colors duration-200 hover:border-lime hover:text-lime disabled:opacity-30"
                 >
                   −
                 </button>
@@ -74,7 +74,7 @@ export function BudgetAllocator() {
                   onClick={() => adjust(pillar.id, STEP)}
                   disabled={remaining < STEP}
                   aria-label={`Increase ${pillar.label}`}
-                  className="flex h-7 w-7 shrink-0 items-center justify-center border border-paper/20 text-paper/70 transition-colors duration-200 hover:border-green hover:text-green disabled:opacity-30"
+                  className="flex h-7 w-7 shrink-0 items-center justify-center border border-paper/20 text-paper/70 transition-colors duration-200 hover:border-lime hover:text-lime disabled:opacity-30"
                 >
                   +
                 </button>
@@ -91,7 +91,7 @@ export function BudgetAllocator() {
             <button
               type="button"
               onClick={() => setCompared(true)}
-              className="label-mono mt-6 w-fit border border-green px-6 py-3 text-[11px] text-green transition-colors duration-300 hover:bg-green hover:text-navy"
+              className="label-mono mt-6 w-fit border border-lime px-6 py-3 text-[11px] text-lime transition-colors duration-300 hover:bg-lime hover:text-navy"
             >
               Compare with Roya
             </button>
@@ -119,14 +119,14 @@ export function BudgetAllocator() {
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="label-mono w-11 shrink-0 text-[10px] text-green">Roya</span>
+                      <span className="label-mono w-11 shrink-0 text-[10px] text-lime">Roya</span>
                       <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-paper/10">
                         <div
-                          className="h-full rounded-full bg-green"
+                          className="h-full rounded-full bg-lime"
                           style={{ width: `${ROYA_ALLOCATION[pillar.id]}%` }}
                         />
                       </div>
-                      <span className="label-mono w-6 shrink-0 text-right text-[10px] text-green">
+                      <span className="label-mono w-6 shrink-0 text-right text-[10px] text-lime">
                         {ROYA_ALLOCATION[pillar.id]}
                       </span>
                     </div>

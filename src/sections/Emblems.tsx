@@ -49,7 +49,8 @@ const EMBLEMS: Emblem[] = [
 
 export function Emblems() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const selected = EMBLEMS.find((e) => e.id === selectedId);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const selected = EMBLEMS.find((e) => e.id === (hoveredId ?? selectedId));
 
   return (
     <div className="px-6 py-20 md:px-[120px]">
@@ -72,20 +73,26 @@ export function Emblems() {
               <button
                 type="button"
                 onClick={() => setSelectedId(selectedId === emblem.id ? null : emblem.id)}
-                aria-expanded={selectedId === emblem.id}
+                onMouseEnter={() => setHoveredId(emblem.id)}
+                onMouseLeave={() => setHoveredId(null)}
+                aria-expanded={selectedId === emblem.id || hoveredId === emblem.id}
                 className={`group flex flex-col items-center gap-3 transition-colors duration-300 ${
-                  selectedId === emblem.id ? 'text-cyan' : 'text-paper/65 hover:text-paper'
+                  selectedId === emblem.id ? 'text-lime' : 'text-paper/65 hover:text-paper'
                 }`}
               >
                 <span className="relative inline-flex transition-transform duration-300 group-hover:-translate-y-1">
+                  {/* Idle: cyan/blue (each mark's own natural tone). Hover:
+                      fades to lime via a hue shift — the source SVGs are
+                      loaded as <img>, so recoloring on the fly needs a CSS
+                      filter rather than currentColor. */}
                   <img
                     src={emblem.src}
                     alt=""
                     aria-hidden="true"
-                    className="h-20 w-auto shrink-0 md:h-28"
+                    className="h-20 w-auto shrink-0 transition-[filter] duration-300 ease-[var(--ease-roya)] group-hover:hue-rotate-[-122deg] group-hover:saturate-150 md:h-28"
                   />
-                  {/* Hover-only cue that this is clickable — the meaning itself
-                      still only appears on click, never on hover. */}
+                  {/* Hover-only cue that this is clickable — clicking keeps
+                      the definition pinned open after the mouse leaves. */}
                   <span
                     aria-hidden="true"
                     className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border border-current bg-navy text-sm leading-none opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -93,7 +100,7 @@ export function Emblems() {
                     <span className="-translate-y-px">+</span>
                   </span>
                 </span>
-                <AnimatedLink className="label-mono whitespace-nowrap text-sm">
+                <AnimatedLink color="lime" className="label-mono whitespace-nowrap text-sm">
                   {emblem.name}
                 </AnimatedLink>
               </button>

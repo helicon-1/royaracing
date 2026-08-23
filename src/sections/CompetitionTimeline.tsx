@@ -40,11 +40,11 @@ export function CompetitionTimeline() {
   return (
     <Section id="timeline" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
-        <AnimatedLink color="white" className="label-mono mb-6 text-white">
+        <AnimatedLink color="lime" className="label-mono mb-6 text-lime">
           03 — Competition Timeline
         </AnimatedLink>
         <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
-          <AnimatedLink color="white">
+          <AnimatedLink color="lime">
             <RevealText as="span" text="Three stages to the World Finals." />
           </AnimatedLink>
         </h2>
@@ -81,7 +81,7 @@ export function CompetitionTimeline() {
                 type="button"
                 onClick={() => setActive(i)}
                 className={`label-mono text-[11px] transition-colors duration-300 ${
-                  i === active ? 'text-cyan' : 'text-paper/40 hover:text-paper/70'
+                  i === active ? 'text-lime' : 'text-paper/40 hover:text-paper/70'
                 }`}
               >
                 {s.label}
@@ -97,26 +97,28 @@ export function CompetitionTimeline() {
             <div className="relative flex flex-col justify-center p-8 md:p-12">
               <div
                 aria-hidden="true"
-                className="absolute left-0 top-0 h-full w-2 bg-cyan"
+                className="absolute left-0 top-0 h-full w-2 bg-lime"
                 style={{ clipPath: 'polygon(0 0, 100% 0, 100% 82%, 45% 100%, 0 100%)' }}
               />
               <div className="pl-6">
                 <div className="flex items-center justify-between gap-4">
-                  <span className="label-mono text-cyan">Stage {String(active + 1).padStart(2, '0')} / 03</span>
+                  <span className="label-mono text-lime">Stage {String(active + 1).padStart(2, '0')} / 03</span>
                   <span
                     className={`label-mono shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-[10px] ${
                       stage.status === 'upcoming'
                         ? 'border-paper/25 text-paper/50'
-                        : 'border-cyan/50 text-cyan'
+                        : 'border-lime/50 text-lime'
                     }`}
                   >
                     {stage.status === 'upcoming' ? 'Upcoming' : 'Complete'}
                   </span>
                 </div>
                 <h3 className="mt-4 text-balance text-4xl font-bold leading-[1.1] text-paper md:text-5xl">
-                  <AnimatedLink>{stage.label}</AnimatedLink>
+                  <AnimatedLink color="lime">{stage.label}</AnimatedLink>
                 </h3>
-                <AnimatedLink className="label-mono mt-3 text-cyan">{stage.month}</AnimatedLink>
+                <AnimatedLink color="lime" className="label-mono mt-3 text-lime">
+                  {stage.month}
+                </AnimatedLink>
                 <p className="mt-6 max-w-sm text-paper/70">{stage.blurb}</p>
               </div>
             </div>
