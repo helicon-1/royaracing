@@ -60,52 +60,52 @@ function MentorshipPanel() {
   }
 
   return (
-    <div className="flex h-full flex-col bg-lime p-8">
-      <AnimatedLink accentColor="var(--color-navy)" className="label-mono text-sm font-bold text-navy/70">
+    <div className="flex h-full flex-col rounded-xl border border-paper/15 bg-paper/[0.04] p-8 backdrop-blur-sm">
+      <AnimatedLink color="lime" className="label-mono text-sm font-bold text-lime">
         Mentoring Program
       </AnimatedLink>
-      <div className="mt-3 text-2xl font-bold text-navy">
-        <AnimatedLink accentColor="var(--color-navy)">Get mentored by the team</AnimatedLink>
+      <div className="mt-3 text-2xl font-bold text-paper">
+        <AnimatedLink color="lime">Get mentored by the team</AnimatedLink>
       </div>
-      <p className="mt-3 text-navy/70">
+      <p className="mt-3 text-paper/70">
         Ongoing — apply anytime. Those who take part receive a certificate of participation, and
         involvement can help toward joining a STEM Racing team next season.
       </p>
 
       {submitted ? (
-        <p className="mt-6 text-navy/80">Thanks — we'll be in touch about the mentoring program.</p>
+        <p className="mt-6 text-paper/80">Thanks — we'll be in touch about the mentoring program.</p>
       ) : (
         <form onSubmit={onSubmit} className="mt-6 space-y-5">
           <div>
-            <label htmlFor="mentor-name" className="label-mono text-[11px] text-navy/60">
+            <label htmlFor="mentor-name" className="label-mono text-[11px] text-paper/50">
               Name
             </label>
             <input
               id="mentor-name"
               required
-              className="mt-2 w-full border-b border-navy/25 bg-transparent py-2 text-navy outline-none transition-colors focus:border-navy"
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-lime"
             />
           </div>
           <div>
-            <label htmlFor="mentor-contact" className="label-mono text-[11px] text-navy/60">
+            <label htmlFor="mentor-contact" className="label-mono text-[11px] text-paper/50">
               Contact (email)
             </label>
             <input
               id="mentor-contact"
               type="email"
               required
-              className="mt-2 w-full border-b border-navy/25 bg-transparent py-2 text-navy outline-none transition-colors focus:border-navy"
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-lime"
             />
           </div>
           <div>
-            <label htmlFor="mentor-level" className="label-mono text-[11px] text-navy/60">
+            <label htmlFor="mentor-level" className="label-mono text-[11px] text-paper/50">
               Academic level
             </label>
             <select
               id="mentor-level"
               required
               defaultValue=""
-              className="mt-2 w-full border-b border-navy/25 bg-transparent py-2 text-navy outline-none transition-colors focus:border-navy"
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-lime"
             >
               <option className="bg-navy text-paper" value="" disabled>
                 Select one
@@ -119,14 +119,14 @@ function MentorshipPanel() {
             </select>
           </div>
           <div>
-            <label htmlFor="mentor-track" className="label-mono text-[11px] text-navy/60">
+            <label htmlFor="mentor-track" className="label-mono text-[11px] text-paper/50">
               Which mentorship track?
             </label>
             <select
               id="mentor-track"
               required
               defaultValue=""
-              className="mt-2 w-full border-b border-navy/25 bg-transparent py-2 text-navy outline-none transition-colors focus:border-navy"
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-lime"
             >
               <option className="bg-navy text-paper" value="" disabled>
                 Select one
@@ -139,19 +139,19 @@ function MentorshipPanel() {
             </select>
           </div>
           <div>
-            <label htmlFor="mentor-note" className="label-mono text-[11px] text-navy/60">
+            <label htmlFor="mentor-note" className="label-mono text-[11px] text-paper/50">
               Why do you want to apply?
             </label>
             <textarea
               id="mentor-note"
               required
               rows={3}
-              className="mt-2 w-full resize-none border-b border-navy/25 bg-transparent py-2 text-navy outline-none transition-colors focus:border-navy"
+              className="mt-2 w-full resize-none border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-lime"
             />
           </div>
           <button
             type="submit"
-            className="label-mono mt-2 border border-navy bg-navy px-6 py-3 text-[11px] text-lime transition-colors duration-300 hover:bg-navy/80"
+            className="label-mono mt-2 border border-lime px-6 py-3 text-[11px] text-lime transition-colors duration-300 hover:bg-lime hover:text-navy"
           >
             Submit
           </button>
@@ -170,52 +170,52 @@ function RegistryOfInterestPanel() {
   }
 
   return (
-    <div className="flex h-full flex-col bg-lime p-8">
-      <AnimatedLink accentColor="var(--color-navy)" className="label-mono text-sm font-bold text-navy/70">
+    <div className="flex h-full flex-col rounded-xl border border-paper/15 bg-paper/[0.04] p-8 backdrop-blur-sm">
+      <AnimatedLink color="lime" className="label-mono text-sm font-bold text-lime">
         Registry of Interest
       </AnimatedLink>
-      <div className="mt-3 text-2xl font-bold text-navy">
-        <AnimatedLink accentColor="var(--color-navy)">Stay in the loop</AnimatedLink>
+      <div className="mt-3 text-2xl font-bold text-paper">
+        <AnimatedLink color="lime">Stay in the loop</AnimatedLink>
       </div>
-      <p className="mt-3 text-navy/70">
+      <p className="mt-3 text-paper/70">
         Not tied to any specific event — tell us who you are, and we'll reach out when something's
         scheduled.
       </p>
 
       {submitted ? (
-        <p className="mt-6 text-navy/80">Thanks — we'll be in touch.</p>
+        <p className="mt-6 text-paper/80">Thanks — we'll be in touch.</p>
       ) : (
         <form onSubmit={onSubmit} className="mt-6 space-y-5">
           <div>
-            <label htmlFor="roi-name" className="label-mono text-[11px] text-navy/60">
+            <label htmlFor="roi-name" className="label-mono text-[11px] text-paper/50">
               Name
             </label>
             <input
               id="roi-name"
               required
-              className="mt-2 w-full border-b border-navy/25 bg-transparent py-2 text-navy outline-none transition-colors focus:border-navy"
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-lime"
             />
           </div>
           <div>
-            <label htmlFor="roi-email" className="label-mono text-[11px] text-navy/60">
+            <label htmlFor="roi-email" className="label-mono text-[11px] text-paper/50">
               Email
             </label>
             <input
               id="roi-email"
               type="email"
               required
-              className="mt-2 w-full border-b border-navy/25 bg-transparent py-2 text-navy outline-none transition-colors focus:border-navy"
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-lime"
             />
           </div>
           <div>
-            <label htmlFor="roi-level" className="label-mono text-[11px] text-navy/60">
+            <label htmlFor="roi-level" className="label-mono text-[11px] text-paper/50">
               Academic level
             </label>
             <select
               id="roi-level"
               required
               defaultValue=""
-              className="mt-2 w-full border-b border-navy/25 bg-transparent py-2 text-navy outline-none transition-colors focus:border-navy"
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-lime"
             >
               <option className="bg-navy text-paper" value="" disabled>
                 Select one
@@ -230,7 +230,7 @@ function RegistryOfInterestPanel() {
           </div>
           <button
             type="submit"
-            className="label-mono mt-2 border border-navy bg-navy px-6 py-3 text-[11px] text-lime transition-colors duration-300 hover:bg-navy/80"
+            className="label-mono mt-2 border border-lime px-6 py-3 text-[11px] text-lime transition-colors duration-300 hover:bg-lime hover:text-navy"
           >
             Submit
           </button>
@@ -249,30 +249,30 @@ function ApplyToEventPanel() {
   }
 
   return (
-    <div className="flex h-full flex-col bg-lime p-8">
-      <AnimatedLink accentColor="var(--color-navy)" className="label-mono text-sm font-bold text-navy/70">
+    <div className="flex h-full flex-col rounded-xl border border-paper/15 bg-paper/[0.04] p-8 backdrop-blur-sm">
+      <AnimatedLink color="lime" className="label-mono text-sm font-bold text-lime">
         Event Application
       </AnimatedLink>
-      <div className="mt-3 text-2xl font-bold text-navy">
-        <AnimatedLink accentColor="var(--color-navy)">
+      <div className="mt-3 text-2xl font-bold text-paper">
+        <AnimatedLink color="lime">
           {hasEvents ? 'Come to one of our upcoming events!' : 'No events scheduled yet'}
         </AnimatedLink>
       </div>
 
       {hasEvents ? (
         <>
-          <p className="mt-3 text-navy/70">
+          <p className="mt-3 text-paper/70">
             Pick an event below — you'll be taken to its application form.
           </p>
           <div className="mt-6">
-            <label htmlFor="upcoming-event" className="label-mono text-[11px] text-navy/60">
+            <label htmlFor="upcoming-event" className="label-mono text-[11px] text-paper/50">
               Which event?
             </label>
             <select
               id="upcoming-event"
               defaultValue=""
               onChange={onSelect}
-              className="mt-2 w-full border-b border-navy/25 bg-transparent py-2 text-navy outline-none transition-colors focus:border-navy"
+              className="mt-2 w-full border-b border-paper/20 bg-transparent py-2 text-paper outline-none transition-colors focus:border-lime"
             >
               <option className="bg-navy text-paper" value="" disabled>
                 Select one
@@ -286,7 +286,7 @@ function ApplyToEventPanel() {
           </div>
         </>
       ) : (
-        <p className="mt-3 text-navy/70">
+        <p className="mt-3 text-paper/70">
           Sorry, we don't have any upcoming events right now — join our Registry of Interest above
           to hear from us when something's scheduled.
         </p>
@@ -309,7 +309,7 @@ function PastEventsList() {
               onClick={() => setOpenTitle(isOpen ? null : event.title)}
               aria-expanded={isOpen}
               className={`group flex w-full items-center justify-between gap-6 px-2 py-6 text-left transition-colors duration-300 ${
-                isOpen ? 'bg-paper text-navy' : 'hover:bg-paper hover:text-navy'
+                isOpen ? 'bg-lime text-navy' : 'hover:bg-paper hover:text-navy'
               }`}
             >
               <span className="flex items-center gap-5">
@@ -322,6 +322,7 @@ function PastEventsList() {
                   <span className="label-mono text-[11px] opacity-50">{event.date}</span>
                   <AnimatedLink
                     color="lime"
+                    accentColor={isOpen ? 'var(--color-navy)' : undefined}
                     showArrow
                     className="text-2xl font-semibold transition-transform duration-300 group-hover:translate-x-1 md:text-3xl"
                   >

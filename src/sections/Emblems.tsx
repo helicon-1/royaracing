@@ -81,15 +81,34 @@ export function Emblems() {
                 }`}
               >
                 <span className="relative inline-flex transition-transform duration-300 group-hover:-translate-y-1">
-                  {/* Idle: cyan/blue (each mark's own natural tone). Hover:
-                      fades to lime via a hue shift — the source SVGs are
-                      loaded as <img>, so recoloring on the fly needs a CSS
-                      filter rather than currentColor. */}
+                  {/* Idle: each mark's own natural/original color, untouched.
+                      Hover: crossfades to a flat, uniform lime silhouette —
+                      the source SVGs are loaded as <img>, so a hue-rotate
+                      filter would shift each mark's own colors unevenly
+                      (worse for multi-colored marks). A CSS mask driven by
+                      the same image's alpha channel, filled with a solid
+                      lime background, gives every emblem the exact same
+                      clean lime regardless of its natural coloring. */}
                   <img
                     src={emblem.src}
                     alt=""
                     aria-hidden="true"
-                    className="h-20 w-auto shrink-0 transition-[filter] duration-300 ease-[var(--ease-roya)] group-hover:hue-rotate-[-122deg] group-hover:saturate-150 md:h-28"
+                    className="h-20 w-auto shrink-0 transition-opacity duration-300 ease-[var(--ease-roya)] group-hover:opacity-0 md:h-28"
+                  />
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      WebkitMaskImage: `url(${emblem.src})`,
+                      maskImage: `url(${emblem.src})`,
+                      WebkitMaskRepeat: 'no-repeat',
+                      maskRepeat: 'no-repeat',
+                      WebkitMaskPosition: 'center',
+                      maskPosition: 'center',
+                      WebkitMaskSize: 'contain',
+                      maskSize: 'contain',
+                      backgroundColor: 'var(--color-lime)',
+                    }}
+                    className="absolute inset-0 opacity-0 transition-opacity duration-300 ease-[var(--ease-roya)] group-hover:opacity-100"
                   />
                   {/* Hover-only cue that this is clickable — clicking keeps
                       the definition pinned open after the mouse leaves. */}
