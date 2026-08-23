@@ -25,7 +25,6 @@ npm run build
 
 See inline code comments for specifics. Flagged pending real input from the team:
 
-- **Garet font** — not licensed for this build; Urbanist substitutes for now (`src/index.css`).
 - **Logo** — `roya_logo_.png` was never attached as an actual file this session; a text wordmark stands in (`src/components/Logo.tsx`).
 - **Riyadh skyline photography** — a vector silhouette placeholder stands in for real licensed photography (`src/components/SkylineBackground.tsx`).
 - **Sustainability budget split** — Roya's real point allocation isn't set yet; a placeholder split is used for the comparison view.

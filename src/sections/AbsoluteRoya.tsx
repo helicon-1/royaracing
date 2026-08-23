@@ -3,6 +3,7 @@ import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
 import { Reveal } from '@/components/Reveal';
 import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
+import { AnimatedLink } from '@/components/ui/animated-link';
 
 interface Episode {
   code: string;
@@ -36,7 +37,9 @@ function EpisodeGroup({
 }) {
   return (
     <div>
-      <p className="label-mono mb-4 text-[11px] text-paper/40">{label}</p>
+      <AnimatedLink color="cyan" className="label-mono mb-4 text-[11px] text-paper/40">
+        {label}
+      </AnimatedLink>
       <ul className="divide-y divide-paper/10 border-t border-paper/10">
         {episodes.map((ep) => {
           const isOpen = openCode === ep.code;
@@ -58,9 +61,12 @@ function EpisodeGroup({
                   />
                   <span className="flex flex-col gap-1">
                     <span className="label-mono text-[11px] opacity-50">{ep.code}</span>
-                    <span className="text-xl font-semibold transition-transform duration-300 group-hover:translate-x-1">
+                    <AnimatedLink
+                      color="cyan"
+                      className="text-xl font-semibold transition-transform duration-300 group-hover:translate-x-1"
+                    >
                       {ep.title}
-                    </span>
+                    </AnimatedLink>
                   </span>
                 </span>
                 <span className="flex shrink-0 items-center gap-4">
@@ -94,12 +100,14 @@ export function AbsoluteRoya() {
   return (
     <Section id="absolute-roya" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
-        <p className="label-mono mb-6 text-cyan">05 — Absolute Roya</p>
-        <RevealText
-          as="h2"
-          text="The podcast and the build vlogs."
-          className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl"
-        />
+        <AnimatedLink color="cyan" className="label-mono mb-6 text-cyan">
+          05 — Absolute Roya
+        </AnimatedLink>
+        <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
+          <AnimatedLink color="cyan">
+            <RevealText as="span" text="The podcast and the build vlogs." />
+          </AnimatedLink>
+        </h2>
         <p className="editorial mt-6 max-w-xl text-xl text-paper/60">
           Off-workshop conversation, and the build itself on camera — both hosted here rather
           than off-site.

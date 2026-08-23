@@ -3,6 +3,7 @@ import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
 import { Reveal } from '@/components/Reveal';
 import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
+import { AnimatedLink } from '@/components/ui/animated-link';
 
 interface Stage {
   label: string;
@@ -39,12 +40,14 @@ export function CompetitionTimeline() {
   return (
     <Section id="timeline" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
-        <p className="label-mono mb-6 text-cyan">03 — Competition Timeline</p>
-        <RevealText
-          as="h2"
-          text="Three stages to the World Finals."
-          className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl"
-        />
+        <AnimatedLink color="white" className="label-mono mb-6 text-white">
+          03 — Competition Timeline
+        </AnimatedLink>
+        <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
+          <AnimatedLink color="white">
+            <RevealText as="span" text="Three stages to the World Finals." />
+          </AnimatedLink>
+        </h2>
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-paper/70">
           Regionals, then Nationals, then the World Finals — where Roya is headed next.
         </p>
@@ -111,9 +114,9 @@ export function CompetitionTimeline() {
                   </span>
                 </div>
                 <h3 className="mt-4 text-balance text-4xl font-bold leading-[1.1] text-paper md:text-5xl">
-                  {stage.label}
+                  <AnimatedLink>{stage.label}</AnimatedLink>
                 </h3>
-                <p className="label-mono mt-3 text-cyan">{stage.month}</p>
+                <AnimatedLink className="label-mono mt-3 text-cyan">{stage.month}</AnimatedLink>
                 <p className="mt-6 max-w-sm text-paper/70">{stage.blurb}</p>
               </div>
             </div>
