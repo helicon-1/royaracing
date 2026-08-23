@@ -37,7 +37,9 @@ function EpisodeGroup({
 }) {
   return (
     <div>
-      <AnimatedLink className="label-mono mb-4 text-[11px] text-paper/40">{label}</AnimatedLink>
+      <AnimatedLink color="cyan" className="label-mono mb-4 text-[11px] text-paper/40">
+        {label}
+      </AnimatedLink>
       <ul className="divide-y divide-paper/10 border-t border-paper/10">
         {episodes.map((ep) => {
           const isOpen = openCode === ep.code;
@@ -59,7 +61,10 @@ function EpisodeGroup({
                   />
                   <span className="flex flex-col gap-1">
                     <span className="label-mono text-[11px] opacity-50">{ep.code}</span>
-                    <AnimatedLink className="text-xl font-semibold transition-transform duration-300 group-hover:translate-x-1">
+                    <AnimatedLink
+                      color="cyan"
+                      className="text-xl font-semibold transition-transform duration-300 group-hover:translate-x-1"
+                    >
                       {ep.title}
                     </AnimatedLink>
                   </span>
@@ -95,9 +100,11 @@ export function AbsoluteRoya() {
   return (
     <Section id="absolute-roya" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
-        <AnimatedLink className="label-mono mb-6 text-cyan">05 — Absolute Roya</AnimatedLink>
+        <AnimatedLink color="cyan" className="label-mono mb-6 text-cyan">
+          05 — Absolute Roya
+        </AnimatedLink>
         <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
-          <AnimatedLink>
+          <AnimatedLink color="cyan">
             <RevealText as="span" text="The podcast and the build vlogs." />
           </AnimatedLink>
         </h2>

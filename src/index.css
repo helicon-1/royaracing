@@ -1,17 +1,4 @@
-/*
-  Garet is Roya Racing's specified heading/UI font. Two files were supplied
-  for this round expecting them to be real licensed Regular/Bold files, but
-  they turned out to be Fontspring's watermarked DEMO fonts (confirmed via
-  the font's own internal name table: "FSP DEMO - Garet Bold" /
-  FONTSPRINGDEMO-GaretBold) — trial fonts that deliberately corrupt certain
-  glyphs (the apostrophe renders as a decorative "DEMO" mark) to block
-  production use, flagged back to the team rather than shipped. Urbanist
-  stays as the interim substitute — a geometric sans with a similar
-  confident, technical character — restricted to the same regular/bold-only
-  rule Garet itself is under. Swap `--font-heading` below the moment
-  genuinely licensed Garet files land; nothing else needs to change.
-*/
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@1,400;1,600&family=Urbanist:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@1,400;1,600&family=Plus+Jakarta+Sans:wght@400;700&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -27,7 +14,7 @@
   --color-ink: #0b1030;
   --color-paper: #f4f4f1;
 
-  --font-heading: "Urbanist", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "IBM Plex Serif", ui-serif, Georgia, serif;
   --font-arabic: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
 

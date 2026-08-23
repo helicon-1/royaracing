@@ -40,9 +40,11 @@ export function CompetitionTimeline() {
   return (
     <Section id="timeline" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
-        <AnimatedLink className="label-mono mb-6 text-cyan">03 — Competition Timeline</AnimatedLink>
+        <AnimatedLink color="white" className="label-mono mb-6 text-white">
+          03 — Competition Timeline
+        </AnimatedLink>
         <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
-          <AnimatedLink>
+          <AnimatedLink color="white">
             <RevealText as="span" text="Three stages to the World Finals." />
           </AnimatedLink>
         </h2>

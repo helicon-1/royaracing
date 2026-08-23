@@ -36,13 +36,15 @@ export function Team() {
   return (
     <Section id="team" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
-        <AnimatedLink className="label-mono mb-6 text-cyan">02 — Team</AnimatedLink>
+        <AnimatedLink color="lime" className="label-mono mb-6 text-lime">
+          02 — Team
+        </AnimatedLink>
         <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
-          <AnimatedLink>
+          <AnimatedLink color="lime">
             <RevealText as="span" text="Six people, one goal." />
           </AnimatedLink>
         </h2>
-        <AnimatedLink className="mt-6 max-w-xl text-lg leading-relaxed text-paper/70">
+        <AnimatedLink color="lime" className="mt-6 max-w-xl text-lg leading-relaxed text-paper/70">
           Click a member to hear them introduce themselves.
         </AnimatedLink>
 
@@ -65,10 +67,16 @@ export function Team() {
                     className="absolute inset-0 h-full w-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                   />
                 </div>
-                <AnimatedLink className="mt-4 min-h-[1.5em] text-lg font-semibold leading-tight text-paper transition-colors duration-300 group-hover:text-cyan">
+                <AnimatedLink
+                  color="lime"
+                  className="mt-4 min-h-[1.5em] text-lg font-semibold leading-tight text-paper transition-colors duration-300 group-hover:text-lime"
+                >
                   {member.name}
                 </AnimatedLink>
-                <AnimatedLink className="label-mono mt-1.5 min-h-[2.4em] text-[11px] leading-snug text-paper/50">
+                <AnimatedLink
+                  color="lime"
+                  className="label-mono mt-1.5 min-h-[2.4em] text-[11px] leading-snug text-paper/50"
+                >
                   {member.role}
                 </AnimatedLink>
               </button>
@@ -91,8 +99,10 @@ export function Team() {
           >
             <div className="flex items-start justify-between gap-6">
               <div>
-                <AnimatedLink className="text-2xl font-bold text-paper">{activeMember.name}</AnimatedLink>
-                <AnimatedLink className="label-mono mt-1 text-[11px] text-cyan">
+                <AnimatedLink color="lime" className="text-2xl font-bold text-paper">
+                  {activeMember.name}
+                </AnimatedLink>
+                <AnimatedLink color="lime" className="label-mono mt-1 text-[11px] text-lime">
                   {activeMember.role}
                 </AnimatedLink>
               </div>
@@ -113,7 +123,7 @@ export function Team() {
             </div>
             <p className="mt-4 text-lg text-paper/80">
               Favorite F1 driver —{' '}
-              <span className="font-semibold text-cyan">{activeMember.favoriteDriver ?? 'TBC'}</span>
+              <span className="font-semibold text-lime">{activeMember.favoriteDriver ?? 'TBC'}</span>
             </p>
           </div>
         </div>

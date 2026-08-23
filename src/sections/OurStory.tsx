@@ -9,9 +9,11 @@ export function OurStory() {
     <Section id="story" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto grid max-w-[1400px] items-stretch gap-16 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="flex flex-col">
-          <AnimatedLink className="label-mono mb-6 text-cyan">01 — Our Story</AnimatedLink>
+          <AnimatedLink color="white" className="label-mono mb-6 text-white">
+            01 — Our Story
+          </AnimatedLink>
           <h2 className="text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
-            <AnimatedLink>
+            <AnimatedLink color="white">
               <RevealText as="span" text="A name chosen on purpose." />
             </AnimatedLink>
           </h2>
@@ -29,7 +31,7 @@ export function OurStory() {
             </Reveal>
             <Reveal delay={220}>
               <p>
-                <span className="editorial text-cyan">"Roya"</span> (رؤية) is Arabic for{' '}
+                <span className="editorial text-white">"Roya"</span> (رؤية) is Arabic for{' '}
                 <span className="text-paper">vision</span> — a direct nod to Saudi Vision 2030.
                 The mission: build real engineering and business skill, develop young talent, and
                 put Roya Racing on the world stage.
