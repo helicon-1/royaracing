@@ -100,7 +100,7 @@ export function Team() {
             <div className="flex items-start justify-between gap-6">
               <div>
                 <AnimatedLink color="white" className="block text-2xl font-bold text-paper">
-                  {activeMember.name.split(' ')[0]}
+                  {activeMember.name}
                 </AnimatedLink>
                 <AnimatedLink color="lime" className="label-mono mt-2 block text-[11px] text-lime">
                   {activeMember.role}
