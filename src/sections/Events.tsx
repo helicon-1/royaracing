@@ -297,32 +297,38 @@ function ApplyToEventPanel() {
 
 function PastEventsList() {
   const [openTitle, setOpenTitle] = useState<string | null>(null);
+  const [hoveredTitle, setHoveredTitle] = useState<string | null>(null);
 
   return (
     <ul className="divide-y divide-paper/10 border-t border-paper/10">
       {PAST_EVENTS.map((event) => {
         const isOpen = openTitle === event.title;
+        // Hovering looks identical to the open state — same lime box,
+        // same navy text — matching Absolute Roya's episode rows.
+        const active = isOpen || hoveredTitle === event.title;
         return (
           <li key={event.title}>
             <button
               type="button"
               onClick={() => setOpenTitle(isOpen ? null : event.title)}
+              onMouseEnter={() => setHoveredTitle(event.title)}
+              onMouseLeave={() => setHoveredTitle(null)}
               aria-expanded={isOpen}
               className={`group flex w-full items-center justify-between gap-6 px-2 py-6 text-left transition-colors duration-300 ${
-                isOpen ? 'bg-lime text-navy' : 'hover:bg-paper hover:text-navy'
+                active ? 'bg-lime text-navy' : ''
               }`}
             >
               <span className="flex items-center gap-5">
                 <PhotoPlaceholder
                   label=""
                   className="h-12 w-12 shrink-0"
-                  accent={isOpen ? 'var(--color-navy)' : 'var(--color-lime)'}
+                  accent={active ? 'var(--color-navy)' : 'var(--color-lime)'}
                 />
                 <span className="flex flex-col gap-1">
                   <span className="label-mono text-[11px] opacity-50">{event.date}</span>
                   <AnimatedLink
                     color="lime"
-                    accentColor={isOpen ? 'var(--color-navy)' : undefined}
+                    accentColor={active ? 'var(--color-navy)' : undefined}
                     showArrow
                     className="text-2xl font-semibold transition-transform duration-300 group-hover:translate-x-1 md:text-3xl"
                   >
@@ -333,9 +339,7 @@ function PastEventsList() {
               </span>
               <span className="flex shrink-0 items-center gap-4">
                 <span className="label-mono text-[11px] opacity-50">{event.duration}</span>
-                <span
-                  className={`label-mono text-[11px] ${isOpen ? 'text-navy/60' : 'text-lime'}`}
-                >
+                <span className={`label-mono text-[11px] ${active ? 'text-navy/60' : 'text-lime'}`}>
                   {isOpen ? 'CLOSE' : 'VIEW'}
                 </span>
               </span>

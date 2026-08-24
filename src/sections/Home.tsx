@@ -1,7 +1,7 @@
 import { Section } from '@/components/Section';
 import { ScrollFlyIn } from '@/components/ui/hero-section-3';
 import { AnimatedLink } from '@/components/ui/animated-link';
-import royaCar from '@/assets/hero/roya-car-placeholder.svg';
+import royaCar from '@/assets/hero/roya-car.png';
 
 export function Home() {
   return (

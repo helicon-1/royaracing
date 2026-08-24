@@ -35,6 +35,8 @@ function EpisodeGroup({
   toggleLabel: string;
   onToggle: (code: string | null) => void;
 }) {
+  const [hoveredCode, setHoveredCode] = useState<string | null>(null);
+
   return (
     <div>
       <AnimatedLink color="lime" className="label-mono mb-4 text-[11px] text-paper/40">
@@ -43,27 +45,32 @@ function EpisodeGroup({
       <ul className="divide-y divide-paper/10 border-t border-paper/10">
         {episodes.map((ep) => {
           const isOpen = openCode === ep.code;
+          // Hovering looks identical to the open state — same lime box,
+          // same navy text — not just a preview on the way to it.
+          const active = isOpen || hoveredCode === ep.code;
           return (
             <li key={ep.code}>
               <button
                 type="button"
                 onClick={() => onToggle(isOpen ? null : ep.code)}
+                onMouseEnter={() => setHoveredCode(ep.code)}
+                onMouseLeave={() => setHoveredCode(null)}
                 aria-expanded={isOpen}
                 className={`group flex w-full items-center justify-between gap-6 px-2 py-6 text-left transition-colors duration-300 ${
-                  isOpen ? 'bg-lime text-navy' : 'hover:bg-paper hover:text-navy'
+                  active ? 'bg-lime text-navy' : ''
                 }`}
               >
                 <span className="flex items-center gap-5">
                   <PhotoPlaceholder
                     label=""
                     className="h-12 w-12 shrink-0"
-                    accent={isOpen ? 'var(--color-navy)' : 'var(--color-lime)'}
+                    accent={active ? 'var(--color-navy)' : 'var(--color-lime)'}
                   />
                   <span className="flex flex-col gap-1">
                     <span className="label-mono text-[11px] opacity-50">{ep.code}</span>
                     <AnimatedLink
                       color="lime"
-                      accentColor={isOpen ? 'var(--color-navy)' : undefined}
+                      accentColor={active ? 'var(--color-navy)' : undefined}
                       showArrow
                       className="text-xl font-semibold transition-transform duration-300 group-hover:translate-x-1"
                     >

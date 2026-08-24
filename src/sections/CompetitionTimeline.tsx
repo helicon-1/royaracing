@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
 import { Reveal } from '@/components/Reveal';
 import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
 import { AnimatedLink } from '@/components/ui/animated-link';
-import { COLORS, hexToHsv, hsvToRgbString, interpolateHsv } from '@/lib/theme';
 
 interface Stage {
   label: string;
@@ -35,47 +34,69 @@ const STAGES: Stage[] = [
 ];
 
 // Per-stage lead color — Regionals and World Finals lime, Nationals cyan.
-const STAGE_ACCENTS = [COLORS.lime, COLORS.cyan, COLORS.lime];
+const STAGE_IS_CYAN = [false, true, false];
 
-/** Live HSV-interpolated color that eases toward `targetHex` whenever it
- *  changes, rather than snapping — same shortest-arc-hue approach used by
- *  the generative background, so the fade never sweeps through grey. */
-function useSmoothColor(targetHex: string, durationMs = 700) {
-  const initial = hsvToRgbString(...hexToHsv(targetHex));
-  const [color, setColor] = useState(initial);
-  const colorRef = useRef(initial);
+/** Eases a 0–1 "how cyan" value toward its target over `durationMs`. Every
+ *  color-bearing element below crossfades two real lime/cyan layers by this
+ *  same value rather than computing one interpolated color — a hue-rotation
+ *  path between lime and cyan necessarily sweeps through green (it sits
+ *  right between them on the wheel); overlapping two flat-colored layers
+ *  and fading their opacity never renders any color other than the two
+ *  exact ones. */
+function useCrossfade(target: boolean, durationMs = 700) {
+  const targetValue = target ? 1 : 0;
+  const [value, setValue] = useState(targetValue);
+  const valueRef = useRef(targetValue);
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
     cancelAnimationFrame(rafRef.current);
-    const from = colorRef.current;
-    const to = targetHex;
+    const from = valueRef.current;
+    const to = targetValue;
+    if (from === to) return;
     const start = performance.now();
 
     function frame(now: number) {
       const t = Math.min(1, (now - start) / durationMs);
-      const next = interpolateHsv(from, to, t);
-      colorRef.current = next;
-      setColor(next);
+      const next = from + (to - from) * t;
+      valueRef.current = next;
+      setValue(next);
       if (t < 1) rafRef.current = requestAnimationFrame(frame);
     }
     rafRef.current = requestAnimationFrame(frame);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [targetHex, durationMs]);
+  }, [targetValue, durationMs]);
 
-  return color;
+  return value;
 }
 
-function withAlpha(rgb: string, alpha: number) {
-  const m = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
-  if (!m) return rgb;
-  return `rgba(${m[1]}, ${m[2]}, ${m[3]}, ${alpha})`;
+/** Hard-edged left-to-right wipe between a lime layer and a cyan layer laid
+ *  exactly on top of it — clip-path, not opacity. Two overlapping
+ *  semi-transparent layers still composite into a blended pixel color
+ *  wherever they overlap (that's what made the old HSV hue-rotation look
+ *  green, and would do the same here); clipping the top layer's visible
+ *  region instead means every rendered pixel is either 100% lime or 100%
+ *  cyan, never a mix of the two. */
+function wipeClip(cyanT: number) {
+  return `inset(0 ${(1 - cyanT) * 100}% 0 0)`;
+}
+
+function CrossfadeText({ cyanT, className, children }: { cyanT: number; className?: string; children: ReactNode }) {
+  return (
+    <span className={`relative inline-block ${className ?? ''}`}>
+      <span className="text-lime">{children}</span>
+      <span className="absolute inset-0 text-cyan" style={{ clipPath: wipeClip(cyanT) }} aria-hidden="true">
+        {children}
+      </span>
+    </span>
+  );
 }
 
 export function CompetitionTimeline() {
   const [active, setActive] = useState(0);
   const stage = STAGES[active];
-  const stageColor = useSmoothColor(STAGE_ACCENTS[active]);
+  const cyanT = useCrossfade(STAGE_IS_CYAN[active]);
+  const accentColor = STAGE_IS_CYAN[active] ? 'var(--color-cyan)' : 'var(--color-lime)';
 
   return (
     <Section id="timeline" className="relative px-6 py-32 md:px-10">
@@ -111,24 +132,28 @@ export function CompetitionTimeline() {
           />
           <div
             aria-hidden="true"
-            className="car-marker pointer-events-none absolute top-1/2 -translate-y-1/2 transition-[left] duration-700 ease-[var(--ease-roya)]"
+            className="pointer-events-none absolute top-1/2 -translate-y-1/2 transition-[left] duration-700 ease-[var(--ease-roya)]"
             style={{
               left: `calc(${(active / (STAGES.length - 1)) * 100}% - ${(active / (STAGES.length - 1)) * 34}px)`,
-              backgroundColor: stageColor,
             }}
-          />
+          >
+            <div className="car-marker" style={{ backgroundColor: 'var(--color-lime)' }} />
+            <div
+              className="car-marker absolute inset-0"
+              style={{ backgroundColor: 'var(--color-cyan)', clipPath: wipeClip(cyanT) }}
+            />
+          </div>
           <div className="mt-3 flex justify-between">
             {STAGES.map((s, i) => (
               <button
                 key={s.label}
                 type="button"
                 onClick={() => setActive(i)}
-                style={i === active ? { color: stageColor } : undefined}
                 className={`label-mono text-[11px] transition-colors duration-300 ${
                   i === active ? '' : 'text-paper/40 hover:text-paper/70'
                 }`}
               >
-                {s.label}
+                {i === active ? <CrossfadeText cyanT={cyanT}>{s.label}</CrossfadeText> : s.label}
               </button>
             ))}
           </div>
@@ -142,31 +167,43 @@ export function CompetitionTimeline() {
               <div
                 aria-hidden="true"
                 className="absolute left-0 top-0 h-full w-2"
-                style={{ backgroundColor: stageColor, clipPath: 'polygon(0 0, 100% 0, 100% 82%, 45% 100%, 0 100%)' }}
-              />
+                style={{ clipPath: 'polygon(0 0, 100% 0, 100% 82%, 45% 100%, 0 100%)' }}
+              >
+                <div className="absolute inset-0" style={{ backgroundColor: 'var(--color-lime)' }} />
+                <div
+                  className="absolute inset-0"
+                  style={{ backgroundColor: 'var(--color-cyan)', clipPath: wipeClip(cyanT) }}
+                />
+              </div>
               <div className="pl-6">
                 <div className="flex items-center justify-between gap-4">
-                  <span className="label-mono" style={{ color: stageColor }}>
+                  <CrossfadeText cyanT={cyanT} className="label-mono">
                     Stage {String(active + 1).padStart(2, '0')} / 03
-                  </span>
-                  <span
-                    className={`label-mono shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-[10px] ${
-                      stage.status === 'upcoming' ? 'border-paper/25 text-paper/50' : ''
-                    }`}
-                    style={
-                      stage.status === 'upcoming'
-                        ? undefined
-                        : { borderColor: withAlpha(stageColor, 0.5), color: stageColor }
-                    }
-                  >
-                    {stage.status === 'upcoming' ? 'Upcoming' : 'Complete'}
-                  </span>
+                  </CrossfadeText>
+                  {stage.status === 'upcoming' ? (
+                    <span className="label-mono shrink-0 whitespace-nowrap rounded-full border border-paper/25 px-3 py-1 text-[10px] text-paper/50">
+                      Upcoming
+                    </span>
+                  ) : (
+                    <span className="relative inline-block shrink-0">
+                      <span className="label-mono whitespace-nowrap rounded-full border border-lime/50 px-3 py-1 text-[10px] text-lime">
+                        Complete
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className="label-mono absolute inset-0 whitespace-nowrap rounded-full border border-cyan/50 px-3 py-1 text-[10px] text-cyan"
+                        style={{ clipPath: wipeClip(cyanT) }}
+                      >
+                        Complete
+                      </span>
+                    </span>
+                  )}
                 </div>
                 <h3 className="mt-4 text-balance text-4xl font-bold leading-[1.1] text-paper md:text-5xl">
-                  <AnimatedLink accentColor={stageColor}>{stage.label}</AnimatedLink>
+                  <AnimatedLink accentColor={accentColor}>{stage.label}</AnimatedLink>
                 </h3>
-                <AnimatedLink accentColor={stageColor} className="label-mono mt-3" style={{ color: stageColor }}>
-                  {stage.month}
+                <AnimatedLink accentColor={accentColor} className="label-mono mt-3">
+                  <CrossfadeText cyanT={cyanT}>{stage.month}</CrossfadeText>
                 </AnimatedLink>
                 <p className="mt-6 max-w-sm text-paper/70">{stage.blurb}</p>
               </div>
