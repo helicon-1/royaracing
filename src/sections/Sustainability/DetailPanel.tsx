@@ -48,6 +48,13 @@ function SocialDetail() {
           Mentors and mentees receive certificates of participation, and involvement can help
           toward joining a racing team next season.
         </p>
+        <button
+          type="button"
+          onClick={() => document.getElementById('events')?.scrollIntoView({ behavior: 'smooth' })}
+          className="label-mono mt-4 inline-flex items-center gap-2 border border-[var(--pillar-active)] px-4 py-2 text-[11px] text-[var(--pillar-active)] transition-colors duration-300 hover:bg-[var(--pillar-active)] hover:text-navy"
+        >
+          Take Me There
+        </button>
       </div>
 
       <ul className="mt-6 divide-y divide-paper/10 border-t border-paper/10">

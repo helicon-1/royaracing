@@ -3,10 +3,9 @@ import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
 import { Reveal } from '@/components/Reveal';
 import { AnimatedLink } from '@/components/ui/animated-link';
-import { COLORS } from '@/lib/theme';
 import { BudgetAllocator } from './BudgetAllocator';
 import { DetailPanel } from './DetailPanel';
-import { PILLARS, type Pillar, type PillarId } from './data';
+import { PILLARS, PILLAR_TINTS, type Pillar, type PillarId } from './data';
 
 const PILLAR_ICONS: Record<PillarId, (props: { className?: string }) => ReactElement> = {
   economic: ({ className }) => (
@@ -60,21 +59,12 @@ function PillarCard({
   onToggle: () => void;
 }) {
   const Icon = PILLAR_ICONS[pillar.id];
-  const [isHovered, setIsHovered] = useState(false);
-
-  // Rest → hover (instant cyan) → click/open (lime) — one shared sequence
-  // for every pillar, not a per-pillar identity color. Hover-in has to be
-  // instant (0ms), so it reads as a snap rather than the slow fade the
-  // client flagged as a bug; everything else keeps the normal transition.
-  const color = isOpen ? COLORS.lime : isHovered ? COLORS.cyan : COLORS.paper;
-  const transitionDuration = isHovered && !isOpen ? '0ms' : '300ms';
+  const color = PILLAR_TINTS[pillar.id];
 
   return (
     <div
-      className="flex h-full flex-col border-t-4 transition-colors"
-      style={{ borderColor: color, backgroundColor: `${color}0d`, transitionDuration }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="flex h-full flex-col border-t-4 transition-colors duration-300"
+      style={{ borderColor: color, backgroundColor: `${color}0d` }}
     >
       {/* The whole box is the click target, not just the title or a
           separate "see what we did" control — clicking anywhere here
@@ -82,7 +72,7 @@ function PillarCard({
           outside this button since it has its own nested interactive
           controls (DetailPanel's activity toggles). */}
       <button type="button" onClick={onToggle} aria-expanded={isOpen} className="flex flex-1 flex-col p-6 text-left md:p-8">
-        <div className="flex items-center gap-3 transition-colors" style={{ color, transitionDuration }}>
+        <div className="flex items-center gap-3" style={{ color }}>
           <Icon className="h-7 w-7 shrink-0" />
           <AnimatedLink accentColor={color} showArrow className="text-xl font-bold md:text-2xl" style={{ color }}>
             {pillar.label}
@@ -91,8 +81,8 @@ function PillarCard({
         <p className="mt-4 text-paper/80">{pillar.definition}</p>
 
         <span
-          className="label-mono mt-6 inline-flex items-center gap-2 text-[11px] transition-colors"
-          style={{ color, transitionDuration }}
+          className="label-mono mt-6 inline-flex items-center gap-2 text-[11px] transition-colors duration-300"
+          style={{ color }}
         >
           {isOpen ? 'Close' : 'See what we did'}
           <span
