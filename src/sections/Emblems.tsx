@@ -98,8 +98,17 @@ export function Emblems() {
                   <span
                     aria-hidden="true"
                     style={{
-                      WebkitMaskImage: `url(${emblem.src})`,
-                      maskImage: `url(${emblem.src})`,
+                      // The URL has to be quoted: Vite emits SVG data URIs
+                      // with the SVG's own unescaped single quotes still in
+                      // them (e.g. viewBox='0 0 100 100'), and an unquoted
+                      // CSS url() token can't contain a bare quote — the
+                      // whole mask-image declaration was silently invalid
+                      // (computed value fell back to `none`), which is why
+                      // the Mamlaka Tower's window cutout rendered as solid
+                      // on hover: there was no mask at all, just a lime
+                      // rectangle sized to the image underneath it.
+                      WebkitMaskImage: `url("${emblem.src}")`,
+                      maskImage: `url("${emblem.src}")`,
                       WebkitMaskRepeat: 'no-repeat',
                       maskRepeat: 'no-repeat',
                       WebkitMaskPosition: 'center',

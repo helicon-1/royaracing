@@ -109,7 +109,7 @@ export function Sponsors() {
               Backed by
             </AnimatedLink>
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-paper/60">
+          <p className="mx-auto mt-4 whitespace-nowrap text-paper/60">
             Their support is what turns a first-season plan into a real shot at the podium.
           </p>
         </div>

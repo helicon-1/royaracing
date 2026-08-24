@@ -137,11 +137,19 @@ export function CompetitionTimeline() {
               left: `calc(${(active / (STAGES.length - 1)) * 100}% - ${(active / (STAGES.length - 1)) * 34}px)`,
             }}
           >
-            <div className="car-marker" style={{ backgroundColor: 'var(--color-lime)' }} />
-            <div
-              className="car-marker absolute inset-0"
-              style={{ backgroundColor: 'var(--color-cyan)', clipPath: wipeClip(cyanT) }}
-            />
+            {/* The .car-marker class's own clip-path draws the car
+                silhouette; that has to live on the outer (lime) layer so
+                the cyan layer nested inside inherits the same silhouette
+                via CSS clipping cascading to descendants — putting the
+                wipe's clip-path directly on a second `.car-marker` div
+                instead overwrote the silhouette clip-path entirely,
+                leaving a plain rectangle visible mid-transition. */}
+            <div className="car-marker relative" style={{ backgroundColor: 'var(--color-lime)' }}>
+              <div
+                className="absolute inset-0"
+                style={{ backgroundColor: 'var(--color-cyan)', clipPath: wipeClip(cyanT) }}
+              />
+            </div>
           </div>
           <div className="mt-3 flex justify-between">
             {STAGES.map((s, i) => (
@@ -160,8 +168,14 @@ export function CompetitionTimeline() {
         </div>
 
         {/* Single F1-telemetry-style display panel — fixed size regardless
-            of which stage is selected, so it can never look inconsistent. */}
-        <Reveal key={stage.label} className="mx-auto mt-12 max-w-4xl">
+            of which stage is selected, so it can never look inconsistent.
+            No `key` here: keying this to the stage used to force a full
+            remount on every switch, which retriggered Reveal's own
+            opacity/translateY mount animation each time — colliding with
+            the color crossfade and making the whole card visibly shift.
+            Reveal now only plays once, on first scroll-into-view; stage
+            content afterward just updates in place. */}
+        <Reveal className="mx-auto mt-12 max-w-4xl">
           <div className="grid min-h-[420px] overflow-hidden bg-ink/60 md:grid-cols-[1.1fr_1fr]">
             <div className="relative flex flex-col justify-center p-8 md:p-12">
               <div
