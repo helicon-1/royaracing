@@ -35,19 +35,19 @@ const PAST_EVENTS: PastEvent[] = [
     title: 'Event 1',
     date: 'Date pending',
     duration: 'Recap pending',
-    description: 'Details and photos pending — check back after the event is confirmed.',
+    description: 'Details and photos pending, check back after the event is confirmed.',
   },
   {
     title: 'Event 2',
     date: 'Date pending',
     duration: 'Recap pending',
-    description: 'Details and photos pending — check back after the event is confirmed.',
+    description: 'Details and photos pending, check back after the event is confirmed.',
   },
   {
     title: 'Event 3',
     date: 'Date pending',
     duration: 'Recap pending',
-    description: 'Details and photos pending — check back after the event is confirmed.',
+    description: 'Details and photos pending, check back after the event is confirmed.',
   },
 ];
 
@@ -68,12 +68,12 @@ function MentorshipPanel() {
         <AnimatedLink color="lime">Get mentored by the team</AnimatedLink>
       </div>
       <p className="mt-3 text-paper/70">
-        Ongoing — apply anytime. Those who take part receive a certificate of participation, and
+        Ongoing, apply anytime. Those who take part receive a certificate of participation, and
         involvement can help toward joining a STEM Racing team next season.
       </p>
 
       {submitted ? (
-        <p className="mt-6 text-paper/80">Thanks — we'll be in touch about the mentoring program.</p>
+        <p className="mt-6 text-paper/80">Thanks, we'll be in touch about the mentoring program.</p>
       ) : (
         <form onSubmit={onSubmit} className="mt-6 space-y-5">
           <div>
@@ -178,12 +178,12 @@ function RegistryOfInterestPanel() {
         <AnimatedLink color="lime">Stay in the loop</AnimatedLink>
       </div>
       <p className="mt-3 text-paper/70">
-        Not tied to any specific event — tell us who you are, and we'll reach out when something's
+        Not tied to any specific event, tell us who you are, and we'll reach out when something's
         scheduled.
       </p>
 
       {submitted ? (
-        <p className="mt-6 text-paper/80">Thanks — we'll be in touch.</p>
+        <p className="mt-6 text-paper/80">Thanks, we'll be in touch.</p>
       ) : (
         <form onSubmit={onSubmit} className="mt-6 space-y-5">
           <div>
@@ -262,7 +262,7 @@ function ApplyToEventPanel() {
       {hasEvents ? (
         <>
           <p className="mt-3 text-paper/70">
-            Pick an event below — you'll be taken to its application form.
+            Pick an event below; you'll be taken to its application form.
           </p>
           <div className="mt-6">
             <label htmlFor="upcoming-event" className="label-mono text-[11px] text-paper/50">
@@ -287,7 +287,7 @@ function ApplyToEventPanel() {
         </>
       ) : (
         <p className="mt-3 text-paper/70">
-          Sorry, we don't have any upcoming events right now — join our Registry of Interest above
+          Sorry, we don't have any upcoming events right now, join our Registry of Interest above
           to hear from us when something's scheduled.
         </p>
       )}
@@ -415,7 +415,7 @@ export function Events() {
     <Section id="events" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
         <AnimatedLink color="lime" className="label-mono mb-6 text-lime">
-          06 — Events
+          06: Events
         </AnimatedLink>
         <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
           <AnimatedLink color="lime">

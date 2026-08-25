@@ -34,7 +34,7 @@ export const PILLARS: Pillar[] = [
     id: 'social',
     label: 'Social',
     definition:
-      "Social sustainability is about the people a program touches beyond its own roster — who it brings in, teaches, and gives back to.",
+      "Social sustainability is about the people a program touches beyond its own roster, who it brings in, teaches, and gives back to.",
     practice:
       'A mentoring program for younger students, partnerships with student-led organizations in Riyadh, and philanthropic outreach tied to STEM education.',
   },
@@ -42,9 +42,9 @@ export const PILLARS: Pillar[] = [
     id: 'environmental',
     label: 'Environmental',
     definition:
-      "Environmental sustainability covers the physical footprint of everything a program does — materials, waste, energy, and what happens to it all afterward. It's broad, not just one or two fixed rules.",
+      "Environmental sustainability covers the physical footprint of everything a program does: materials, waste, energy, and what happens to it all afterward. It's broad, not just one or two fixed rules.",
     practice:
-      'Deliberate material sourcing, reused offcuts and failed prints, a digital-first pit display, and weighing energy and travel choices for events and testing — among other things.',
+      'Deliberate material sourcing, reused offcuts and failed prints, a digital-first pit display, and weighing energy and travel choices for events and testing, among other things.',
   },
 ];
 

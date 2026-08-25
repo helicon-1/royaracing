@@ -116,7 +116,7 @@ export function Sustainability() {
   return (
     <Section id="sustainability" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
-        <AnimatedLink className="label-mono mb-6 text-green">04 — Sustainability</AnimatedLink>
+        <AnimatedLink className="label-mono mb-6 text-green">04: Sustainability</AnimatedLink>
         <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
           <AnimatedLink>
             <RevealText as="span" text="Three pillars, one program." />

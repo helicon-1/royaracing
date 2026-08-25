@@ -54,7 +54,7 @@ export function Footer() {
                       className="text-paper/35"
                       title="Social link to be confirmed"
                     >
-                      {s} <span className="label-mono text-[10px]">— TBC</span>
+                      {s} <span className="label-mono text-[10px]">, TBC</span>
                     </AnimatedLink>
                   </li>
                 ))}
@@ -76,7 +76,7 @@ export function Footer() {
             ))}
           </div>
           <p className="label-mono text-[10px] text-paper/35">
-            Roya Racing — Saudi STEM Racing, Professional Class — Riyadh, founded November 2025
+            Roya Racing, Saudi STEM Racing, Professional Class, Riyadh, founded November 2025
           </p>
         </div>
       </div>

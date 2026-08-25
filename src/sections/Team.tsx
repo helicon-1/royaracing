@@ -37,7 +37,7 @@ export function Team() {
     <Section id="team" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
         <AnimatedLink color="lime" className="label-mono mb-6 text-lime">
-          02 — Team
+          02: Team
         </AnimatedLink>
         <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
           <AnimatedLink color="lime">
@@ -58,11 +58,11 @@ export function Team() {
               >
                 <div className="relative aspect-[4/5] w-full overflow-hidden shadow-none transition-shadow duration-300 group-hover:shadow-[0_20px_40px_-12px_rgba(11,16,48,0.55)]">
                   <PhotoPlaceholder
-                    label={`${member.name.split(' ')[0]} — pose A`}
+                    label={`${member.name.split(' ')[0]}, pose A`}
                     className="absolute inset-0 h-full w-full transition-opacity duration-500 group-hover:opacity-0"
                   />
                   <PhotoPlaceholder
-                    label={`${member.name.split(' ')[0]} — pose B`}
+                    label={`${member.name.split(' ')[0]}, pose B`}
                     accent="var(--color-lime)"
                     className="absolute inset-0 h-full w-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                   />
@@ -122,7 +122,7 @@ export function Team() {
               <p className="label-mono text-paper/40">Video coming soon</p>
             </div>
             <p className="mt-4 text-lg text-paper/80">
-              Favorite F1 driver —{' '}
+              Favorite F1 driver,{' '}
               <span className="font-semibold text-lime">{activeMember.favoriteDriver ?? 'TBC'}</span>
             </p>
           </div>

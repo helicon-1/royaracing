@@ -7,14 +7,14 @@ import type { PillarId } from './data';
 const social = PILLAR_TINTS.social;
 
 const ECONOMIC_POINTS = [
-  'Every purchase is weighed against its value before it is made — not bought on impulse.',
+  'Every purchase is weighed against its value before it is made, not bought on impulse.',
   'The car is engineered to a fixed budget, not an open one.',
   'Spending is tracked closely across the season, so nothing goes to waste.',
 ];
 
 const ENVIRONMENTAL_POINTS = [
   'Material sourcing chosen deliberately, not by default.',
-  'Manufacturing waste reduced and reused — offcuts and failed prints go back into the process, not the bin.',
+  'Manufacturing waste reduced and reused: offcuts and failed prints go back into the process, not the bin.',
   'A digital-first pit display in place of printed material.',
   'Energy and travel choices weighed for events and testing, not just the parts list.',
 ];
@@ -88,7 +88,7 @@ function SocialDetail() {
               <div
                 className={`overflow-hidden transition-[max-height] duration-500 ease-[var(--ease-roya)] ${isOpen ? 'max-h-64' : 'max-h-0'}`}
               >
-                <PhotoPlaceholder label={`Photo pending — ${activity.title}`} className="mb-6 aspect-video w-full" />
+                <PhotoPlaceholder label={`Photo pending, ${activity.title}`} className="mb-6 aspect-video w-full" />
               </div>
             </li>
           );
@@ -103,7 +103,7 @@ export function DetailPanel({ id }: { id: PillarId }) {
   if (id === 'environmental') {
     return (
       <ListDetail
-        intro="This covers more than just the car itself — from sourcing to what happens after a season ends. A few concrete examples:"
+        intro="This covers more than just the car itself, from sourcing to what happens after a season ends. A few concrete examples:"
         points={ENVIRONMENTAL_POINTS}
       />
     );

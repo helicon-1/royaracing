@@ -25,7 +25,7 @@ const EMBLEMS: Emblem[] = [
     id: 'fanajeel',
     name: 'Fanajeel',
     src: fanajeel,
-    meaning: 'Traditional Saudi coffee cups — a symbol of hospitality.',
+    meaning: 'Traditional Saudi coffee cups, a symbol of hospitality.',
   },
   {
     id: 'mamlaka',
@@ -37,7 +37,7 @@ const EMBLEMS: Emblem[] = [
     id: 'vision2030',
     name: 'Vision 2030',
     src: vision2030,
-    meaning: "Saudi Arabia's transformation plan — inspiration for our name.",
+    meaning: "Saudi Arabia's transformation plan, inspiration for our name.",
   },
   {
     id: 'sadu',
@@ -62,7 +62,7 @@ export function Emblems() {
         </div>
         <div className="mx-auto mt-3 max-w-xl text-paper/60">
           <AnimatedLink>
-            Each mark on this site was chosen on purpose — together they tell a short story
+            Each mark on this site was chosen on purpose; together they tell a short story
             about who Roya is and where the team comes from.
           </AnimatedLink>
         </div>

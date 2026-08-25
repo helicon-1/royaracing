@@ -110,7 +110,7 @@ export function AbsoluteRoya() {
     <Section id="absolute-roya" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
         <AnimatedLink color="lime" className="label-mono mb-6 text-lime">
-          05 — Absolute Roya
+          05: Absolute Roya
         </AnimatedLink>
         <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
           <AnimatedLink color="lime">
@@ -118,7 +118,7 @@ export function AbsoluteRoya() {
           </AnimatedLink>
         </h2>
         <p className="editorial mt-6 max-w-xl text-xl text-paper/60">
-          Off-workshop conversation, and the build itself on camera — both hosted here rather
+          Off-workshop conversation, and the build itself on camera, both hosted here rather
           than off-site.
         </p>
 
