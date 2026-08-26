@@ -21,8 +21,8 @@ export type SectionId =
   | 'story'
   | 'team'
   | 'timeline'
-  | 'sustainability'
   | 'absolute-roya'
+  | 'sustainability'
   | 'events';
 
 // One accent per section — never mixed within a section (brief section 3).
@@ -31,8 +31,8 @@ export const SECTION_ACCENT: Record<SectionId, string> = {
   story: COLORS.cyan,
   team: COLORS.cyan,
   timeline: COLORS.cyan,
-  sustainability: COLORS.green,
   'absolute-roya': COLORS.cyan,
+  sustainability: COLORS.green,
   events: COLORS.cyan,
 };
 

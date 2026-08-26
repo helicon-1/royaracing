@@ -7,8 +7,8 @@ const LINKS: { id: SectionId; label: string }[] = [
   { id: 'story', label: 'Our Story' },
   { id: 'team', label: 'Team' },
   { id: 'timeline', label: 'Timeline' },
-  { id: 'sustainability', label: 'Sustainability' },
   { id: 'absolute-roya', label: 'Absolute Roya' },
+  { id: 'sustainability', label: 'Sustainability' },
   { id: 'events', label: 'Events' },
 ];
 
