@@ -15,6 +15,7 @@ const MENTORSHIP_TRACKS = [
 ];
 
 interface PastEvent {
+  code: string;
   title: string;
   date: string;
   duration: string;
@@ -32,22 +33,51 @@ const UPCOMING_EVENTS: UpcomingEvent[] = [];
 
 const PAST_EVENTS: PastEvent[] = [
   {
-    title: 'Event 1',
-    date: 'Date pending',
+    code: 'Event 1',
+    title: 'Project RoyatNa',
+    date: '27 January 2026, with NAF3, at 966 Innovation Hub',
     duration: 'Recap pending',
-    description: 'Details and photos pending, check back after the event is confirmed.',
+    description:
+      "Roya's first STEM Racing event circuit, held for International Education Day in collaboration with NAF3, a student-led organization. The event moved through three stages: an immersive introduction to Project Management with hands-on activities, followed by Enterprise, then Engineering, each with its own explanation and activity, before closing with a live race. Free for all attendees; 50 students attended, with 25 returning participants.",
   },
   {
-    title: 'Event 2',
-    date: 'Date pending',
+    code: 'Event 2',
+    title: 'Royaneering with Giddam',
+    date: '25 February 2026, with Giddam',
     duration: 'Recap pending',
-    description: 'Details and photos pending, check back after the event is confirmed.',
+    description:
+      'A live online engineering seminar hosted with Giddam, a World Finals team that placed 9th globally. The session covered what engineering work on a STEM Racing car actually looks like, included a Q&A, and Giddam shared their own experiences as engineers. Free and fully online; 112 YouTube views on the recording.',
   },
   {
-    title: 'Event 3',
-    date: 'Date pending',
+    code: 'Event 3',
+    title: 'Royaneering with Roya, Round 1',
+    date: 'Date to be confirmed, in-person',
     duration: 'Recap pending',
-    description: 'Details and photos pending, check back after the event is confirmed.',
+    description:
+      "The first Royaneering with Roya session, held in person, where Roya's own engineers walked students through hands-on engineering experience. A fuller write-up of this session is coming.",
+  },
+  {
+    code: 'Event 4',
+    title: 'Royaneering with Roya, Round 2',
+    date: '12 March 2026, online',
+    duration: 'Recap pending',
+    description:
+      "Following strong demand after the in-person Round 1 above, Roya hosted a second session, this time online, where the team's own engineers walked students through the process of designing a car in Fusion 360. Free and fully online; 15 participants.",
+  },
+  {
+    code: 'Event 5',
+    title: 'Roya X Sanad',
+    date: '4 April 2026, with Itqan Attarbiah Schools, Sanad Organization',
+    duration: 'Recap pending',
+    description:
+      'An event for children with cancer, where Roya helped them assemble mini cars from reused, cut wood pieces, and introduced them to what STEM Racing is. 150 attendees, including 50 children with cancer, supported by student volunteers.',
+  },
+  {
+    code: 'Event 6',
+    title: 'Roya X VOC Debates',
+    date: 'Date to be confirmed, at 966 Innovation Hub, with VOC',
+    duration: 'Recap pending',
+    description: 'A debate-format event held in collaboration with VOC. Full recap coming once more details are confirmed.',
   },
 ];
 
@@ -325,7 +355,7 @@ function PastEventsList() {
                   accent={active ? 'var(--color-navy)' : 'var(--color-lime)'}
                 />
                 <span className="flex flex-col gap-1">
-                  <span className="label-mono text-[11px] opacity-50">{event.date}</span>
+                  <span className="label-mono text-[11px] opacity-50">{event.code}</span>
                   <AnimatedLink
                     color="lime"
                     accentColor={active ? 'var(--color-navy)' : undefined}
@@ -334,6 +364,7 @@ function PastEventsList() {
                   >
                     {event.title}
                   </AnimatedLink>
+                  <span className="label-mono text-[11px] opacity-50">{event.date}</span>
                   <span className="text-sm opacity-60">{event.description}</span>
                 </span>
               </span>
@@ -350,9 +381,9 @@ function PastEventsList() {
               }`}
             >
               <div className="grid grid-cols-3 gap-3 py-4">
-                <PhotoPlaceholder label="Photo pending" className="aspect-square w-full" />
-                <PhotoPlaceholder label="Photo pending" className="aspect-square w-full" />
-                <PhotoPlaceholder label="Photo pending" className="aspect-square w-full" />
+                <PhotoPlaceholder label={`Photo pending, ${event.title}`} className="aspect-square w-full" />
+                <PhotoPlaceholder label={`Photo pending, ${event.title}`} className="aspect-square w-full" />
+                <PhotoPlaceholder label={`Photo pending, ${event.title}`} className="aspect-square w-full" />
               </div>
             </div>
           </li>

@@ -68,9 +68,9 @@ export const SOCIAL_ACTIVITIES: SocialActivity[] = [
   },
 ];
 
-/** Placeholder — Roya's real point allocation hasn't been supplied yet. */
+/** Roya's real sustainability point allocation across the three pillars. */
 export const ROYA_ALLOCATION: Record<PillarId, number> = {
-  economic: 40,
-  social: 35,
-  environmental: 25,
+  economic: 28.9,
+  social: 40.5,
+  environmental: 30.6,
 };

@@ -40,7 +40,7 @@ export function BudgetAllocator() {
     if (userTop === royaTop) {
       return `You and Roya both lead with ${label(userTop)}, not a right answer, just where the emphasis lands today.`;
     }
-    return `You lead with ${label(userTop)}; Roya's current placeholder split leans toward ${label(royaTop)}. Neither is "correct"; different programs weigh these differently.`;
+    return `You lead with ${label(userTop)}; Roya's split leans toward ${label(royaTop)}. Neither is "correct"; different programs weigh these differently.`;
   }, [allocation]);
 
   return (
@@ -99,7 +99,7 @@ export function BudgetAllocator() {
         ) : (
           <div>
             <p className="label-mono text-[11px] text-paper/50">
-              You vs. Roya <span className="text-paper/30">, Roya's split is a placeholder, pending real figures</span>
+              You vs. Roya <span className="text-paper/30">, Roya's real point allocation across the three pillars</span>
             </p>
             <div className="mt-4 space-y-5">
               {PILLARS.map((pillar) => (
@@ -114,8 +114,8 @@ export function BudgetAllocator() {
                           style={{ width: `${allocation[pillar.id]}%` }}
                         />
                       </div>
-                      <span className="label-mono w-6 shrink-0 text-right text-[10px] text-cyan">
-                        {allocation[pillar.id]}
+                      <span className="label-mono w-9 shrink-0 text-right text-[10px] text-cyan">
+                        {allocation[pillar.id]}%
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -126,8 +126,8 @@ export function BudgetAllocator() {
                           style={{ width: `${ROYA_ALLOCATION[pillar.id]}%` }}
                         />
                       </div>
-                      <span className="label-mono w-6 shrink-0 text-right text-[10px] text-lime">
-                        {ROYA_ALLOCATION[pillar.id]}
+                      <span className="label-mono w-9 shrink-0 text-right text-[10px] text-lime">
+                        {ROYA_ALLOCATION[pillar.id]}%
                       </span>
                     </div>
                   </div>
