@@ -11,8 +11,8 @@ import { OurStory } from '@/sections/OurStory';
 import { Emblems } from '@/sections/Emblems';
 import { Team } from '@/sections/Team';
 import { CompetitionTimeline } from '@/sections/CompetitionTimeline';
-import { Sustainability } from '@/sections/Sustainability';
 import { AbsoluteRoya } from '@/sections/AbsoluteRoya';
+import { Sustainability } from '@/sections/Sustainability';
 import { Events } from '@/sections/Events';
 
 function App() {
@@ -38,8 +38,8 @@ function App() {
         <Emblems />
         <Team />
         <CompetitionTimeline />
-        <Sustainability />
         <AbsoluteRoya />
+        <Sustainability />
         <Events />
       </main>
       <Footer />

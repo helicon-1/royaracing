@@ -51,10 +51,10 @@ const PAST_EVENTS: PastEvent[] = [
   {
     code: 'Event 3',
     title: 'Royaneering with Roya, Round 1',
-    date: 'Date to be confirmed, in-person',
+    date: '28 February 2026, in-person, at a school',
     duration: 'Recap pending',
     description:
-      "The first Royaneering with Roya session, held in person, where Roya's own engineers walked students through hands-on engineering experience. A fuller write-up of this session is coming.",
+      "An in-person engineering experience where students could ask Roya's engineers anything and get real answers, paired with a hands-on Fusion 360 session teaching students to design, model, and refine race car components. Spots were limited, making it an exclusive session. It's also the event that Round 2, the online Fusion 360 follow-up, was created in response to, by popular demand.",
   },
   {
     code: 'Event 4',
@@ -77,7 +77,7 @@ const PAST_EVENTS: PastEvent[] = [
     title: 'Roya X VOC Debates',
     date: 'Date to be confirmed, at 966 Innovation Hub, with VOC',
     duration: 'Recap pending',
-    description: 'A debate-format event held in collaboration with VOC. Full recap coming once more details are confirmed.',
+    description: 'An Oxford Union-style debate event, held at 966 Innovation Hub in collaboration with VOC.',
   },
 ];
 
