@@ -10,7 +10,7 @@ export function OurStory() {
       <div className="mx-auto grid max-w-[1400px] items-stretch gap-16 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="flex flex-col">
           <AnimatedLink color="white" className="label-mono mb-6 text-white">
-            01 — Our Story
+            01: Our Story
           </AnimatedLink>
           <h2 className="text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
             <AnimatedLink color="white">
@@ -22,9 +22,9 @@ export function OurStory() {
             <Reveal delay={100}>
               <p>
                 <span className="text-cyan">Roya Racing</span> is a Saudi team competing in{' '}
-                <span className="text-cyan">STEM Racing</span> — formerly known as F1 in Schools.
+                <span className="text-cyan">STEM Racing</span>, formerly known as F1 in Schools.
                 Student teams design, build and race miniature CO₂-powered cars, judged across
-                three separate categories: Engineering, Enterprise, and Project Management —
+                three separate categories: Engineering, Enterprise, and Project Management,
                 covering the car itself, the business and marketing side, and how well the team
                 runs its own operation. Founded in Riyadh in November 2025, aiming to become the
                 first Saudi team to reach the <span className="text-cyan">World Finals podium</span>.
@@ -33,7 +33,7 @@ export function OurStory() {
             <Reveal delay={220}>
               <p>
                 <span className="editorial text-cyan">"Roya"</span> (رؤية) is Arabic for{' '}
-                <span className="text-paper">vision</span> — a direct nod to{' '}
+                <span className="text-paper">vision</span>, a direct nod to{' '}
                 <span className="text-cyan">Saudi Vision 2030</span>. The mission: build real
                 engineering and business skill, develop young talent, and put{' '}
                 <span className="text-cyan">Roya Racing</span> on the world stage.
@@ -43,7 +43,7 @@ export function OurStory() {
         </div>
 
         <Reveal>
-          <PhotoPlaceholder label="Photo pending — workshop" className="h-full min-h-96 w-full" />
+          <PhotoPlaceholder label="Photo pending, workshop" className="h-full min-h-96 w-full" />
         </Reveal>
       </div>
     </Section>

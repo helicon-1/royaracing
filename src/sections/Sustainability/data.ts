@@ -34,7 +34,7 @@ export const PILLARS: Pillar[] = [
     id: 'social',
     label: 'Social',
     definition:
-      "Social sustainability is about the people a program touches beyond its own roster — who it brings in, teaches, and gives back to.",
+      "Social sustainability is about the people a program touches beyond its own roster, who it brings in, teaches, and gives back to.",
     practice:
       'A mentoring program for younger students, partnerships with student-led organizations in Riyadh, and philanthropic outreach tied to STEM education.',
   },
@@ -42,9 +42,9 @@ export const PILLARS: Pillar[] = [
     id: 'environmental',
     label: 'Environmental',
     definition:
-      "Environmental sustainability covers the physical footprint of everything a program does — materials, waste, energy, and what happens to it all afterward. It's broad, not just one or two fixed rules.",
+      "Environmental sustainability covers the physical footprint of everything a program does: materials, waste, energy, and what happens to it all afterward. It's broad, not just one or two fixed rules.",
     practice:
-      'Deliberate material sourcing, reused offcuts and failed prints, a digital-first pit display, and weighing energy and travel choices for events and testing — among other things.',
+      'Deliberate material sourcing, reused offcuts and failed prints, a digital-first pit display, and weighing energy and travel choices for events and testing, among other things.',
   },
 ];
 
@@ -68,9 +68,9 @@ export const SOCIAL_ACTIVITIES: SocialActivity[] = [
   },
 ];
 
-/** Placeholder — Roya's real point allocation hasn't been supplied yet. */
+/** Roya's real sustainability point allocation across the three pillars. */
 export const ROYA_ALLOCATION: Record<PillarId, number> = {
-  economic: 40,
-  social: 35,
-  environmental: 25,
+  economic: 28.9,
+  social: 40.5,
+  environmental: 30.6,
 };

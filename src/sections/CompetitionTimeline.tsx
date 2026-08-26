@@ -102,7 +102,7 @@ export function CompetitionTimeline() {
     <Section id="timeline" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
         <AnimatedLink color="lime" className="label-mono mb-6 text-lime">
-          03 — Competition Timeline
+          03: Competition Timeline
         </AnimatedLink>
         <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
           <AnimatedLink color="lime">
@@ -110,7 +110,7 @@ export function CompetitionTimeline() {
           </AnimatedLink>
         </h2>
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-paper/70">
-          Regionals, then Nationals, then the World Finals — where Roya is headed next.
+          Regionals, then Nationals, then the World Finals, where Roya is headed next.
         </p>
 
         {/* Stage selector — native range input, so click, drag and arrow
@@ -222,7 +222,7 @@ export function CompetitionTimeline() {
                 <p className="mt-6 max-w-sm text-paper/70">{stage.blurb}</p>
               </div>
             </div>
-            <PhotoPlaceholder label={`Photo pending — ${stage.label}`} className="h-full min-h-64 w-full" />
+            <PhotoPlaceholder label={`Photo pending, ${stage.label}`} className="h-full min-h-64 w-full" />
           </div>
         </Reveal>
       </div>

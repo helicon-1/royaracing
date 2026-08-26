@@ -20,7 +20,7 @@ export function Home() {
             Our Roya
           </h1>
           <p className="font-heading mt-4 text-sm font-normal text-paper/60 md:text-base">
-            A Saudi STEM Racing team, built in Riyadh — aiming to become the first Saudi team to
+            A Saudi STEM Racing team, built in Riyadh, aiming to become the first Saudi team to
             reach the World Finals podium.
           </p>
         </div>
