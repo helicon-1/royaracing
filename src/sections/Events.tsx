@@ -15,6 +15,11 @@ import sanadEngineerWriting from '@/assets/events/sanad-engineer-writing.jpg';
 import sanadVolunteersGreeting from '@/assets/events/sanad-volunteers-greeting.jpg';
 import sanadNotebookHandoff from '@/assets/events/sanad-notebook-handoff.jpg';
 import sanadMicInterview from '@/assets/events/sanad-mic-interview.jpg';
+import sanadJerseySponsors from '@/assets/events/sanad-jersey-sponsors.jpg';
+import sanadMentorAssembly from '@/assets/events/sanad-mentor-assembly.jpg';
+import sanadPaintingCloseup from '@/assets/events/sanad-painting-closeup.jpg';
+import sanadCarAssembly from '@/assets/events/sanad-car-assembly.jpg';
+import sanadGroupPhoto from '@/assets/events/sanad-group-photo.jpg';
 
 const MENTORSHIP_TRACKS = [
   'Marketing Mentorship',
@@ -86,14 +91,19 @@ const PAST_EVENTS: PastEvent[] = [
     photos: [
       sanadWorkshopRoom,
       sanadKidsWorkshop,
+      sanadMentorAssembly,
+      sanadCarAssembly,
+      sanadPaintingCloseup,
       sanadEngineerWriting,
       sanadNotebookHandoff,
       sanadMicInterview,
       sanadVolunteersGreeting,
+      sanadJerseySponsors,
       sanadTeamTalk,
       sanadGuestbook,
       sanadToteBags,
       sanadPlaque,
+      sanadGroupPhoto,
     ],
   },
   {
@@ -401,7 +411,7 @@ function PastEventsList() {
             </button>
             <div
               className={`overflow-hidden transition-[max-height] duration-500 ease-[var(--ease-roya)] ${
-                isOpen ? 'max-h-[2000px]' : 'max-h-0'
+                isOpen ? 'max-h-[3000px]' : 'max-h-0'
               }`}
             >
               <div className="grid grid-cols-3 gap-3 py-4">
