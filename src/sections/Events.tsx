@@ -10,6 +10,11 @@ import sanadKidsWorkshop from '@/assets/events/sanad-kids-workshop.jpg';
 import sanadTeamTalk from '@/assets/events/sanad-team-talk.jpg';
 import sanadGuestbook from '@/assets/events/sanad-guestbook.jpg';
 import sanadToteBags from '@/assets/events/sanad-tote-bags.jpg';
+import sanadWorkshopRoom from '@/assets/events/sanad-workshop-room.jpg';
+import sanadEngineerWriting from '@/assets/events/sanad-engineer-writing.jpg';
+import sanadVolunteersGreeting from '@/assets/events/sanad-volunteers-greeting.jpg';
+import sanadNotebookHandoff from '@/assets/events/sanad-notebook-handoff.jpg';
+import sanadMicInterview from '@/assets/events/sanad-mic-interview.jpg';
 
 const MENTORSHIP_TRACKS = [
   'Marketing Mentorship',
@@ -78,7 +83,18 @@ const PAST_EVENTS: PastEvent[] = [
     duration: 'Recap pending',
     description:
       'An event for children with cancer, where Roya helped them assemble mini cars from reused, cut wood pieces, and introduced them to what STEM Racing is. 150 attendees, including 50 children with cancer, supported by student volunteers.',
-    photos: [sanadKidsWorkshop, sanadTeamTalk, sanadGuestbook, sanadToteBags, sanadPlaque],
+    photos: [
+      sanadWorkshopRoom,
+      sanadKidsWorkshop,
+      sanadEngineerWriting,
+      sanadNotebookHandoff,
+      sanadMicInterview,
+      sanadVolunteersGreeting,
+      sanadTeamTalk,
+      sanadGuestbook,
+      sanadToteBags,
+      sanadPlaque,
+    ],
   },
   {
     code: 'Event 6',
@@ -385,7 +401,7 @@ function PastEventsList() {
             </button>
             <div
               className={`overflow-hidden transition-[max-height] duration-500 ease-[var(--ease-roya)] ${
-                isOpen ? 'max-h-[1000px]' : 'max-h-0'
+                isOpen ? 'max-h-[2000px]' : 'max-h-0'
               }`}
             >
               <div className="grid grid-cols-3 gap-3 py-4">
