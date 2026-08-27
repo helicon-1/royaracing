@@ -30,6 +30,10 @@ import royatnaGamePresentation from '@/assets/events/royatna-game-presentation.j
 import royatnaFerrariBook from '@/assets/events/royatna-ferrari-book.jpg';
 import royatnaBalloonCarCloseup from '@/assets/events/royatna-balloon-car-closeup.jpg';
 import royatnaBalloonCarRace from '@/assets/events/royatna-balloon-car-race.jpg';
+import royaneering1CarComponents from '@/assets/events/royaneering1-car-components.jpg';
+import royaneering1Donuts from '@/assets/events/royaneering1-donuts.jpg';
+import royaneering1CfdPresentation from '@/assets/events/royaneering1-cfd-presentation.jpg';
+import royaneering1CadSession from '@/assets/events/royaneering1-cad-session.jpg';
 
 const MENTORSHIP_TRACKS = [
   'Marketing Mentorship',
@@ -94,6 +98,12 @@ const PAST_EVENTS: PastEvent[] = [
     duration: 'Recap pending',
     description:
       "An in-person engineering experience where students could ask Roya's engineers anything and get real answers, paired with a hands-on Fusion 360 session teaching students to design, model, and refine race car components. Spots were limited, making it an exclusive session. It's also the event that Round 2, the online Fusion 360 follow-up, was created in response to, by popular demand.",
+    photos: [
+      royaneering1CarComponents,
+      royaneering1CfdPresentation,
+      royaneering1CadSession,
+      royaneering1Donuts,
+    ],
   },
   {
     code: 'Event 4',
