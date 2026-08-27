@@ -20,6 +20,16 @@ import sanadMentorAssembly from '@/assets/events/sanad-mentor-assembly.jpg';
 import sanadPaintingCloseup from '@/assets/events/sanad-painting-closeup.jpg';
 import sanadCarAssembly from '@/assets/events/sanad-car-assembly.jpg';
 import sanadGroupPhoto from '@/assets/events/sanad-group-photo.jpg';
+import royatnaCeoSpeech from '@/assets/events/royatna-ceo-speech.jpg';
+import royatnaCameraSetup from '@/assets/events/royatna-camera-setup.jpg';
+import royatnaCategoriesPresentation from '@/assets/events/royatna-categories-presentation.jpg';
+import royatnaCarDesignPresentation from '@/assets/events/royatna-car-design-presentation.jpg';
+import royatnaRoundtable from '@/assets/events/royatna-roundtable.jpg';
+import royatnaPrizeDisplay from '@/assets/events/royatna-prize-display.jpg';
+import royatnaGamePresentation from '@/assets/events/royatna-game-presentation.jpg';
+import royatnaFerrariBook from '@/assets/events/royatna-ferrari-book.jpg';
+import royatnaBalloonCarCloseup from '@/assets/events/royatna-balloon-car-closeup.jpg';
+import royatnaBalloonCarRace from '@/assets/events/royatna-balloon-car-race.jpg';
 
 const MENTORSHIP_TRACKS = [
   'Marketing Mentorship',
@@ -56,6 +66,18 @@ const PAST_EVENTS: PastEvent[] = [
     duration: 'Recap pending',
     description:
       "Roya's first STEM Racing event circuit, held for International Education Day in collaboration with NAF3, a student-led organization. The event moved through three stages: an immersive introduction to Project Management with hands-on activities, followed by Enterprise, then Engineering, each with its own explanation and activity, before closing with a live race. Free for all attendees; 50 students attended, with 25 returning participants.",
+    photos: [
+      royatnaCeoSpeech,
+      royatnaCameraSetup,
+      royatnaCategoriesPresentation,
+      royatnaGamePresentation,
+      royatnaBalloonCarCloseup,
+      royatnaBalloonCarRace,
+      royatnaCarDesignPresentation,
+      royatnaRoundtable,
+      royatnaPrizeDisplay,
+      royatnaFerrariBook,
+    ],
   },
   {
     code: 'Event 2',
