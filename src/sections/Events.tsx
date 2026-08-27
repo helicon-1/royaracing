@@ -5,6 +5,11 @@ import { Reveal } from '@/components/Reveal';
 import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
 import { TireRating } from '@/components/TireRating';
 import { AnimatedLink } from '@/components/ui/animated-link';
+import sanadPlaque from '@/assets/events/sanad-plaque.jpg';
+import sanadKidsWorkshop from '@/assets/events/sanad-kids-workshop.jpg';
+import sanadTeamTalk from '@/assets/events/sanad-team-talk.jpg';
+import sanadGuestbook from '@/assets/events/sanad-guestbook.jpg';
+import sanadToteBags from '@/assets/events/sanad-tote-bags.jpg';
 
 const MENTORSHIP_TRACKS = [
   'Marketing Mentorship',
@@ -20,6 +25,8 @@ interface PastEvent {
   date: string;
   duration: string;
   description: string;
+  /** Real photos, once supplied. Falls back to placeholder squares when absent. */
+  photos?: string[];
 }
 
 interface UpcomingEvent {
@@ -71,6 +78,7 @@ const PAST_EVENTS: PastEvent[] = [
     duration: 'Recap pending',
     description:
       'An event for children with cancer, where Roya helped them assemble mini cars from reused, cut wood pieces, and introduced them to what STEM Racing is. 150 attendees, including 50 children with cancer, supported by student volunteers.',
+    photos: [sanadKidsWorkshop, sanadTeamTalk, sanadGuestbook, sanadToteBags, sanadPlaque],
   },
   {
     code: 'Event 6',
@@ -377,13 +385,26 @@ function PastEventsList() {
             </button>
             <div
               className={`overflow-hidden transition-[max-height] duration-500 ease-[var(--ease-roya)] ${
-                isOpen ? 'max-h-[400px]' : 'max-h-0'
+                isOpen ? 'max-h-[1000px]' : 'max-h-0'
               }`}
             >
               <div className="grid grid-cols-3 gap-3 py-4">
-                <PhotoPlaceholder label={`Photo pending, ${event.title}`} className="aspect-square w-full" />
-                <PhotoPlaceholder label={`Photo pending, ${event.title}`} className="aspect-square w-full" />
-                <PhotoPlaceholder label={`Photo pending, ${event.title}`} className="aspect-square w-full" />
+                {event.photos
+                  ? event.photos.map((photo, i) => (
+                      <img
+                        key={photo}
+                        src={photo}
+                        alt={`${event.title}, photo ${i + 1}`}
+                        className="aspect-square w-full object-cover"
+                      />
+                    ))
+                  : [0, 1, 2].map((i) => (
+                      <PhotoPlaceholder
+                        key={i}
+                        label={`Photo pending, ${event.title}`}
+                        className="aspect-square w-full"
+                      />
+                    ))}
               </div>
             </div>
           </li>
