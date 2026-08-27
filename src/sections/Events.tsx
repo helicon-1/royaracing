@@ -34,6 +34,7 @@ import royaneering1CarComponents from '@/assets/events/royaneering1-car-componen
 import royaneering1Donuts from '@/assets/events/royaneering1-donuts.jpg';
 import royaneering1CfdPresentation from '@/assets/events/royaneering1-cfd-presentation.jpg';
 import royaneering1CadSession from '@/assets/events/royaneering1-cad-session.jpg';
+import vocAudience from '@/assets/events/voc-audience.jpg';
 
 const MENTORSHIP_TRACKS = [
   'Marketing Mentorship',
@@ -144,6 +145,7 @@ const PAST_EVENTS: PastEvent[] = [
     date: 'Date to be confirmed, at 966 Innovation Hub, with VOC',
     duration: 'Recap pending',
     description: 'An Oxford Union-style debate event, held at 966 Innovation Hub in collaboration with VOC.',
+    photos: [vocAudience],
   },
 ];
 
