@@ -30,6 +30,18 @@ import royatnaGamePresentation from '@/assets/events/royatna-game-presentation.j
 import royatnaFerrariBook from '@/assets/events/royatna-ferrari-book.jpg';
 import royatnaBalloonCarCloseup from '@/assets/events/royatna-balloon-car-closeup.jpg';
 import royatnaBalloonCarRace from '@/assets/events/royatna-balloon-car-race.jpg';
+import giddamBannerLaptop from '@/assets/events/giddam-banner-laptop.jpg';
+import giddamVideoCall from '@/assets/events/giddam-video-call.jpg';
+import rwr1CarComponentsPresentation from '@/assets/events/rwr1-car-components-presentation.jpg';
+import rwr1WhiteboardCfd from '@/assets/events/rwr1-whiteboard-cfd.jpg';
+import rwr1CfdSimulation from '@/assets/events/rwr1-cfd-simulation.jpg';
+import vocTimetableOpening from '@/assets/events/voc-timetable-opening.jpg';
+import vocToteBagHandout from '@/assets/events/voc-tote-bag-handout.jpg';
+import vocAttendees from '@/assets/events/voc-attendees.jpg';
+import vocTeamBannerCrowd from '@/assets/events/voc-team-banner-crowd.jpg';
+import vocToteBagCloseup from '@/assets/events/voc-tote-bag-closeup.jpg';
+import vocTimetableDebate from '@/assets/events/voc-timetable-debate.jpg';
+import vocFlagCloseup from '@/assets/events/voc-flag-closeup.jpg';
 
 const MENTORSHIP_TRACKS = [
   'Marketing Mentorship',
@@ -86,6 +98,7 @@ const PAST_EVENTS: PastEvent[] = [
     duration: 'Recap pending',
     description:
       'A live online engineering seminar hosted with Giddam, a World Finals team that placed 9th globally. The session covered what engineering work on a STEM Racing car actually looks like, included a Q&A, and Giddam shared their own experiences as engineers. Free and fully online; 112 YouTube views on the recording.',
+    photos: [giddamVideoCall, giddamBannerLaptop],
   },
   {
     code: 'Event 3',
@@ -94,6 +107,7 @@ const PAST_EVENTS: PastEvent[] = [
     duration: 'Recap pending',
     description:
       "An in-person engineering experience where students could ask Roya's engineers anything and get real answers, paired with a hands-on Fusion 360 session teaching students to design, model, and refine race car components. Spots were limited, making it an exclusive session. It's also the event that Round 2, the online Fusion 360 follow-up, was created in response to, by popular demand.",
+    photos: [rwr1CarComponentsPresentation, rwr1WhiteboardCfd, rwr1CfdSimulation],
   },
   {
     code: 'Event 4',
@@ -135,6 +149,15 @@ const PAST_EVENTS: PastEvent[] = [
     duration: 'Recap pending',
     description:
       'An Oxford Union-style debate event, held at 966 Innovation Hub in collaboration with VOC. The agenda ran through opening speeches, floor debate, a break, closing speeches and summary, a Maghrib prayer break, and closed with house votes and deliberation.',
+    photos: [
+      vocTimetableOpening,
+      vocTimetableDebate,
+      vocTeamBannerCrowd,
+      vocToteBagHandout,
+      vocToteBagCloseup,
+      vocAttendees,
+      vocFlagCloseup,
+    ],
   },
 ];
 
