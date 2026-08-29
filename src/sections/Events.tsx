@@ -133,7 +133,8 @@ const PAST_EVENTS: PastEvent[] = [
     title: 'Roya X VOC Debates',
     date: 'Date to be confirmed, at 966 Innovation Hub, with VOC',
     duration: 'Recap pending',
-    description: 'An Oxford Union-style debate event, held at 966 Innovation Hub in collaboration with VOC.',
+    description:
+      'An Oxford Union-style debate event, held at 966 Innovation Hub in collaboration with VOC. The agenda ran through opening speeches, floor debate, a break, closing speeches and summary, a Maghrib prayer break, and closed with house votes and deliberation.',
   },
 ];
 
