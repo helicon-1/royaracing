@@ -21,7 +21,6 @@ const MEMBERS: Member[] = [
   { name: 'Bayan Mashabi', role: 'Sponsorship Manager' },
   { name: 'Reema Alsadoon', role: 'Manufacturing Engineer' },
   { name: 'Omar Alghamdi', role: 'Designing Engineer' },
-  { name: 'Riyad', role: 'Manufacturing Engineer' },
 ];
 
 export function Team() {
@@ -44,7 +43,7 @@ export function Team() {
         </AnimatedLink>
         <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
           <AnimatedLink color="lime">
-            <RevealText as="span" text="Six people, one goal." />
+            <RevealText as="span" text="Five people, one goal." />
           </AnimatedLink>
         </h2>
         <AnimatedLink color="lime" className="mt-6 max-w-xl text-lg leading-relaxed text-paper/70">
