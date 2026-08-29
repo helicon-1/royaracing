@@ -408,6 +408,55 @@ function ApplyToEventPanel() {
   );
 }
 
+const PHOTOS_PER_PAGE = 3;
+
+function PhotoCarousel({ photos, title }: { photos: string[]; title: string }) {
+  const [page, setPage] = useState(0);
+  const totalPages = Math.ceil(photos.length / PHOTOS_PER_PAGE);
+  const start = page * PHOTOS_PER_PAGE;
+  const visible = photos.slice(start, start + PHOTOS_PER_PAGE);
+
+  return (
+    <div className="py-4">
+      <div className="grid grid-cols-3 gap-3">
+        {visible.map((photo, i) => (
+          <img
+            key={photo}
+            src={photo}
+            alt={`${title}, photo ${start + i + 1} of ${photos.length}`}
+            className="aspect-square w-full object-cover"
+          />
+        ))}
+      </div>
+      {totalPages > 1 && (
+        <div className="mt-3 flex items-center justify-between">
+          <button
+            type="button"
+            onClick={() => setPage((p) => Math.max(0, p - 1))}
+            disabled={page === 0}
+            aria-label="Previous photos"
+            className="label-mono flex items-center gap-2 text-[11px] text-paper/70 transition-colors duration-200 hover:text-lime disabled:cursor-not-allowed disabled:opacity-25 disabled:hover:text-paper/70"
+          >
+            <span aria-hidden="true">&larr;</span> Previous
+          </button>
+          <span className="label-mono text-[11px] text-paper/40">
+            {page + 1} / {totalPages}
+          </span>
+          <button
+            type="button"
+            onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
+            disabled={page === totalPages - 1}
+            aria-label="View more photos"
+            className="label-mono flex items-center gap-2 text-[11px] text-paper/70 transition-colors duration-200 hover:text-lime disabled:cursor-not-allowed disabled:opacity-25 disabled:hover:text-paper/70"
+          >
+            View more <span aria-hidden="true">&rarr;</span>
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function PastEventsList() {
   const [openTitle, setOpenTitle] = useState<string | null>(null);
   const [hoveredTitle, setHoveredTitle] = useState<string | null>(null);
@@ -463,24 +512,19 @@ function PastEventsList() {
                 isOpen ? 'max-h-[3000px]' : 'max-h-0'
               }`}
             >
-              <div className="grid grid-cols-3 gap-3 py-4">
-                {event.photos
-                  ? event.photos.map((photo, i) => (
-                      <img
-                        key={photo}
-                        src={photo}
-                        alt={`${event.title}, photo ${i + 1}`}
-                        className="aspect-square w-full object-cover"
-                      />
-                    ))
-                  : [0, 1, 2].map((i) => (
-                      <PhotoPlaceholder
-                        key={i}
-                        label={`Photo pending, ${event.title}`}
-                        className="aspect-square w-full"
-                      />
-                    ))}
-              </div>
+              {event.photos ? (
+                <PhotoCarousel photos={event.photos} title={event.title} />
+              ) : (
+                <div className="grid grid-cols-3 gap-3 py-4">
+                  {[0, 1, 2].map((i) => (
+                    <PhotoPlaceholder
+                      key={i}
+                      label={`Photo pending, ${event.title}`}
+                      className="aspect-square w-full"
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </li>
         );
