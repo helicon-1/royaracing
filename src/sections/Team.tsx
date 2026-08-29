@@ -12,15 +12,13 @@ interface Member {
   favoriteDriver?: string;
 }
 
-// Matches the team's current physical banner (confirmed across multiple
-// event photos), which no longer matches the original roster this section
-// shipped with.
 const MEMBERS: Member[] = [
-  { name: 'Ibrahim Alsharkh', role: 'Project Manager' },
-  { name: 'Nourah Alsabhan', role: 'Marketing Manager' },
-  { name: 'Bayan Mashabi', role: 'Sponsorship Manager' },
+  { name: 'Ibrahim Alsharkh', role: 'Team Leader & Project Manager' },
+  { name: 'Bayan Mashabi', role: 'Head of Enterprise' },
+  { name: 'Nourah Alsabhan', role: 'Marketing Director' },
+  { name: 'Abdullah Taher', role: 'Strategic Operations Manager' },
+  { name: 'Ibrahim Taher', role: 'Design Engineer' },
   { name: 'Reema Alsadoon', role: 'Manufacturing Engineer' },
-  { name: 'Omar Alghamdi', role: 'Designing Engineer' },
 ];
 
 export function Team() {
@@ -43,7 +41,7 @@ export function Team() {
         </AnimatedLink>
         <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
           <AnimatedLink color="lime">
-            <RevealText as="span" text="Five people, one goal." />
+            <RevealText as="span" text="Six people, one goal." />
           </AnimatedLink>
         </h2>
         <AnimatedLink color="lime" className="mt-6 max-w-xl text-lg leading-relaxed text-paper/70">
