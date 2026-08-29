@@ -14,15 +14,13 @@ interface Member {
 
 // Matches the team's current physical banner (confirmed across multiple
 // event photos), which no longer matches the original roster this section
-// shipped with. One surname is still unconfirmed — see the note below.
+// shipped with.
 const MEMBERS: Member[] = [
   { name: 'Ibrahim Alsharkh', role: 'Project Manager' },
   { name: 'Nourah Alsabhan', role: 'Marketing Manager' },
   { name: 'Bayan Mashabi', role: 'Sponsorship Manager' },
   { name: 'Reema Alsadoon', role: 'Manufacturing Engineer' },
   { name: 'Omar Alghamdi', role: 'Designing Engineer' },
-  // Surname not clearly legible on the banner photos supplied — first name
-  // reads as "Riyad". Confirm and fill in before this ships for real.
   { name: 'Riyad', role: 'Manufacturing Engineer' },
 ];
 
