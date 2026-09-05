@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
 import { Reveal } from '@/components/Reveal';
+import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
 import { AnimatedLink } from '@/components/ui/animated-link';
 import royaCar from '@/assets/hero/roya-car.png';
 
@@ -16,13 +17,13 @@ const STAGES: Stage[] = [
   {
     label: 'Regionals',
     month: 'April',
-    status: 'complete',
+    status: 'upcoming',
     blurb: 'Riyadh regional qualifier. Recap and results to be added.',
   },
   {
     label: 'Nationals',
     month: 'June',
-    status: 'complete',
+    status: 'upcoming',
     blurb: 'National qualifier. Recap and results to be added.',
   },
   {
@@ -32,6 +33,11 @@ const STAGES: Stage[] = [
     blurb: 'Not yet reached. This is the stage Roya Racing is building toward.',
   },
 ];
+
+/** Total rendered width of the car-photo marker below — kept as one
+ *  constant since the track-position formula has to subtract exactly
+ *  this many pixels to keep the marker's footprint inside the track. */
+const CAR_MARKER_WIDTH = 80;
 
 // Per-stage lead color — Regionals and World Finals lime, Nationals cyan.
 const STAGE_IS_CYAN = [false, true, false];
@@ -134,22 +140,12 @@ export function CompetitionTimeline() {
             aria-hidden="true"
             className="pointer-events-none absolute top-1/2 -translate-y-1/2 transition-[left] duration-700 ease-[var(--ease-roya)]"
             style={{
-              left: `calc(${(active / (STAGES.length - 1)) * 100}% - ${(active / (STAGES.length - 1)) * 34}px)`,
+              left: `calc(${(active / (STAGES.length - 1)) * 100}% - ${(active / (STAGES.length - 1)) * CAR_MARKER_WIDTH}px)`,
             }}
           >
-            {/* The .car-marker class's own clip-path draws the car
-                silhouette; that has to live on the outer (lime) layer so
-                the cyan layer nested inside inherits the same silhouette
-                via CSS clipping cascading to descendants — putting the
-                wipe's clip-path directly on a second `.car-marker` div
-                instead overwrote the silhouette clip-path entirely,
-                leaving a plain rectangle visible mid-transition. */}
-            <div className="car-marker relative" style={{ backgroundColor: 'var(--color-lime)' }}>
-              <div
-                className="absolute inset-0"
-                style={{ backgroundColor: 'var(--color-cyan)', clipPath: wipeClip(cyanT) }}
-              />
-            </div>
+            {/* A real photo rather than a stylized icon, so it doesn't need
+                to crossfade lime/cyan as it travels — it just slides. */}
+            <img src={royaCar} alt="" style={{ width: CAR_MARKER_WIDTH }} className="h-auto" />
           </div>
           <div className="mt-3 flex justify-between">
             {STAGES.map((s, i) => (
@@ -200,12 +196,12 @@ export function CompetitionTimeline() {
                     </span>
                   ) : (
                     <span className="relative inline-block shrink-0">
-                      <span className="label-mono whitespace-nowrap rounded-full border border-lime/50 px-3 py-1 text-[10px] text-lime">
+                      <span className="label-mono whitespace-nowrap rounded-full border border-lime px-3 py-1 text-[10px] text-lime">
                         Complete
                       </span>
                       <span
                         aria-hidden="true"
-                        className="label-mono absolute inset-0 whitespace-nowrap rounded-full border border-cyan/50 px-3 py-1 text-[10px] text-cyan"
+                        className="label-mono absolute inset-0 whitespace-nowrap rounded-full border border-cyan bg-ink px-3 py-1 text-[10px] text-cyan"
                         style={{ clipPath: wipeClip(cyanT) }}
                       >
                         Complete
@@ -222,13 +218,7 @@ export function CompetitionTimeline() {
                 <p className="mt-6 max-w-sm text-paper/70">{stage.blurb}</p>
               </div>
             </div>
-            <div className="relative flex h-full min-h-64 w-full items-center justify-center overflow-hidden border-l border-paper/10 bg-ink/40">
-              <img
-                src={royaCar}
-                alt="Roya Racing car"
-                className="h-full w-full object-contain p-8"
-              />
-            </div>
+            <PhotoPlaceholder label={`Photo pending, ${stage.label}`} className="h-full min-h-64 w-full" />
           </div>
         </Reveal>
       </div>

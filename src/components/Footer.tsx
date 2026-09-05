@@ -12,7 +12,7 @@ interface Social {
 }
 
 const SOCIALS: Social[] = [
-  { name: 'Instagram', href: 'https://www.instagram.com/roya.racing?igsi=Yzc5MXdpZTJ6Y2V1' },
+  { name: 'Instagram', href: 'https://www.instagram.com/roya.racing?igsi=OW11azhqZ2NhYnZu&utm_source=qr' },
   { name: 'LinkedIn', href: 'https://www.linkedin.com/company/roya-racing/' },
   { name: 'YouTube', href: 'https://youtube.com/@royaracing?si=gzieX9U1QVEPMv0p' },
   { name: 'TikTok', href: 'https://www.tiktok.com/@roya.racing?_r=1&_t=ZS-99TXjDsTd3d' },
