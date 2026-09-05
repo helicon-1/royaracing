@@ -9,14 +9,10 @@ import { PILLARS, PILLAR_TINTS, type Pillar, type PillarId } from './data';
 
 const PILLAR_ICONS: Record<PillarId, (props: { className?: string }) => ReactElement> = {
   economic: ({ className }) => (
-    // Saudi Riyal sign (SAMA's 2025 symbol, Unicode U+20C1) — drawn rather
-    // than set as text, since the glyph is too new for reliable font
-    // coverage. Not a pixel-exact reproduction, just evokes the same
-    // crossbar-over-vertical-stroke shape as the official mark.
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
       <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.6" />
       <path
-        d="M9.5 7.5v9M9.5 7.5c2 0 4 1.1 4 2.9s-2 2.9-4 2.9M7.5 10.8h8"
+        d="M12 6.5v11M15 9c0-1.4-1.3-2.5-3-2.5s-3 1.1-3 2.5 1.3 2.2 3 2.5c1.7.3 3 1.1 3 2.5S13.7 17 12 17s-3-1.1-3-2.5"
         stroke="currentColor"
         strokeWidth="1.4"
         strokeLinecap="round"

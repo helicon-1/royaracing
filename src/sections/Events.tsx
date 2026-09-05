@@ -408,51 +408,82 @@ function ApplyToEventPanel() {
   );
 }
 
-const PHOTOS_PER_PAGE = 3;
+const CAROUSEL_WINDOW = 3;
 
+/** Sliding window over `photos`: always shows exactly CAROUSEL_WINDOW images,
+ *  shifting by one per arrow click rather than jumping a full page, so the
+ *  last click always lands on a full group (last photo plus the two before
+ *  it) instead of stranding a single photo alone. */
 function PhotoCarousel({ photos, title }: { photos: string[]; title: string }) {
-  const [page, setPage] = useState(0);
-  const totalPages = Math.ceil(photos.length / PHOTOS_PER_PAGE);
-  const start = page * PHOTOS_PER_PAGE;
-  const visible = photos.slice(start, start + PHOTOS_PER_PAGE);
+  const [start, setStart] = useState(0);
 
-  return (
-    <div className="py-4">
-      <div className="grid grid-cols-3 gap-3">
-        {visible.map((photo, i) => (
+  if (photos.length <= CAROUSEL_WINDOW) {
+    return (
+      <div className="grid grid-cols-3 gap-3 py-4">
+        {photos.map((photo, i) => (
           <img
             key={photo}
             src={photo}
-            alt={`${title}, photo ${start + i + 1} of ${photos.length}`}
+            alt={`${title}, photo ${i + 1} of ${photos.length}`}
+            loading="lazy"
             className="aspect-square w-full object-cover"
           />
         ))}
       </div>
-      {totalPages > 1 && (
-        <div className="mt-3 flex items-center justify-between">
-          <button
-            type="button"
-            onClick={() => setPage((p) => Math.max(0, p - 1))}
-            disabled={page === 0}
-            aria-label="Previous photos"
-            className="label-mono flex items-center gap-2 text-[11px] text-paper/70 transition-colors duration-200 hover:text-lime disabled:cursor-not-allowed disabled:opacity-25 disabled:hover:text-paper/70"
-          >
-            <span aria-hidden="true">&larr;</span> Previous
-          </button>
-          <span className="label-mono text-[11px] text-paper/40">
-            {page + 1} / {totalPages}
-          </span>
-          <button
-            type="button"
-            onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
-            disabled={page === totalPages - 1}
-            aria-label="View more photos"
-            className="label-mono flex items-center gap-2 text-[11px] text-paper/70 transition-colors duration-200 hover:text-lime disabled:cursor-not-allowed disabled:opacity-25 disabled:hover:text-paper/70"
-          >
-            View more <span aria-hidden="true">&rarr;</span>
-          </button>
+    );
+  }
+
+  const maxStart = photos.length - CAROUSEL_WINDOW;
+
+  return (
+    <div className="py-4">
+      <div className="overflow-hidden">
+        <div
+          className="flex transition-transform duration-500 ease-[var(--ease-roya)]"
+          style={{
+            width: `${(photos.length / CAROUSEL_WINDOW) * 100}%`,
+            transform: `translateX(-${(start / photos.length) * 100}%)`,
+          }}
+        >
+          {photos.map((photo, i) => (
+            <div
+              key={photo}
+              className="box-border shrink-0 px-1.5"
+              style={{ width: `${100 / photos.length}%` }}
+            >
+              <img
+                src={photo}
+                alt={`${title}, photo ${i + 1} of ${photos.length}`}
+                loading="lazy"
+                className="aspect-square w-full object-cover"
+              />
+            </div>
+          ))}
         </div>
-      )}
+      </div>
+      <div className="mt-3 flex items-center justify-between">
+        <button
+          type="button"
+          onClick={() => setStart((s) => Math.max(0, s - 1))}
+          disabled={start === 0}
+          aria-label="Previous photo"
+          className="label-mono flex items-center gap-2 text-[11px] text-paper/70 transition-colors duration-200 hover:text-lime disabled:cursor-not-allowed disabled:opacity-25 disabled:hover:text-paper/70"
+        >
+          <span aria-hidden="true">&larr;</span> Previous
+        </button>
+        <span className="label-mono text-[11px] text-paper/40">
+          {start + 1}&ndash;{start + CAROUSEL_WINDOW} / {photos.length}
+        </span>
+        <button
+          type="button"
+          onClick={() => setStart((s) => Math.min(maxStart, s + 1))}
+          disabled={start === maxStart}
+          aria-label="Next photo"
+          className="label-mono flex items-center gap-2 text-[11px] text-paper/70 transition-colors duration-200 hover:text-lime disabled:cursor-not-allowed disabled:opacity-25 disabled:hover:text-paper/70"
+        >
+          Next <span aria-hidden="true">&rarr;</span>
+        </button>
+      </div>
     </div>
   );
 }
