@@ -6,7 +6,20 @@ import vision2030 from '@/assets/emblems/vision-2030.svg';
 import { Logo } from './Logo';
 import { AnimatedLink } from './ui/animated-link';
 
-const SOCIALS = ['Instagram', 'X', 'LinkedIn', 'YouTube'];
+interface Social {
+  name: string;
+  /** null until the team confirms the real account URL. */
+  href: string | null;
+}
+
+const SOCIALS: Social[] = [
+  { name: 'Instagram', href: 'https://www.instagram.com/roya.racing?igsi=Yzc5MXdpZTJ6Y2V1' },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/company/roya-racing/' },
+  { name: 'YouTube', href: 'https://youtube.com/@royaracing?si=gzieX9U1QVEPMv0p' },
+  // Pending: the TikTok URL supplied matched the Instagram one exactly,
+  // flagged back to the team rather than publishing a mislabeled link.
+  { name: 'TikTok', href: null },
+];
 
 const FOOTER_EMBLEMS = [
   { name: 'Sadu', src: bowtie },
@@ -47,17 +60,28 @@ export function Footer() {
                 Follow
               </AnimatedLink>
               <ul className="mt-3 space-y-2">
-                {SOCIALS.map((s) => (
-                  <li key={s}>
-                    <AnimatedLink
-                      color="cyan"
-                      className="text-paper/35"
-                      title="Social link to be confirmed"
-                    >
-                      {s} <span className="label-mono text-[10px]">, TBC</span>
-                    </AnimatedLink>
-                  </li>
-                ))}
+                {SOCIALS.map((s) =>
+                  s.href ? (
+                    <li key={s.name}>
+                      <AnimatedLink
+                        color="cyan"
+                        showArrow
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-paper/80"
+                      >
+                        {s.name}
+                      </AnimatedLink>
+                    </li>
+                  ) : (
+                    <li key={s.name}>
+                      <AnimatedLink color="cyan" className="text-paper/35" title="Social link to be confirmed">
+                        {s.name} <span className="label-mono text-[10px]">, TBC</span>
+                      </AnimatedLink>
+                    </li>
+                  ),
+                )}
               </ul>
             </div>
           </div>

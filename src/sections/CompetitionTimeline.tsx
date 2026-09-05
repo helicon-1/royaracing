@@ -2,8 +2,8 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Section } from '@/components/Section';
 import { RevealText } from '@/components/RevealText';
 import { Reveal } from '@/components/Reveal';
-import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
 import { AnimatedLink } from '@/components/ui/animated-link';
+import royaCar from '@/assets/hero/roya-car.png';
 
 interface Stage {
   label: string;
@@ -222,7 +222,13 @@ export function CompetitionTimeline() {
                 <p className="mt-6 max-w-sm text-paper/70">{stage.blurb}</p>
               </div>
             </div>
-            <PhotoPlaceholder label={`Photo pending, ${stage.label}`} className="h-full min-h-64 w-full" />
+            <div className="relative flex h-full min-h-64 w-full items-center justify-center overflow-hidden border-l border-paper/10 bg-ink/40">
+              <img
+                src={royaCar}
+                alt="Roya Racing car"
+                className="h-full w-full object-contain p-8"
+              />
+            </div>
           </div>
         </Reveal>
       </div>
