@@ -111,8 +111,8 @@
 
   /* Competition Timeline's stage selector — a native range input (so click,
      drag and arrow keys all work), thumb hidden (opacity 0, still a real
-     hit target) since the visible car is a separately animated overlay
-     (.car-marker) that can transition smoothly between stages instead of
+     hit target) since the visible car is a separately animated image
+     overlay that can transition smoothly between stages instead of
      snapping with the input's value. */
   .range-car {
     -webkit-appearance: none;
@@ -120,26 +120,6 @@
     height: 4px;
     background: color-mix(in srgb, var(--color-paper) 20%, transparent);
     border-radius: 999px;
-  }
-
-  .car-marker {
-    width: 34px;
-    height: 16px;
-    background: var(--color-lime);
-    clip-path: polygon(
-      0% 60%,
-      10% 60%,
-      16% 20%,
-      60% 20%,
-      70% 45%,
-      100% 45%,
-      100% 100%,
-      70% 100%,
-      60% 75%,
-      16% 75%,
-      10% 100%,
-      0% 100%
-    );
   }
 
   .range-car::-webkit-slider-thumb {

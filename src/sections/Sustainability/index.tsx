@@ -112,9 +112,11 @@ export function Sustainability() {
   return (
     <Section id="sustainability" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1400px]">
-        <AnimatedLink className="label-mono mb-6 text-green">05: Sustainability</AnimatedLink>
+        <AnimatedLink color="lime" className="label-mono mb-6 text-lime">
+          05: Sustainability
+        </AnimatedLink>
         <h2 className="max-w-2xl text-4xl font-bold leading-[1.05] text-paper md:text-6xl">
-          <AnimatedLink>
+          <AnimatedLink color="lime">
             <RevealText as="span" text="Three pillars, one program." />
           </AnimatedLink>
         </h2>
@@ -136,9 +138,11 @@ export function Sustainability() {
         </div>
 
         <div className="mt-24">
-          <AnimatedLink className="label-mono text-green">Your allocation</AnimatedLink>
+          <AnimatedLink color="lime" className="label-mono text-lime">
+            Your allocation
+          </AnimatedLink>
           <h3 className="mt-3 max-w-2xl text-2xl font-bold text-paper">
-            <AnimatedLink>
+            <AnimatedLink color="lime">
               If you ran Roya's sustainability budget, where would the points go?
             </AnimatedLink>
           </h3>

@@ -34,14 +34,14 @@ export function Nav() {
                 <a
                   href={`#${link.id}`}
                   className={`relative py-1 transition-colors duration-300 hover:text-paper ${
-                    activeSection === link.id ? 'text-cyan' : ''
+                    activeSection === link.id ? (link.id === 'sustainability' ? 'text-lime' : 'text-cyan') : ''
                   }`}
                 >
                   {link.label}
                   <span
-                    className={`absolute -bottom-0.5 left-0 h-px bg-cyan transition-all duration-300 ${
-                      activeSection === link.id ? 'w-full' : 'w-0'
-                    }`}
+                    className={`absolute -bottom-0.5 left-0 h-px transition-all duration-300 ${
+                      link.id === 'sustainability' ? 'bg-lime' : 'bg-cyan'
+                    } ${activeSection === link.id ? 'w-full' : 'w-0'}`}
                   />
                 </a>
               </li>
@@ -77,7 +77,11 @@ export function Nav() {
                 href={`#${link.id}`}
                 onClick={() => setOpen(false)}
                 className={`block py-3 label-mono text-sm transition-colors duration-300 ${
-                  activeSection === link.id ? 'text-cyan' : 'text-paper/70'
+                  activeSection === link.id
+                    ? link.id === 'sustainability'
+                      ? 'text-lime'
+                      : 'text-cyan'
+                    : 'text-paper/70'
                 }`}
               >
                 {link.label}
